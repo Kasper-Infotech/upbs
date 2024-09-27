@@ -67,6 +67,8 @@ const MainSidebar = () => {
         { to: "/admin/myAttendance", label: "My Attendance" },
         { to: "/admin/todaysAttendance", label: "TodaysAttendance" },
         { to: "/admin/viewAttendance", label: "View Attendance" },
+        { to: "/admin/AttendanceRegister", label: "Attendance Register" },
+
       ],
     },
     {
@@ -428,9 +430,9 @@ const MainSidebar = () => {
           className=" btn text-white rounded-0 py-0"
         >
           {activeCategory || extended ? (
-            <img style={{ width: "8rem" }} src={Logo} alt="" />
+            <img style={{ width: "auto" , height:'2rem'}} src={Logo} alt="" />
           ) : (
-            <img style={{ width: "8rem" }} src={Logo} alt="" />
+            <img style={{ width: "auto", height:'2rem' }} src={Logo} alt="" />
           )}
         </button>
         <span

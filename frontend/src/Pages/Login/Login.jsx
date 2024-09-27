@@ -41,7 +41,7 @@ const Login = (props) => {
             className="form my-auto bg-white    p py-5  px-4 p-md-3 rounded text-black fw-bold d-flex flex-column justify-content-center"
           > 
           <div className="d-flex justify-content-center align-items-center"> 
-            <img style={{width:'15rem', height:'auto'}} src={KASPLOGO} className="mx-auto" alt="" />
+            <img style={{width:'6rem', height:'auto'}} src={KASPLOGO} className="mx-auto" alt="" />
           </div>
             <h4
               style={{

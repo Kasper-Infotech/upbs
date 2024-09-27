@@ -8,6 +8,7 @@ export const SearchRouteData = [
 
   // Attendance
   { control: "admin", name: "My Attendance", path: "/admin/myAttendance" },
+  { control: "admin", name: "Attendance register", path: "/admin/AttendanceRegister" },
   {
     control: "admin",
     name: "TodaysAttendance",

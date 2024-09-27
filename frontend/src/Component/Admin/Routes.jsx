@@ -44,7 +44,6 @@ import NoticeBoard from "../../Utils/NoticeBoard/NoticeBoard.jsx";
 import RequestDetails from "../../Pages/RequestTicket/RequestDetails.jsx";
 import RequestDetailsPending from "../../Pages/RequestTicket/RequestDetailsPending.jsx";
 import AttendanceRegister from "../HrManager/attendance/AttendanceRegister.jsx";
-
 import { AttendanceContext } from "../../Context/AttendanceContext/AttendanceContext";
 import MonthlyLeaveRegister from "../../Pages/ApplyLeave/MonthlyLeaveRegister/MonthlyLeaveRegister.jsx";
 import LeaveRegister from "../../Utils/LeaveComponentHrDash/LeaveRegister.jsx";

@@ -28,7 +28,7 @@
 
 // const createEmployee = async (req, res) => {
 //   try {
-//     const latestUser = await Employee.findOne({ empID: /^KASP\d{4}$/ }).sort({
+//     const latestUser = await Employee.findOne({ empID: /^s\d{4}$/ }).sort({
 //       empID: -1
 //     });
 //     let newUserID;
@@ -669,16 +669,16 @@ const getAllEmployee = async (req, res) => {
 
 const createEmployee = async (req, res) => {
   try {
-    const latestUser = await Employee.findOne({ empID: /^KASP\d{4}$/ }).sort({
+    const latestUser = await Employee.findOne({ empID: /^UPBS\d{4}$/ }).sort({
       empID: -1
     });
     let newUserID;
     if (latestUser) {
       const currentNumber = parseInt(latestUser.empID.substring(4));
       const nextNumber = currentNumber + 1;
-      newUserID = `KASP${nextNumber.toString().padStart(4, "0")}`;
+      newUserID = `UPBS${nextNumber.toString().padStart(4, "0")}`;
     } else {
-      newUserID = "KASP0001"; // Start from 1 if no user exists
+      newUserID = "UPBS0001"; // Start from 1 if no user exists
     }
 
     const { file } = req;
