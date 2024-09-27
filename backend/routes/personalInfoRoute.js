@@ -1,0 +1,25 @@
+const express = require("express");
+const personalInfoRoute = express.Router();
+
+const {verifyAll} = require('../middleware/rbacMiddleware');
+
+
+const {
+  personalInfo,
+  updatepersonalInfo
+} = require("../controllers/personalInfoController");
+
+// GET: Retrieve all personalInfo
+personalInfoRoute.get(
+  "/personal-info/:id",
+  // verifyAdminHREmployee,
+  personalInfo
+);
+
+// PUT: Update an existing personalInfo
+personalInfoRoute.put(
+  "/personal-info/:id",
+  updatepersonalInfo
+);
+
+module.exports = personalInfoRoute;
