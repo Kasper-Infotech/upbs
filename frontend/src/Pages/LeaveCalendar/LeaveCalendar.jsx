@@ -234,6 +234,8 @@ const LeaveCalendar = () => {
                   <option value="National Holiday">National Holiday</option>
                   <option value="Gazetted Holiday">Gazetted Holiday</option>
                   <option value="Restricted Holiday">Restricted Holiday</option>
+                  <option value="Weekly Off">Weekly Off</option>
+                  <option value="Others">Others</option>
                 </select>
               </div>
             </div>
