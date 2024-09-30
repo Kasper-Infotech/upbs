@@ -88,7 +88,6 @@ const PersonalInfoTable = (props) => {
             : "",
         };
 
-      
         setRowData([temp]);
       })
       .catch((error) => {
@@ -239,34 +238,35 @@ const PersonalInfoTable = (props) => {
                             justifyContent: "center",
                             alignItems: "center", // Ensures initials are centered
                             overflow: "hidden", // Ensures the image fits the circle
-                            
                           }}
                         >
-                         {items?.data?.profile?.image_url ? (
-                        <img
-                          style={{
-                            height: "100%",
-                              width: "100%",
-                              borderRadius: "50%",
-                              objectFit: "cover",
-                          }}
-                          className="border-0"
-                          src={items?.data?.profile?.image_url}
-                          alt=""
-                        />
-                      ) : (
-                        <span  style={{
-                          fontSize: "35px", // Adjust font size for visibility
-                          fontWeight: "bold", // Make the initials bold
-                          textAlign: "center", 
-                          lineHeight: "120px", // Ensure vertical alignment within the circle
-                        }}>
-                          {items?.FirstName?.charAt(0).toUpperCase() ?? ""}
-                          {items?.LastName?.charAt(0).toUpperCase() ?? ""}
-                        </span>
-                      )}
-                        </div> 
-                   
+                          {items?.data?.profile?.image_url ? (
+                            <img
+                              style={{
+                                height: "100%",
+                                width: "100%",
+                                borderRadius: "50%",
+                                objectFit: "cover",
+                              }}
+                              className="border-0"
+                              src={items?.data?.profile?.image_url}
+                              alt=""
+                            />
+                          ) : (
+                            <span
+                              style={{
+                                fontSize: "35px", // Adjust font size for visibility
+                                fontWeight: "bold", // Make the initials bold
+                                textAlign: "center",
+                                lineHeight: "120px", // Ensure vertical alignment within the circle
+                              }}
+                            >
+                              {items?.FirstName?.charAt(0).toUpperCase() ?? ""}
+                              {items?.LastName?.charAt(0).toUpperCase() ?? ""}
+                            </span>
+                          )}
+                        </div>
+
                         <p
                           style={{ position: "absolute", top: "0", left: "0" }}
                           className="btn btn-success px-2 py-0 m-2 rounded-5  shadow"
@@ -566,7 +566,7 @@ const PersonalInfoTable = (props) => {
                               </div>
                               <div className="col-12 col-sm-6 d-flex flex-column">
                                 <label htmlFor="" className="  ">
-                                  Presonal Email
+                                  Personal Email
                                 </label>
                                 <input
                                   type="text"
