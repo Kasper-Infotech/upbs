@@ -9,9 +9,14 @@ import { IoArrowBackOutline, IoFingerPrintSharp } from "react-icons/io5";
 import { MdOutlineMarkEmailUnread } from "react-icons/md";
 import PasswordStrengthMeter from "../../Utils/PasswordStrengthMeter/PasswordStrengthMeter";
 import { TbPasswordFingerprint } from "react-icons/tb";
+import { GoEyeClosed } from "react-icons/go";
+import { RxEyeOpen } from "react-icons/rx";
 
 const ForgetPass = () => {
   const history = useHistory();
+  const [seePass, setSeePass] = useState(false);
+  const [seeConfirmPass, setSeeConfirmPass] = useState(false); // New state
+  const [password, setPassword] = useState("");
   const [stage, setStage] = useState(1);
   const [data, setData] = useState({
     email: "",
@@ -408,7 +413,7 @@ const ForgetPass = () => {
                 </p>
               </div>
             </div>
-            <div className="d-flex flex-column align-items-start gap-0 w-100">
+            <div className="d-flex flex-column align-items-start gap-0 w-100 position-relative">
               <label>Password</label>
               <input
                 value={data.pass}
@@ -416,16 +421,32 @@ const ForgetPass = () => {
                   setData((prev) => ({ ...prev, pass: e.target.value }))
                 }
                 name="password"
-                type="password"
                 className="login-input m-0"
                 placeholder="Password"
                 required
+                type={seePass ? "text" : "password"}
               />
+              <span
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  transform: "translateY(-55%)",
+                  right: "3%",
+                  cursor: "pointer",
+                }}
+                className="fs-5 text-muted my-0"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setSeePass(!seePass);
+                }}
+              >
+                {seePass ? <GoEyeClosed /> : <RxEyeOpen />}
+              </span>
               <PasswordStrengthMeter password={data.pass} />
             </div>
             <p className="error-message">{formError.password}</p>
 
-            <div className="d-flex flex-column align-items-start gap-0 w-100">
+            <div className="d-flex flex-column align-items-start gap-0 w-100 position-relative">
               <label>Confirm Password</label>
               <input
                 value={data.confirm_pass}
@@ -433,11 +454,27 @@ const ForgetPass = () => {
                   setData((prev) => ({ ...prev, confirm_pass: e.target.value }))
                 }
                 name="confirm_password"
-                type="password"
+                type={seeConfirmPass ? "text" : "password"}
                 className="login-input m-0"
                 placeholder="Confirm Password"
                 required
-              />
+              />{" "}
+              <span
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  transform: "translateY(-20%)",
+                  right: "3%",
+                  cursor: "pointer",
+                }}
+                className="fs-5 text-muted my-0"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setSeeConfirmPass(!seeConfirmPass); // Toggle visibility
+                }}
+              >
+                {seeConfirmPass ? <GoEyeClosed /> : <RxEyeOpen />}
+              </span>
             </div>
 
             <p className="error-message">{formError.confirmPassword}</p>
