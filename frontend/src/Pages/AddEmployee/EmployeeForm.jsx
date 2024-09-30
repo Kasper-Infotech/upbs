@@ -6,11 +6,14 @@ import { useTheme } from "../../Context/TheamContext/ThemeContext";
 import { MdOutlineCancel, MdOutlineDoneAll } from "react-icons/md";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import NumericInput from "../../Utils/InputBox/NumericInput";
+import { GoEyeClosed } from "react-icons/go";
+import { RxEyeOpen } from "react-icons/rx";
 
 const EmployeeForm = (props) => {
   const location = useLocation();
   const route = location.pathname.split("/")[1];
-
+  const [seePass, setSeepass] = useState(false);
+  const [password, setPassword] = useState("");
   const [roleData, setRoleData] = useState([]);
   const [positionData, setPositionData] = useState([]);
   const [departmentData, setDepartmentData] = useState([]);
@@ -182,12 +185,29 @@ const EmployeeForm = (props) => {
             >
               Password <sup className="text-danger fs-6">*</sup>
             </label>
-            <div className="form-input">
+            <div className="form-input position-relative">
               <input
                 className="form-control rounded-0"
-                type="password"
                 placeholder="Password"
+                type={seePass ? "text" : "password"}
+                onChange={(e) => setPassword(e.target.value)}
               />
+              <span
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  transform: "translateY(-55%)",
+                  right: "3%",
+                  cursor: "pointer",
+                }}
+                className="fs-5 text-muted my-0"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setSeepass(!seePass);
+                }}
+              >
+                {seePass ? <GoEyeClosed /> : <RxEyeOpen />}
+              </span>
             </div>
           </div>
 
@@ -458,7 +478,7 @@ const EmployeeForm = (props) => {
                   : "var(--secondaryDashMenuColor)",
               }}
             >
-              Reporting Manager 
+              Reporting Manager
             </label>
             <div className="form-input">
               <select className="form-select rounded-0" as="select" name="role">
@@ -479,7 +499,7 @@ const EmployeeForm = (props) => {
                   : "var(--secondaryDashMenuColor)",
               }}
             >
-              Reporting Hr 
+              Reporting Hr
             </label>
             <div className="form-input">
               <select className="form-select rounded-0" as="select" name="role">
