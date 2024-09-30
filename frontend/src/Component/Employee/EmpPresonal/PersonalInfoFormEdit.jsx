@@ -197,7 +197,6 @@ const PersonalInfoFormEdit = (props) => {
                     className="rounded-0"
                     type="text"
                     placeholder="Contact No "
-                    required
                     value={state.ContactNoData}
                     onChange={onContactNoDataChange}
                   />
@@ -215,7 +214,6 @@ const PersonalInfoFormEdit = (props) => {
                     className="rounded-0"
                     type="text"
                     placeholder="Emergency Contact No"
-                    required
                     value={state.EmergencyContactNoData}
                     onChange={onEmergencyContactNoDataChange}
                   />
@@ -234,7 +232,6 @@ const PersonalInfoFormEdit = (props) => {
                     className="rounded-0"
                     type="email"
                     placeholder="presonalEmail"
-                    required
                     value={state.presonalEmail}
                     onChange={onpresonalEmailChange}
                   />
@@ -253,7 +250,6 @@ const PersonalInfoFormEdit = (props) => {
                     className="rounded-0"
                     type="text"
                     placeholder="PAN Card No"
-                    required
                     value={state.PANcardNoData}
                     onChange={onPANcardNoDataChange}
                   />
@@ -272,7 +268,6 @@ const PersonalInfoFormEdit = (props) => {
                     className="rounded-0"
                     type="date"
                     placeholder="DOB"
-                    disabled
                     value={state.DOBData}
                     onChange={onDOBDataChange}
                   />
@@ -288,8 +283,8 @@ const PersonalInfoFormEdit = (props) => {
                 </Form.Label>
 
                 <Col className="form-input">
-                  <Form.Control className="rounded-0" as="select" required>
-                    <option value="" disabled selected>
+                  <Form.Control className="rounded-0" as="select">
+                    <option value="" selected>
                       Select your option
                     </option>
                     <option
@@ -356,7 +351,6 @@ const PersonalInfoFormEdit = (props) => {
                     className="rounded-0"
                     type="text"
                     placeholder="Hobbies"
-                    required
                     value={state.HobbiesData}
                     onChange={onHobbiesDataChange}
                   />
