@@ -61,8 +61,11 @@ const SmallScreenSidebar = () => {
       name: "Attendance",
       navLinks: [
         { to: "/admin/myAttendance", label: "My Attendance" },
-        { to: "/admin/todaysAttendance", label: "TodaysAttendance" },
+        { to: "/admin/todaysAttendance", label: "Todays Attendance" },
         { to: "/admin/viewAttendance", label: "View Attendance" },
+        { to: "/admin/AttendanceRegister", label: "Attendance Register" },
+        { to: "/admin/updateAttendance", label: "Update Attencance" },
+
       ],
     },
     {
@@ -73,8 +76,9 @@ const SmallScreenSidebar = () => {
         { to: "/admin/leaveApplication", label: "Leave Request" },
         { to: "/admin/leaveAccepted", label: "Approved Leaves " },
         { to: "/admin/leaveRejected", label: "Rejected Leaves " },
+        { to: "/admin/leaveRegister", label: "Leave Register" },
         { to: "/admin/leaveAssign", label: "Leave Assign" },
-        { to: "/admin/AllEmpLeave", label: "All Emp Leave Balance" },
+        { to: "/admin/AllEmpLeave", label: "Emp Leave Balance" },
       ],
     },
     {
@@ -169,11 +173,12 @@ const SmallScreenSidebar = () => {
       icon: <TbUserCheck />,
       name: "Attendance",
       navLinks: [
-        { to: "/hr/attenDance", label: "Create Attendance" },
+        { to: "/hr/attenDance", label: "Self Attendance" },
         { to: "/hr/AttendanceRegister", label: "Attendance Register" },
-        { to: "/hr/todaysAttendance", label: "TodaysAttendance" },
+        { to: "/hr/todaysAttendance", label: "Todays Attendance" },
         { to: "/hr/viewAttenDance", label: "View Attendance" },
         { to: "/hr/manualAttand", label: "Manual Attendance" },
+        { to: "/hr/updateAttendance", label: "Update Attencance" },
       ],
     },
     {
@@ -185,8 +190,9 @@ const SmallScreenSidebar = () => {
         { to: "/hr/leaveApplication", label: "Pending " },
         { to: "/hr/leaveAccepted", label: "Accepted " },
         { to: "/hr/leaveRejected", label: "Rejected " },
+        { to: "/hr/leaveRegister", label: "Leave Register " },
         { to: "/hr/assignLeave", label: "Assign Leave" },
-        { to: "/hr/allEmpLeave", label: "All Emp Leave" },
+        { to: "/hr/allEmpLeave", label: "Emp Leave Balance" },
       ],
     },
     {
@@ -325,7 +331,7 @@ const SmallScreenSidebar = () => {
     },
     {
       user: "3",
-      icon: <FaRegUser />,
+      icon: <MdOutlineDashboardCustomize />,
       name: "Dashboard",
       navLinks: [{ to: "/employee/dashboard", label: "Dashboard" }],
     },
