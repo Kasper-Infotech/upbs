@@ -20,6 +20,9 @@ function ManualAttendance() {
     setMessage,
   } = useContext(AttendanceContext);
 
+  const userType = localStorage.getItem("Accounts");
+  const reportingHr = localStorage.getItem("Email");
+
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -29,13 +32,23 @@ function ManualAttendance() {
           },
         });
 
-        setEmployees(response.data);
+        if (userType === "1") {
+          setEmployees(response.data);
+        } else {
+          const filteredEmployees = response.data.filter(
+            (item) => item.Account === 3 || item.reportHr === reportingHr
+          );
+          setEmployees(filteredEmployees);
+        }
       } catch (error) {
         console.error("Error fetching employees:", error);
       }
     };
+
     fetchUsers();
   }, []);
+
+  console.log(employees);
 
   const handleUserChange = (employeeID) => {
     const selectedEmployee = employees.find(
