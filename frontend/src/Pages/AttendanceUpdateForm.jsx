@@ -1,412 +1,217 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap");
+import React, { useState, useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Select from "react-select";
+import axios from "axios";
+import BASE_URL from "./config/config";
+import toast from "react-hot-toast";
+import TittleHeader from "./TittleHeader/TittleHeader";
 
-html {
-  font-size: 14px;
-}
+const AttendanceUpdateForm = () => {
+  const email = localStorage.getItem("Email");
+  const [attendanceData, setAttendanceData] = useState({
+    updatedBy: email,
+    date: "",
+    loginTime: "",
+    logoutTime: "",
+    remark: "",
+    Email: "",
+  });
+  const [empData, setEmpData] = useState([]);
+  const [minDate, setMinDate] = useState("");
+  const [maxDate, setMaxDate] = useState("");
 
-body {
-  font-family: "Roboto", sans-serif;
-  font-size: 1rem; /* 14px */
-  margin: 0;
-}
+  useEffect(() => {
+    axios
+      .post(
+        `${BASE_URL}/api/employeeTeam`,
+        { email },
+        {
+          headers: {
+            authorization: localStorage.getItem("token") || "",
+          },
+        }
+      )
+      .then((response) => {
+        if (Array.isArray(response.data)) {
+          setEmpData(response.data);
+        } else {
+          console.error("Data received is not an array:", response.data);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching employee data:", error);
+      });
+  }, []);
 
-h1 {
-  font-size: 2rem; /* 28px */
-  font-weight: 700;
-}
+  useEffect(() => {
+    const today = new Date();
+    const twoDaysAgo = new Date(today);
+    twoDaysAgo.setDate(today.getDate() - 2);
 
-h2 {
-  font-size: 1.75rem; /* 24.5px */
-  font-weight: 600;
-}
+    const formatDate = (date) => {
+      const d = new Date(date);
+      const month = "" + (d.getMonth() + 1);
+      const day = "" + d.getDate();
+      const year = d.getFullYear();
 
-h3 {
-  font-size: 1.5rem; /* 21px */
-  font-weight: 500;
-}
+      return [year, month.padStart(2, "0"), day.padStart(2, "0")].join("-");
+    };
 
-h4 {
-  font-size: 1.25rem; /* 17.5px */
-  font-weight: 500;
-}
+    setMinDate(formatDate(twoDaysAgo));
+    setMaxDate(formatDate(today));
+  }, []);
 
-h5 {
-  font-size: 1.125rem; /* 15.75px */
-  font-weight: 400;
-}
+  const formatTime = (time) => {
+    if (!time) return "";
+    return `${time}:00`; // Append ':00' to the time in HH:MM format
+  };
 
-nav,
-button {
-  font-size: 1rem;
-  font-family: "Open Sans", sans-serif;
-}
+  const handleChange = (e) => {
+    const { name, value } = e.target;
 
-label,
-input {
-  font-size: 1rem;
-  font-family: "Open Sans", sans-serif;
-}
+    let formattedValue = value;
+    if (name === "loginTime" || name === "logoutTime") {
+      formattedValue = formatTime(value);
+    }
 
-/* Responsive Typography */
-@media (max-width: 1200px) {
-  html {
-    font-size: 13px;
-  }
-}
+    setAttendanceData({
+      ...attendanceData,
+      [name]: formattedValue,
+    });
+  };
 
-@media (max-width: 992px) {
-  html {
-    font-size: 12px;
-  }
-}
+  const handleEmailSelect = (selectedOption) => {
+    setAttendanceData({
+      ...attendanceData,
+      Email: selectedOption ? selectedOption.value : null,
+    });
+  };
 
-@media (max-width: 768px) {
-  html {
-    font-size: 11px;
-  }
-}
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(attendanceData);
+    axios
+      .post(`${BASE_URL}/api/updateAttendance`, attendanceData, {
+        headers: {
+          authorization: localStorage.getItem("token") || "",
+        },
+      })
+      .then((response) => {
+        setAttendanceData({
+          updatedBy: email,
+          date: "",
+          loginTime: "",
+          logoutTime: "",
+          remark: "",
+          Email: "", // Reset to empty string instead of null
+        });
+        toast.success("Login time Update successfully");
+      })
+      .catch((error) => {
+        console.error("Error fetching employee data:", error);
+      });
+  };
 
-/* @media (max-width: 576px) {
-  html {
-    font-size: 12px;
-  }
-} */
+  const emailOptions = empData.map((emp) => ({
+    value: emp.Email,
+    label: emp.Email,
+  }));
 
-/* Button Styles  */
+  return (
+    <div className="container-fluid mt-4">
+      <div className="">
+        <div className="card-header mb-3">
+          <TittleHeader
+            title={"Update Attendance"}
+            message={"You can update user attendance here."}
+          />
+        </div>
+        <div className="card-body">
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+              <label htmlFor="selectedEmail" className="form-label">
+                Select Email:
+              </label>
+              <Select
+                id="selectedEmail"
+                name="selectedEmail"
+                options={emailOptions}
+                value={
+                  emailOptions.find(
+                    (option) => option.value === attendanceData.Email
+                  ) || ""
+                }
+                onChange={handleEmailSelect}
+                placeholder="Select an email"
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="date" className="form-label">
+                Date:
+              </label>
+              <input
+                type="date"
+                id="date"
+                name="date"
+                className="form-control"
+                value={attendanceData.date}
+                onChange={handleChange}
+                min={minDate}
+                max={maxDate}
+                required
+              />
+            </div>
 
-/* .btn-primary {
-  background: linear-gradient(145deg, #050C9C, #3572EF) !important;
-  border-radius: 0 !important;
-  border: none !important;
-}
+            <div className="mb-3">
+              <label htmlFor="loginTime" className="form-label">
+                Login Time:
+              </label>
+              <input
+                type="time"
+                id="loginTime"
+                name="loginTime"
+                className="form-control"
+                value={attendanceData.loginTime}
+                onChange={handleChange}
+              />
+            </div>
 
-.btn-secondary {
-  background: linear-gradient(145deg, #FF5F00, #FF9F66) !important;
-  border-radius: 0 !important;
-}
+            <div className="mb-3">
+              <label htmlFor="logoutTime" className="form-label">
+                Logout Time:
+              </label>
+              <input
+                type="time"
+                id="logoutTime"
+                name="logoutTime"
+                className="form-control"
+                value={attendanceData.logoutTime}
+                onChange={handleChange}
+              />
+            </div>
 
-.btn-danger {
-  background: linear-gradient(145deg, #BB2525, #FF6969) !important;
-  border-radius: 0 !important;
-  border: none !important;
-}
+            <div className="mb-3">
+              <label htmlFor="remark" className="form-label">
+                Remark:
+              </label>
+              <textarea
+                id="remark"
+                name="remark"
+                className="form-control"
+                rows="3"
+                value={attendanceData.remark}
+                onChange={handleChange}
+              />
+            </div>
 
-.btn-success {
-  background: linear-gradient(145deg, #059212, #06D001) !important;
-  border-radius: 0 !important;
-  border: none !important;
-}
-
-.btn-warning {
-  background: linear-gradient(145deg, #FF9A00, #FFBF00) !important;
-  border-radius: 0 !important;
-  border: none !important;
-  color: white !important;
-}
-
-.btn-info {
-  background: linear-gradient(145deg, #850F8D, #C738BD) !important;
-  border-radius: 0 !important;
-  border: none !important;
-  color: white !important;
-} */
-
-/* Background Style */
-
-/* .bg-primary {
-  background: linear-gradient(145deg, #050C9C, #3572EF) !important;
-}
-
-.bg-secondary {
-  background: linear-gradient(145deg, #bb4703, #FF9F66) !important;
-}
-
-.bg-danger {
-  background: linear-gradient(145deg, #BB2525, #FF6969) !important;
-}
-
-.bg-success {
-  background: linear-gradient(145deg, #059212, #06D001) !important;
-}
-
-.bg-warning {
-  background: linear-gradient(145deg, #FF9A00, #FFBF00) !important;
-}
-
-.bg-info {
-  background: linear-gradient(145deg, #850F8D, #C738BD) !important;
-} */
-
-/* Button Styles */
-
-.btn-primary {
-  background-color: #1a2a8b !important;
-  border-radius: 0 !important;
-  border: none !important;
-}
-
-.btn-secondary {
-  background-color: #ff6000 !important;
-  border-radius: 0 !important;
-  border: none !important;
-}
-
-.btn-danger {
-  background-color: #bb2525 !important;
-  border-radius: 0 !important;
-  border: none !important;
-}
-
-.btn-success {
-  background-color: #059212 !important;
-  border-radius: 0 !important;
-  border: none !important;
-}
-
-.btn-warning {
-  background-color: #ff9a00 !important;
-  border-radius: 0 !important;
-  border: none !important;
-  color: white !important;
-}
-
-.btn-info {
-  background-color: #850f8d !important;
-  border-radius: 0 !important;
-  border: none !important;
-  color: white !important;
-}
-
-/* Background Styles */
-
-.bg-primary {
-  background-color: #1a2a8b !important;
-}
-
-.bg-secondary {
-  background-color: #ff6000 !important;
-}
-
-.bg-danger {
-  background-color: #bb2525 !important;
-}
-
-.bg-success {
-  background-color: #059212 !important;
-}
-
-.bg-warning {
-  background-color: #ff9a00 !important;
-}
-
-.bg-info {
-  background-color: #850f8d !important;
-}
-
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-
-:root {
-  --primaryDashColorDark: #000000;
-  --secondaryDashColorDark: #1d1d1d;
-
-  --primaryDashMenuColor: #ffffff;
-  --secondaryDashMenuColor: #f2f2f2;
-
-  /* --basecolor: #9ba9ff;
-  --basecolor1: #a5adff;
-  --basecolor2: #afb1ff;
-  --basecolor3: #b9b5ff;
-  --basecolor4: #c4baff;
-  --basecolor5: #cebeff; */
-  /* --basecolor: #00b2ca;
-  --basecolor1: #04a6c2;
-  --basecolor2: #0899ba;
-  --basecolor3: #0f80aa;
-  --basecolor4: #1e81be;
-  --basecolor5: #1a5b92;
-  --basecolorTransparent: #3f94df57; */
-  --basecolor: #20cfe6;
-  --basecolor1: #20b7d1;
-  --basecolor2: #25afce;
-  --basecolor3: #2597c0;
-  --basecolor4: #2b96d8;
-  --basecolor5: #2972b3;
-  --basecolorTransparent: #3f94df57;
-}
-
-.LightModeTheam {
-  --PrimaryColor: #302ae6;
-  --SecondaryColor: #ffffff;
-  --fontColor: #424242;
-  --bgColor: #fff;
-}
-
-/* .bg-primary {
-  background-color: #175CD3 !important;
-  color: black !important;
-} */
-
-*::-webkit-scrollbar-track {
-  background-color: rgba(255, 255, 255, 0.377);
-}
-
-*::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-  background-color: transparent !important;
-}
-
-*::-webkit-scrollbar-thumb {
-  background-color: rgba(221, 221, 217, 0.671);
-  border-radius: 50px;
-  cursor: pointer;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  background-origin: border-box;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-
-.list-none {
-  list-style: none;
-}
-
-.justify-between {
-  justify-content: space-between;
-}
-
-.justify-center {
-  justify-content: center;
-}
-
-.aline-center {
-  align-items: center;
-}
-
-.aline-end {
-  align-items: end;
-}
-
-.react-calendar_tile {
-  position: relative;
-}
-
-.react-calendar_tile .holiday-marker {
-  position: relative;
-}
-
-.registration-page {
-  background: linear-gradient(
-    165deg,
-    rgba(23, 59, 158, 0.836),
-    rgb(14, 182, 194)
+            <button type="submit" className="btn btn-primary">
+              Update Attendance
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
   );
-  font-weight: bold;
-  color: white;
-}
+};
 
-.registration-page sup {
-  font-size: 0.8rem;
-}
-
-.btn-dark {
-  width: 100%;
-  text-align: start !important;
-}
-
-.registration-page::-webkit-scrollbar {
-  width: 2px;
-}
-
-.registration-page::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-}
-
-.registration-page::-webkit-scrollbar-thumb {
-  background-color: darkgrey;
-  outline: 1px solid slategrey;
-}
-
-.active {
-  background-color: #f5f5ff !important;
-}
-
-.selected-employee-email:hover span {
-  display: block !important;
-}
-
-.search-hoverable-text:hover {
-  color: #01005e !important;
-}
-
-.react-calendar__tile--active {
-  background: #dc00ac;
-  color: white;
-}
-
-/* Table  */
-
-table {
-  font-size: 1rem !important;
-}
-
-table tr th {
-  font-weight: 400 !important;
-}
-
-.ellipsis {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-input[type="time"] {
-  appearance: none;
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  padding: 5px;
-  font-size: 16px;
-}
-
-.custom-time-picker {
-  border: 1px solid rgba(146, 145, 145, 0.377);
-  height: 2.5rem;
-  border-radius: 5px;
-  background-color: white;
-  overflow: hidden;
-  width: 100%;
-}
-
-.custom-time-picker input {
-  height: 100%;
-  border: none;
-  border-radius: 10px;
-  padding-left: 10px;
-  font-size: 1.2rem;
-  width: calc(100% - 20px); /* Adjust the width to accommodate the padding */
-}
-
-.custom-time-picker input:focus {
-  outline: none;
-  /* box-shadow: 0 0 5px rgba(81, 203, 238, 1); */
-}
-
-.react-time-picker__wrapper {
-  border: none !important;
-}
-
-.react-time-picker__inputGroup__input {
-  border: none !important;
-  outline: none !important;
-}
+export default AttendanceUpdateForm;
