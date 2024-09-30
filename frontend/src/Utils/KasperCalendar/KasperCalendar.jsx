@@ -77,7 +77,11 @@ const KasperCalendar = ({ holidays, year, month }) => {
                 style={{
                   height: ".5rem",
                   width: ".54rem",
-                  background: "red",
+                  background:
+                    isHoliday.holidayType === "Weekly Off" ||
+                    isHoliday.holidayType === "Others"
+                      ? "red"
+                      : "blue",
                   borderRadius: "50%",
                   position: "absolute",
                   right: "-.8rem",
@@ -104,7 +108,11 @@ const KasperCalendar = ({ holidays, year, month }) => {
                   style={{
                     height: ".5rem",
                     width: ".5rem",
-                    background: "red",
+                    background:
+                      isHoliday.holidayType === "Weekly Off" ||
+                      isHoliday.holidayType === "Others"
+                        ? "red"
+                        : "blue",
                     borderRadius: "0",
                     marginBottom: "0.2rem",
                   }}
