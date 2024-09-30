@@ -110,7 +110,11 @@ const SalaryForm = (props) => {
               </option>
               {employeeData.map((data, index) => (
                 <option key={index} value={data["_id"]}>
-                  {data["empID"] + " " + data["LastName"]}
+                  {data["empID"] +
+                    " " +
+                    data["FirstName"] +
+                    " " +
+                    data["LastName"]}
                 </option>
               ))}
             </Form.Control>
