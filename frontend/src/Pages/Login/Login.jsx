@@ -4,14 +4,14 @@ import { RxEyeOpen } from "react-icons/rx";
 import { GoEyeClosed } from "react-icons/go";
 import { Link } from "react-router-dom";
 import LoginImage from "../../img/AuthPage/LoginPage.jpeg";
-import KASPLOGO from "../../img/logo.png"
+import KASPLOGO from "../../img/logo.png";
 
 const Login = (props) => {
   let error = null;
   const [alertMsg, setalertMsg] = useState("");
   const [seePass, setSeepass] = useState(false);
   const [password, setPassword] = useState("");
- 
+
   if (props.error) {
     if (props.error.response) {
       error = props.error.response.data;
@@ -19,10 +19,11 @@ const Login = (props) => {
       error = props.error.message;
     }
   }
+
   return (
     <div
       style={{ height: "100vh", width: "100%", overflow: "auto" }}
-      className="  m-0 p-0 bg-light"
+      className="m-0 p-0 bg-light"
     >
       <div
         style={{ height: "100%", width: "100%" }}
@@ -30,29 +31,29 @@ const Login = (props) => {
       >
         <div
           style={{ height: "100%" }}
-          className="col-12 col-md-4 position-relative  px-0 p-md-5 d-flex bg-white flex-column justify-content-center aline-center"
+          className="col-12 col-md-4 position-relative px-0 p-md-5 d-flex bg-white flex-column justify-content-center align-center"
         >
           <form
-            style={{
-              height: "fit-content",
-              zIndex: "1",
-            }}
+            style={{ height: "fit-content", zIndex: "1" }}
             onSubmit={props.onSubmit}
-            className="form my-auto bg-white    p py-5  px-4 p-md-3 rounded text-black fw-bold d-flex flex-column justify-content-center"
-          > 
-          <div className="d-flex justify-content-center align-items-center"> 
-            <img style={{width:'6rem', height:'auto'}} src={KASPLOGO} className="mx-auto" alt="" />
-          </div>
+            className="form my-auto bg-white py-5 px-4 p-md-3 rounded text-black fw-bold d-flex flex-column justify-content-center"
+          >
+            <div className="d-flex justify-content-center align-items-center">
+              <img
+                style={{ width: "15rem", height: "auto" }}
+                src={KASPLOGO}
+                className="mx-auto"
+                alt=""
+              />
+            </div>
             <h4
-              style={{
-                color: "var(--primaryDashColorDark)",
-              }}
+              style={{ color: "var(--primaryDashColorDark)" }}
               className="my-4 text-center text-md-start gap-2"
             >
               Sign In
             </h4>
             <div className="d-flex flex-column my-3">
-              <label for="email" className="ps-2 fw-normal">
+              <label htmlFor="email" className="ps-2 fw-normal">
                 Account
               </label>
               <input
@@ -64,7 +65,7 @@ const Login = (props) => {
             </div>
 
             <div className="d-flex position-relative flex-column my-3 mb-4 mb-md-3">
-              <label for="password" className="ps-2  fw-normal">
+              <label htmlFor="password" className="ps-2 fw-normal">
                 Enter your password
               </label>
               <div className="position-relative">
@@ -72,35 +73,30 @@ const Login = (props) => {
                   name="password"
                   placeholder="**********"
                   className="login-input border my-0"
-                  type={!seePass ? "password" : "text"}
+                  type={seePass ? "text" : "password"}
                   onChange={(e) => setPassword(e.target.value)}
                 />
                 <span
                   style={{
                     position: "absolute",
-                    top: "5%",
+                    top: "50%",
+                    transform: "translateY(-55%)",
                     right: "3%",
-                    outline: "none",
-                    border: "none",
+                    cursor: "pointer",
                   }}
                   className="fs-5 text-muted my-0"
                   onClick={(e) => {
                     e.preventDefault();
-                    setSeepass(seePass ? false : true);
+                    setSeepass(!seePass);
                   }}
                 >
-                  {/* {password.length > 0 ? ({!seePass ? <RxEyeOpen /> : <GoEyeClosed />}) : ""} */}
+                  {seePass ? <GoEyeClosed /> : <RxEyeOpen />}
                 </span>
               </div>
-              {error ? (
-                <p
-                  style={{}}
-                  className="alert m-0 fw-normal text-center p-0 text-danger"
-                >
+              {error && (
+                <p className="alert m-0 fw-normal text-center p-0 text-danger">
                   {error}
                 </p>
-              ) : (
-                ""
               )}
             </div>
 
@@ -142,7 +138,7 @@ const Login = (props) => {
                 fontWeight: "normal",
                 whiteSpace: "pre",
               }}
-              className="d-blocktext-center text-muted"
+              className="d-block text-center text-muted"
             >
               Made with <span className="heart beat">❤️</span> by Kasper
               Infotech
@@ -153,12 +149,11 @@ const Login = (props) => {
           style={{
             height: "100%",
             zIndex: "0",
-            // position: "relative",
             backgroundImage: `url(${LoginImage})`,
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
           }}
-          className="imagePossition col-12 col-md-8 p-5 d-flex flex-column justify-content-center gap-4 "
+          className="imagePosition col-12 col-md-8 p-5 d-flex flex-column justify-content-center gap-4"
         >
           <p
             style={{ position: "absolute", bottom: "10px" }}
