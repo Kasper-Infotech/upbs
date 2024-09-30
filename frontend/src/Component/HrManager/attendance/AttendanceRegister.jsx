@@ -188,30 +188,33 @@ function AttendanceRegister() {
   const handleExport = () => {
     const wsData = [];
     const monthYear = `${getUserStatusColor(filterMonth)} ${filterYear}`;
-    const companyName = "Kasper Infotech Private Limited";
-    const companyAddressLine1 = "214, Tower B, The iThum Towers,";
+    const companyName = "UPBS TECHNOLOGY";
+    const companyAddressLine1 = "ITHUM TOWER, 805 The, B 804";
     const companyAddressLine2 = "Sector 62, Noida, Uttar Pradesh 201301";
 
+    // Add company details and report title to the worksheet data
     wsData.push([companyName]);
     wsData.push([companyAddressLine1]);
     wsData.push([companyAddressLine2]);
-    wsData.push([]);
+    wsData.push([]); // Blank row for spacing
     wsData.push([`Attendance Summary for ${monthYear}`]);
-    wsData.push([]);
+    wsData.push([]); // Blank row for spacing
 
+    // Define headers for the worksheet
     const headers = [
       "S.No",
       "Employee ID",
       "Employee Name",
       ...[...Array(daysInMonth)].map((_, day) =>
         (day + 1).toString().padStart(2, "0")
-      ),
+      ), // Columns for each day of the month (01, 02, 03, ..., 30)
       "Total Absent",
       "Total Present",
       "Total Halfday",
     ];
     wsData.push(headers);
 
+    // Loop through each employee's attendance data and construct rows for export
     attendance.forEach((employee, index) => {
       const yearIndex = employee.years.findIndex(
         (year) => year.year === filterYear
@@ -220,26 +223,35 @@ function AttendanceRegister() {
         (month) => month.month === filterMonth
       );
       const dates = employee.years[yearIndex]?.months[monthIndex]?.dates || [];
+
+      // Construct the row for the employee
       const row = [
-        (index + 1).toString().padStart(2, "0"),
-        employee.employeeObjID?.empID || "NA",
-        employee.employeeObjID?.FirstName || "NA",
+        (index + 1).toString().padStart(2, "0"), // Serial number (e.g., 01, 02, ...)
+        employee.employeeObjID?.empID || "NA", // Employee ID
+        employee.employeeObjID?.FirstName || "NA", // Employee Name
         ...[...Array(daysInMonth)].map((_, day) => {
-          const dateObject = dates.find((date) => date.date === day + 1);
+          const dateObject = dates.find((date) => date.date === day + 1); // Find attendance for the day
           const loginTimeForDay = dateObject
-            ? dateObject.loginTime[0]
-            : undefined;
-          return markAttendance(loginTimeForDay).status;
+            ? dateObject.loginTime[0] // If attendance data exists for that day, get the login time
+            : "A";
+          return markAttendance(loginTimeForDay).status === "A"
+            ? "A"
+            : markAttendance(loginTimeForDay).status;
         }),
-        calculateTotal("A", employee),
-        calculateTotal("P", employee),
-        calculateTotal("H", employee),
+        calculateTotal("A", employee), // Calculate total absent days
+        calculateTotal("P", employee), // Calculate total present days
+        calculateTotal("H", employee), // Calculate total half-days
       ];
+
+      // Add the row to the worksheet data
       wsData.push(row);
     });
 
+    // Create the worksheet and workbook
     const ws = XLSX.utils.aoa_to_sheet(wsData);
     const wb = XLSX.utils.book_new();
+
+    // Append the worksheet to the workbook and export it as a file
     XLSX.utils.book_append_sheet(wb, ws, "Attendance Summary");
     XLSX.writeFile(wb, "Attendance_Summary.xlsx");
   };
