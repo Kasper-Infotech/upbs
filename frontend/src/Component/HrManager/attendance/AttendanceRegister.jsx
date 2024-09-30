@@ -34,13 +34,62 @@ function AttendanceRegister() {
   const daysInMonth = new Date(filterYear, filterMonth, 0).getDate();
   console.log(attendance);
 
-  const markAttendance = (loginTime) => {
-    if (!loginTime || loginTime.length === 0) {
-      return { status: "--", color: "#c1bdbd", title: "No Data" };
+  // const markAttendance = (loginTime) => {
+  //   if (!loginTime || loginTime.length === 0) {
+  //     return { status: "--", color: "#c1bdbd", title: "No Data" };
+  //   }
+
+  //   if (loginTime[0] === "") {
+  //     return { status: "A", color: "#EF4040", title: "Absent" };
+  //   }
+
+  //   if (loginTime === "WO") {
+  //     return { status: "WO", color: "#6e99de", title: "Work Off" };
+  //   }
+
+  //   const loginHour = parseInt(loginTime.split(":")[0]);
+  //   const loginMinute = parseInt(loginTime.split(":")[1]);
+
+  //   if (loginHour < 9 || (loginHour === 9 && loginMinute < 31)) {
+  //     return { status: "P", color: "#6BCB77", title: "Present" };
+  //   } else if (loginHour === 9 && loginMinute < 46) {
+  //     return { status: "L", color: "#41C9E2", title: "Late" };
+  //   } else if (loginHour < 14 || (loginHour === 14 && loginMinute === 0)) {
+  //     return { status: "H", color: "#FDA403", title: "Half Day" };
+  //   } else {
+  //     return { status: "A", color: "#EF4040", title: "Absent" };
+  //   }
+  // };
+
+  const markAttendance = (loginTime, day) => {
+    const today = new Date();
+    const currentDay = today.getDate();
+    const currentMonth = today.getMonth() + 1;
+    const currentYear = today.getFullYear();
+
+    // Check if the date is before the current date
+    if (
+      filterYear < currentYear ||
+      (filterYear === currentYear && filterMonth < currentMonth) ||
+      (filterYear === currentYear &&
+        filterMonth === currentMonth &&
+        day < currentDay)
+    ) {
+      if (!loginTime || loginTime.length === 0) {
+        return { status: "A", color: "#EF4040", title: "Absent" }; // Mark as absent
+      }
+    } else if (!loginTime || loginTime.length === 0) {
+      return { status: "--", color: "#c1bdbd", title: "No Data" }; // For future dates
     }
+
+    if (loginTime[0] === "") {
+      return { status: "A", color: "#EF4040", title: "Absent" };
+    }
+
     if (loginTime === "WO") {
       return { status: "WO", color: "#6e99de", title: "Work Off" };
     }
+
     const loginHour = parseInt(loginTime.split(":")[0]);
     const loginMinute = parseInt(loginTime.split(":")[1]);
 
@@ -54,7 +103,6 @@ function AttendanceRegister() {
       return { status: "A", color: "#EF4040", title: "Absent" };
     }
   };
-
   const uniqueYears = Array.from(
     new Set(
       attendance.flatMap((employee) => employee.years.map((year) => year.year))
@@ -110,19 +158,30 @@ function AttendanceRegister() {
     const monthIndex = employee.years[yearIndex]?.months.findIndex(
       (month) => month.month === filterMonth
     );
+
+    // Get the dates for the specified month and year
     const dates = employee.years[yearIndex]?.months[monthIndex]?.dates || [];
-    dates.forEach((date) => {
-      const loginTime = date.loginTime[0];
+
+    // Loop through each day of the month
+    for (let day = 1; day <= daysInMonth; day++) {
+      const dateObject = dates.find((date) => date.date === day);
+
+      // If no attendance data for the date, mark as absent until the current date
+      const loginTime = dateObject ? dateObject.loginTime[0] : "";
+
+      // Mark attendance based on loginTime or lack of data
       const attendanceStatus = markAttendance(loginTime).status;
+
       if (
         attendanceStatus === status ||
         (status === "P" &&
           (attendanceStatus === "WO" || attendanceStatus === "L")) ||
-        (status === "A" && markAttendance(loginTime).status === "--")
+        (status === "A" && attendanceStatus === "--") // Handle "--" as absent
       ) {
         total++;
       }
-    });
+    }
+
     return total;
   };
 
@@ -222,8 +281,6 @@ function AttendanceRegister() {
     window.addEventListener("resize", checkScrollable); // Recheck on window resize
     return () => window.removeEventListener("resize", checkScrollable);
   }, [attendance]);
-
-  // scrool end
 
   return (
     <div
@@ -425,7 +482,10 @@ function AttendanceRegister() {
                       const loginTimeForDay = dateObject
                         ? dateObject.loginTime[0]
                         : undefined;
-                      const { status, color } = markAttendance(loginTimeForDay);
+                      const { status, color } = markAttendance(
+                        loginTimeForDay,
+                        day + 1
+                      ); // Pass day to markAttendance
                       return (
                         <td
                           style={{
@@ -445,7 +505,6 @@ function AttendanceRegister() {
                     <td className="text-center">
                       {calculateTotal("P", employee)}
                     </td>
-                    {/* <td className='text-center'>{calculateTotal('L', employee)}</td> */}
                     <td className="text-center">
                       {calculateTotal("H", employee)}
                     </td>
