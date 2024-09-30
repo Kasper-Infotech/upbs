@@ -65,9 +65,10 @@ const MainSidebar = () => {
       name: "Attendance",
       navLinks: [
         { to: "/admin/myAttendance", label: "My Attendance" },
-        { to: "/admin/todaysAttendance", label: "TodaysAttendance" },
+        { to: "/admin/todaysAttendance", label: "Todays Attendance" },
         { to: "/admin/viewAttendance", label: "View Attendance" },
         { to: "/admin/AttendanceRegister", label: "Attendance Register" },
+        { to: "/admin/updateAttendance", label: "Update Attencance" },
 
       ],
     },
@@ -178,9 +179,10 @@ const MainSidebar = () => {
       navLinks: [
         { to: "/hr/attenDance", label: "Self Attendance" },
         { to: "/hr/AttendanceRegister", label: "Attendance Register" },
-        { to: "/hr/todaysAttendance", label: "TodaysAttendance" },
+        { to: "/hr/todaysAttendance", label: "Todays Attendance" },
         { to: "/hr/viewAttenDance", label: "View Attendance" },
         { to: "/hr/manualAttand", label: "Manual Attendance" },
+        { to: "/hr/updateAttendance", label: "Update Attencance" },
       ],
     },
     {
