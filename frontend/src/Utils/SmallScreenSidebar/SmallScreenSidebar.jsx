@@ -403,8 +403,8 @@ const SmallScreenSidebar = () => {
     >
       <h3>
         <span
-          className="text-white fw-normal fs-6 rounded-5 my-auto mx-auto border-1 border d-flex  justify-content-center align-items-center"
-          style={{ height: "20px", width: "20px", cursor: "pointer" }}
+          className="fw-normal fs-6 rounded-5 my-auto mx-auto border-1 border d-flex  justify-content-center align-items-center"
+          style={{ height: "20px", width: "20px", cursor: "pointer", color : !darkMode ? "white" : "black" }}
           onClick={toggleSidebar}
         >
           X
