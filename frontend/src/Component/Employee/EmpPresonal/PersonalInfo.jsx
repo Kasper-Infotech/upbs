@@ -26,7 +26,7 @@ const PersonalInfo = ({ data, back }) => {
 
   const handlePersonalInfoEditUpdate = (info, newInfo) => {
     newInfo.preventDefault();
-  
+
     const formData = new FormData();
     formData.append("Gender", editFormGender);
     formData.append("ContactNo", newInfo.target[4].value);
@@ -42,7 +42,7 @@ const PersonalInfo = ({ data, back }) => {
 
    
     axios
-      .put(`${BASE_URL}/api/personal-info/${id}`, formData, {
+      .put(`${BASE_URL}/api/personal-info/${info["_id"]}`, formData, {
         headers: {
           Authorization: localStorage.getItem("token") || "",
           "Content-Type": "multipart/form-data",
