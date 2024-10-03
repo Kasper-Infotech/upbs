@@ -14,6 +14,7 @@ import { GrStatusInfo } from "react-icons/gr";
 import TakeBreakLogs from "../../../Pages/Attendance/TakeBreakLogs";
 import Pagination from "../../../Utils/Pagination";
 import { rowBodyStyle, rowHeadStyle } from "../../../Style/TableStyle";
+import { useSelector } from "react-redux";
 
 const SelfAttendance = () => {
   const [attendanceData, setAttendanceData] = useState(null);
@@ -21,8 +22,10 @@ const SelfAttendance = () => {
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
   const [hoveredDate, setHoveredDate] = useState(null);
   const [isInfoHovering, setIsInfoHovering] = useState(false);
-  const empMail = localStorage.getItem("Email");
-  const employeeId = localStorage.getItem("_id");
+  const { userData} = useSelector((state)=> state.user);
+
+  const empMail = userData?.Email;
+  const employeeId = userData?._id;
   const { darkMode } = useTheme();
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);

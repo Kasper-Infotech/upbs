@@ -4,11 +4,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { AttendanceContext } from "../../Context/AttendanceContext/AttendanceContext";
 import { useTheme } from "../../Context/TheamContext/ThemeContext";
 import BASE_URL from "../config/config";
+import { useSelector } from "react-redux";
 
 const MyTeam = () => {
   const {managerMail} = useContext(AttendanceContext)
-
-  const email = localStorage.getItem("Email");
+  const { userData} = useSelector((state)=> state.user);
+  const email = userData?.Email;;
   const [employeeData, setEmployeeData] = useState([]);
   const [loading, setLoading] = useState(true);
   const { darkMode } = useTheme();

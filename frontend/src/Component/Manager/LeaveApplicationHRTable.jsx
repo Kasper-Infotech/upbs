@@ -17,6 +17,7 @@ import { rowBodyStyle, rowHeadStyle } from "../../Style/TableStyle";
 import OverLayToolTip from "../../Utils/OverLayToolTip";
 import { FiEdit2 } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
+import { useSelector } from "react-redux";
 
 const override = css`
   display: block;
@@ -27,6 +28,7 @@ const override = css`
 
 const LeaveApplicationHRTable = (props) => {
   const [leaveApplicationHRData, setLeaveApplicationHRData] = useState([]);
+  const { userData} = useSelector((state)=> state.user);
   const [loading, setLoading] = useState(true);
   const [rowData, setRowData] = useState([]);
   const [sortColumn, setSortColumn] = useState(null);
@@ -34,7 +36,7 @@ const LeaveApplicationHRTable = (props) => {
   const [sortDirection, setSortDirection] = useState("asc");
   const [filteredData, setFilteredData] = useState([]);
   const { darkMode } = useTheme();
-  const email = localStorage.getItem("Email");
+  const email = userData?.Email;;
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
   const formatDate = (dateString) => {

@@ -12,6 +12,7 @@ import LeaveDark from "../../img/Leave/LeaveDark.svg";
 import BASE_URL from "../../Pages/config/config";
 import { rowBodyStyle, rowHeadStyle } from "../../Style/TableStyle";
 import Pagination from "../../Utils/Pagination";
+import { useSelector } from "react-redux";
 
 const override = css`
   display: block;
@@ -22,6 +23,7 @@ const override = css`
 
 const LeaveApplicationHRTableAccepted = (props) => {
   const [leaveApplicationHRData, setLeaveApplicationHRData] = useState([]);
+  const { userData} = useSelector((state)=> state.user);
   const [loading, setLoading] = useState(true);
   const [rowData, setRowData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -29,7 +31,7 @@ const LeaveApplicationHRTableAccepted = (props) => {
   const { darkMode } = useTheme();
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
-  const email = localStorage.getItem("Email");
+  const email = userData?.Email;;
   const formatDate = (dateString) => {
     if (!dateString) return;
     const dateParts = dateString.split("-");

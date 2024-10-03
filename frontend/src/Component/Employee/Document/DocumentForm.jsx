@@ -6,6 +6,7 @@ import BASE_URL from "../../../Pages/config/config";
 import toast from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
 import { useTheme } from "../../../Context/TheamContext/ThemeContext";
+import { useSelector } from "react-redux";
 
 const DropArea = styled.div`
   background-position: center;
@@ -22,11 +23,12 @@ const DocumentUploadForm = (props) => {
   const [number, setNumber] = useState("");
   const [files, setFiles] = useState([]);
   const [loading, setLoading] = useState(false);
+  const { userData} = useSelector((state)=> state.user);
   let email;
   if(props.data){
     email=props.data["Email"]
   }else{
-    email = localStorage.getItem("Email");
+   email = userData?.Email;
   }
   
   const { darkMode } = useTheme();

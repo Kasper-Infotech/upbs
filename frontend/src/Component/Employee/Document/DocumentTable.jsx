@@ -8,16 +8,18 @@ import { toast } from "react-hot-toast";
 import { useTheme } from "../../../Context/TheamContext/ThemeContext";
 import { FaPlus } from "react-icons/fa";
 import SearchLight from "../../../img/Attendance/SearchLight.svg";
+import { useSelector } from "react-redux";
 
 const DocumentTable = (props) => {
   const [showDownloadbtn, setShowDownloadbtn] = useState(null);
+  const { userData} = useSelector((state)=> state.user);
   const [documents, setDocuments] = useState([]);
   const { darkMode } = useTheme();
   let email;
   if (props.data) {
     email = props.data["Email"];
   } else {
-    email = localStorage.getItem("Email");
+  email = userData?.Email;;
   }
 
   useEffect(() => {

@@ -3,9 +3,12 @@ import { IoSunnyOutline, IoMoonOutline } from "react-icons/io5"; // Import moon 
 import "./AttendanceCard.css";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { useTheme } from "../../Context/TheamContext/ThemeContext";
+import { useSelector } from "react-redux";
 
 const AttendanceCard = () => {
   const { darkMode } = useTheme();
+  
+  const { userData} = useSelector((state)=> state.user);
   const [currentTime, setCurrentTime] = useState(
     new Date().toLocaleTimeString("en-US", {
       hour: "2-digit",
@@ -43,8 +46,7 @@ const AttendanceCard = () => {
   // Determine whether it's evening (6 PM or later)
   const isEvening = new Date().getHours() >= 18;
 
-  const userType = localStorage.getItem("Account");
-
+  const userType = userData?.Account;
   const paths = {
     1: "/admin/todaysAttendance",
     2: "/hr/attenDance",

@@ -15,6 +15,7 @@ import LeaveLight from "../../../img/Leave/LeaveLight.svg";
 import { rowBodyStyle, rowHeadStyle } from "../../../Style/TableStyle";
 import LeaveDark from "../../../img/Leave/LeaveDark.svg";
 import Pagination from "../../../Utils/Pagination";
+import { useSelector } from "react-redux";
 
 
 const override = css`
@@ -27,7 +28,7 @@ const override = css`
 const LeaveApplicationHRTable = (props) => {
   const location = useLocation();
   const routeChecker = location.pathname.split("/")[1];
-    
+  const { userData} = useSelector((state)=> state.user);
   const [leaveApplicationHRData, setLeaveApplicationHRData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
@@ -39,7 +40,7 @@ const LeaveApplicationHRTable = (props) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
 
-  const email = localStorage.getItem("Email");
+  const email = userData?.Email;
 
   const loadLeaveApplicationHRData = () => {
     axios

@@ -8,21 +8,19 @@ const Moment = require('moment-timezone'); // Add this line to include moment-ti
 const createAttendance = async (req, res) => {
   const {
     employeeId,
-    year,
-    month,
-    date,
+   
     breakTime,
     breakTimeMs,
     ResumeTime,
     resumeTimeMS,
     BreakReasion,
-    LogStatus,
+
     status,
     totalLogAfterBreak
   } = req.body;
-  
-
-  // Use IST explicitly in the code
+  const year = new Date().getFullYear();
+const  month= new Date().getMonth() + 1;
+ const date= new Date().getDate();
   const currentDate = new Date();
   const currentDay = currentDate.getDate();
   const isWeekend = [0, 6].includes(currentDate.getDay());
@@ -47,19 +45,20 @@ const createAttendance = async (req, res) => {
     logoutTimeMs = [currentTimeMs];
   }
 
-  const { attendanceId } = req.params;
+  
 
   try {
     const employee = await Employee.findById(employeeId);
+
     if (!employee) {
       return res.status(404).json({ error: "Employee ID not found: " + employeeId });
     }
 
-    let attendanceRecord = await AttendanceModel.findById(attendanceId);
+    let attendanceRecord = await AttendanceModel.findById({_id:employee.attendanceObjID});
     if (!attendanceRecord) {
       return res.status(404).json({ error: "Attendance record not found" });
     }
-
+   
     let yearObject = attendanceRecord.years.find((y) => y.year === year);
     if (!yearObject) {
       yearObject = {
@@ -118,6 +117,7 @@ const createAttendance = async (req, res) => {
     }
 
     let dateObject = monthObject.dates.find((d) => d.date === date);
+   
     if (!dateObject) {
       dateObject = {
         date: date,

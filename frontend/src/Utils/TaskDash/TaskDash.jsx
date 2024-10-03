@@ -8,14 +8,15 @@ import { MdOutlineAddTask } from "react-icons/md";
 import { useTheme } from "../../Context/TheamContext/ThemeContext";
 import TaskImage from "../../img/Task/ActiveTask.svg";
 import { getTimeAgo } from "../GetDayFormatted";
+import { useSelector } from "react-redux";
 
 const TaskDash = () => {
   const [tasks, setTasks] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const { darkMode } = useTheme();
-
-  const email = localStorage.getItem("Email");
+  const { userData} = useSelector((state)=> state.user);
+  const email = userData?.Email;;
 
   const fetchData = async () => {
     try {

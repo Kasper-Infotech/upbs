@@ -5,13 +5,15 @@ import {
 } from "react-router-dom/cjs/react-router-dom.min";
 import { useTheme } from "../../Context/TheamContext/ThemeContext";
 import { IoChevronBackOutline } from "react-icons/io5";
+import { useSelector } from "react-redux";
 
 const GoBack = () => {
   const history = useHistory();
   const location = useLocation();
   const { darkMode } = useTheme();
 
-  const userType = localStorage.getItem("Account");
+  const { userData} = useSelector((state)=> state.user);
+  const userType = userData?.Account;
 
   // Define the routes where the back button should not be displayed
   const shouldHideButton =

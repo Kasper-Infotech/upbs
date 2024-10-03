@@ -7,6 +7,7 @@ import { AiOutlineTeam } from "react-icons/ai";
 
 const TeamManager = () => {
   const dispatch = useDispatch();
+  const { userData} = useSelector((state)=> state.user);
   const { attendanceData, status, error } = useSelector(
     (state) => state.attendance
   );
@@ -83,9 +84,10 @@ const TeamManager = () => {
     return <div>Error: {error}</div>;
   }
 
-  const reportingManager = localStorage.getItem("Email");
-  const userType = localStorage.getItem("Account");
-  const MyId = localStorage.getItem("_id");
+  const reportingManager = userData?.Email;
+ 
+  const userType = userData?.Account;
+  const MyId = userData?._id;
 
   const MyReportingManager = attendanceData
     .filter((data) => data.userId === MyId)

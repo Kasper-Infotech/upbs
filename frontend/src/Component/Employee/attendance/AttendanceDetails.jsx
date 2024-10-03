@@ -9,6 +9,7 @@ import {
 import BASE_URL from "../../../Pages/config/config";
 import { useTheme } from "../../../Context/TheamContext/ThemeContext";
 import { BsStopwatch } from "react-icons/bs";
+import { useSelector } from "react-redux";
 
 const AttendanceDetails = ({ data }) => {
   // const [employees, setEmployees] = useState([]);
@@ -23,8 +24,9 @@ const AttendanceDetails = ({ data }) => {
     return Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
 };
   const [selectedWeek, setSelectedWeek] = useState(new Date().getWeek());
+  const { userData} = useSelector((state)=> state.user);
 
-  const employeeId = localStorage.getItem("_id");
+  const employeeId = userData._id;
   const { darkMode } = useTheme();
 
   useEffect(() => {

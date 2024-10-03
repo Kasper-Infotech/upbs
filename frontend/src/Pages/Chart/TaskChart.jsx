@@ -4,14 +4,16 @@ import Chart from "react-apexcharts";
 import { AttendanceContext } from "../../Context/AttendanceContext/AttendanceContext";
 import { useTheme } from "../../Context/TheamContext/ThemeContext";
 import BASE_URL from "../config/config";
+import { useSelector } from "react-redux";
 const TaskChart = () => {
   const [departmentData, setDepartmentData] = useState([]);
+  const { userData} = useSelector((state)=> state.user);
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const { darkMode } = useTheme();
   const [error, setError] = useState(null);
   const [taskReceived, setTaskReceived] = useState(false);
-  const email = localStorage.getItem("Email");
+  const email = userData?.Email;;
   const { socket } = useContext(AttendanceContext);
   const loadEmployeeData = () => {
     axios

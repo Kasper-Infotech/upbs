@@ -10,10 +10,14 @@ import AttendanceContextProvider from "./Context/AttendanceContext/AttendanceCon
 import { SidebarProvider } from "./Context/AttendanceContext/smallSidebarcontext";
 import { ThemeProvider } from "./Context/TheamContext/ThemeContext";
 import { Provider } from "react-redux";
-import {store} from "./redux/store"
+import {store} from "./redux/store";
+import { HashRouter as Router} from "react-router-dom";
+
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
+        <Router>
     <Provider store={store}>
     <ThemeProvider>
       <SidebarProvider>
@@ -23,6 +27,7 @@ root.render(
       </SidebarProvider>
     </ThemeProvider>
     </Provider>
+    </Router>
     <Toaster
       position="top-center"
       reverseOrder={false}

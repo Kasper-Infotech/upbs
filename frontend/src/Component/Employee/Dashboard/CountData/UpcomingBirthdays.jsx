@@ -5,6 +5,7 @@ import HappyBirthday from "./HappyBirthday.svg";
 import BASE_URL from "../../../../Pages/config/config";
 import { LuPartyPopper } from "react-icons/lu";
 import { useTheme } from "../../../../Context/TheamContext/ThemeContext";
+import { useSelector } from "react-redux";
 
 const UpcomingBirthdays = () => {
   const [employeeData, setEmployeeData] = useState([]);
@@ -12,10 +13,11 @@ const UpcomingBirthdays = () => {
   const [rowData, setRowData] = useState([]);
   const [upcomingBirthdays, setUpcomingBirthdays] = useState([]);
   const { darkMode } = useTheme();
+  const { userData} = useSelector((state)=> state.user);
 
   const loadEmployeeData = () => {
     axios
-      .get(`${BASE_URL}/api/employee/` + localStorage.getItem("_id"), {
+      .get(`${BASE_URL}/api/employee/` + userData?._id, {
         headers: {
           authorization: localStorage.getItem("token") || "",
         },

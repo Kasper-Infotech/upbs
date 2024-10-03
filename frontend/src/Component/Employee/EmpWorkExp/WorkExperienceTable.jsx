@@ -11,6 +11,7 @@ import BASE_URL from "../../../Pages/config/config.js";
 import { useTheme } from "../../../Context/TheamContext/ThemeContext.js";
 import OverLayToolTip from "../../../Utils/OverLayToolTip.jsx";
 import TittleHeader from "../../../Pages/TittleHeader/TittleHeader.jsx";
+import { useSelector } from "react-redux";
 const override = css`
   display: block;
   margin: 0 auto;
@@ -20,6 +21,8 @@ const override = css`
 
 const WorkExperienceTable = (props) => {
   const [workExperienceData, setWorkExperienceData] = useState([]);
+  const { userData} = useSelector((state)=> state.user);
+
   const [loading, setLoading] = useState(true);
   const [rowData, setRowData] = useState([]);
   const { darkMode } = useTheme();
@@ -27,7 +30,7 @@ const WorkExperienceTable = (props) => {
   if (props.data) {
     id = props.data["_id"];
   } else {
-    id = localStorage.getItem("_id");
+    id = userData?._id;
   }
   // Removed const from here
   let workExperienceObj = [];

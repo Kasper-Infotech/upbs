@@ -4,6 +4,7 @@ import { TfiReload } from "react-icons/tfi";
 import { FaCircleInfo } from "react-icons/fa6";
 import BASE_URL from "../../../Pages/config/config";
 import { useTheme } from "../../../Context/TheamContext/ThemeContext";
+import { useSelector } from "react-redux";
 
 const AttendanceDetails = (props) => {
   const [employees, setEmployees] = useState([]);
@@ -12,7 +13,8 @@ const AttendanceDetails = (props) => {
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
   const [hoveredDate, setHoveredDate] = useState(null);
   const [isInfoHovering, setIsInfoHovering] = useState(false);
-  const employeeId = localStorage.getItem("_id");
+  const { userData} = useSelector((state)=> state.user);
+  const employeeId = userData._id;
   const { darkMode } = useTheme();
 
   const handleMouseEnter = (date) => {

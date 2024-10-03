@@ -33,34 +33,36 @@ import { ImCalendar } from "react-icons/im";
 import { TbBeach, TbUserCheck } from "react-icons/tb";
 import { PiUsersThree } from "react-icons/pi";
 import { FaRegUserCircle } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 const MainSidebar = () => {
   const [activeCategory, setActiveCategory] = useState(null);
+  const { userData} = useSelector((state)=> state.user);
 
   const [extended, setExtended] = useState(false);
   const { darkMode } = useTheme();
 
   const allLinks = [
     {
-      user: "1",
+      user: 1,
       icon: <MdOutlineDashboardCustomize />,
       name: "Dashboard",
       navLinks: [{ to: "/admin/dashboard", label: "Dashboard" }],
     },
     {
-      user: "1",
+      user: 1,
       icon: <RiUser3Line />,
       name: "Employee",
       navLinks: [{ to: "/admin/employee", label: "Employee List" }],
     },
     {
-      user: "1",
+      user: 1,
       icon: <MdCurrencyRupee />,
       name: "Salary",
       navLinks: [{ to: "/admin/salary", label: "Salary" }],
     },
     {
-      user: "1",
+      user: 1,
       icon: <IoMdCheckmarkCircleOutline />,
       name: "Attendance",
       navLinks: [
@@ -73,7 +75,7 @@ const MainSidebar = () => {
       ],
     },
     {
-      user: "1",
+      user: 1,
       icon: <IoCalendarOutline />,
       name: "Leave",
       navLinks: [
@@ -86,7 +88,7 @@ const MainSidebar = () => {
       ],
     },
     {
-      user: "1",
+      user: 1,
       icon: <GoTasklist />,
       name: "Task",
       navLinks: [
@@ -99,7 +101,7 @@ const MainSidebar = () => {
       ],
     },
     {
-      user: "1",
+      user: 1,
       icon: <LuKeyRound />,
       name: "Access",
       navLinks: [
@@ -109,13 +111,13 @@ const MainSidebar = () => {
       ],
     },
     {
-      user: "1",
+      user: 1,
       icon: <HiOutlineBuildingOffice2 />,
       name: "Company",
       navLinks: [{ to: "/admin/company", label: "Company List" }],
     },
     {
-      user: "1",
+      user: 1,
       icon: <IoLocationOutline />,
       name: "Address",
       navLinks: [
@@ -125,13 +127,13 @@ const MainSidebar = () => {
       ],
     },
     {
-      user: "1",
+      user: 1,
       icon: <HiOutlineSpeakerphone />,
       name: "Notice",
       navLinks: [{ to: "/admin/NoticeManagement", label: "Notice" }],
     },
     {
-      user: "1",
+      user: 1,
       icon: <IoIosHelpCircleOutline />,
       name: "Request Details",
       navLinks: [
@@ -140,13 +142,13 @@ const MainSidebar = () => {
       ],
     },
     {
-      user: "1",
+      user: 1,
       icon: <LuPartyPopper />,
       name: "Holiday",
       navLinks: [{ to: "/admin/leaveCal", label: "Leave Calendar" }],
     },
     {
-      user: "1",
+      user: 1,
       icon: <AiOutlineFundProjectionScreen />,
       name: "Project",
       navLinks: [
@@ -155,25 +157,25 @@ const MainSidebar = () => {
       ],
     },
     {
-      user: "2",
+      user: 2,
       icon: <LuLayoutDashboard />,
       name: "Dashboard",
       navLinks: [{ to: "/hr/dashboard", label: "Dashboard" }],
     },
     {
-      user: "2",
+      user: 2,
       icon: <PiUsersThree />,
       name: "Employee",
       navLinks: [{ to: "/hr/employee", label: "Employee List" }],
     },
     {
-      user: "2",
+      user: 2,
       icon: <IoCashOutline />,
       name: "Salary",
       navLinks: [{ to: "/hr/salary", label: "Salary" }],
     },
     {
-      user: "2",
+      user: 2,
       icon: <TbUserCheck />,
       name: "Attendance",
       navLinks: [
@@ -186,7 +188,7 @@ const MainSidebar = () => {
       ],
     },
     {
-      user: "2",
+      user: 2,
       icon: <TbBeach />,
       name: "Leave",
       navLinks: [
@@ -200,7 +202,7 @@ const MainSidebar = () => {
       ],
     },
     {
-      user: "2",
+      user: 2,
       icon: <MdOutlineContacts />,
       name: "Access",
       navLinks: [
@@ -210,7 +212,7 @@ const MainSidebar = () => {
       ],
     },
     {
-      user: "2",
+      user: 2,
       icon: <HiOutlineBuildingOffice2 />,
       name: "Company",
       navLinks: [{ to: "/hr/company", label: "Company List" }],
@@ -225,13 +227,13 @@ const MainSidebar = () => {
       ],
     },
     {
-      user: "2",
+      user: 2,
       icon: <HiOutlineSpeakerphone />,
       name: "Notice",
       navLinks: [{ to: "/hr/NoticeManagement", label: "Notice" }],
     },
     {
-      user: "2",
+      user: 2,
       icon: <IoTicketOutline />,
       name: "My Request",
       navLinks: [
@@ -241,7 +243,7 @@ const MainSidebar = () => {
       ],
     },
     {
-      user: "2",
+      user: 2,
       icon: <IoIosHelpCircleOutline />,
       name: "Team Request",
       navLinks: [
@@ -250,25 +252,25 @@ const MainSidebar = () => {
       ],
     },
     {
-      user: "2",
+      user: 2,
       icon: <ImCalendar />,
       name: "Holiday",
       navLinks: [{ to: "/hr/holiday", label: "Holiday Calendar" }],
     },
     {
-      user: "2",
+      user: 2,
       icon: <FaRegCircleUser />,
       name: "Profile",
       navLinks: [{ to: "/hr/personal-info", label: "Profile" }],
     },
     {
-      user: "4",
+      user: 4,
       icon: <MdOutlineDashboardCustomize />,
       name: "Dashboard",
       navLinks: [{ to: "/manager/dashboard", label: "Dashboard" }],
     },
     {
-      user: "4",
+      user: 4,
       icon: <IoMdCheckmarkCircleOutline />,
       name: "Attendance",
       navLinks: [
@@ -278,7 +280,7 @@ const MainSidebar = () => {
       ],
     },
     {
-      user: "4",
+      user: 4,
       icon: <IoCalendarOutline />,
       name: "Leave",
       navLinks: [
@@ -289,7 +291,7 @@ const MainSidebar = () => {
       ],
     },
     {
-      user: "4",
+      user: 4,
       icon: <GoTasklist />,
       name: "Task",
       navLinks: [
@@ -302,13 +304,13 @@ const MainSidebar = () => {
     },
 
     {
-      user: "4",
+      user: 4,
       icon: <HiOutlineSpeakerphone />,
       name: "Notice",
       navLinks: [{ to: "/manager/NoticeManagement", label: "Notice" }],
     },
     {
-      user: "4",
+      user: 4,
       icon: <IoTicketOutline />,
       name: "My Request",
       navLinks: [
@@ -318,7 +320,7 @@ const MainSidebar = () => {
       ],
     },
     {
-      user: "4",
+      user: 4,
       icon: <IoIosHelpCircleOutline />,
       name: "Team Request",
       navLinks: [
@@ -328,30 +330,30 @@ const MainSidebar = () => {
     },
 
     {
-      user: "4",
+      user: 4,
       icon: <FaRegUserCircle />,
       name: "Profile",
       navLinks: [{ to: "/manager/personal-info", label: "Profile" }],
     },
     {
-      user: "3",
+      user: 3,
       icon: <MdOutlineDashboardCustomize />,
       name: "Dashboard",
       navLinks: [{ to: "/employee/dashboard", label: "Dashboard" }],
     },
     {
-      user: "3",
+      user: 3,
       icon: <FaRegCircleUser />,
       name: "Profile",
       navLinks: [
         {
-          to: "/employee/" + localStorage.getItem("_id") + "/personal-info",
+          to: "/employee/" + userData?._id + "/personal-info",
           label: "Profile",
         },
       ],
     },
     {
-      user: "3",
+      user: 3,
       icon: <IoMdCheckmarkCircleOutline className="fs-4" />,
       name: "Attendance",
       navLinks: [
@@ -362,7 +364,7 @@ const MainSidebar = () => {
       ],
     },
     {
-      user: "3",
+      user: 3,
       icon: <IoCalendarOutline />,
       name: "Leave",
       navLinks: [
@@ -373,13 +375,13 @@ const MainSidebar = () => {
       ],
     },
     {
-      user: "3",
+      user: 3,
       icon: <GoTasklist />,
       name: "Task",
       navLinks: [{ to: "/employee/task", label: "Task" }],
     },
     {
-      user: "3",
+      user: 3,
       icon: <IoTicketOutline />,
       name: "Request",
       navLinks: [
@@ -390,8 +392,7 @@ const MainSidebar = () => {
     },
   ];
 
-  const LoginUser = localStorage.getItem("Account");
-
+ 
   const toggleDropdown = (name) => {
     if (activeCategory === name) {
       setActiveCategory(null);
@@ -462,7 +463,7 @@ const MainSidebar = () => {
         }}
       >
         {allLinks
-          .filter((links) => links.user === LoginUser)
+          .filter((links) => links.user === userData?.Account)
           .map(({ icon, name, navLinks }) =>
             navLinks.length > 1 ? (
               <div

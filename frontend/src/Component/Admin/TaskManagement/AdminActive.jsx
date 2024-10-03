@@ -23,10 +23,13 @@ import AvatarGroup from "../../../Pages/AvatarGroup/AvatarGroup";
 import { AttendanceContext } from "../../../Context/AttendanceContext/AttendanceContext";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import profile from "../../../img/profile.jpg"
+import { useSelector } from "react-redux";
 
 const AdminActive = () => {
   const [tasks, setTasks] = useState([]);
-  const email  =localStorage.getItem("Email")
+  const { userData} = useSelector((state)=> state.user);
+
+  const email  =userData?.Email;
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isCanceling, setIsCanceling] = useState(false);

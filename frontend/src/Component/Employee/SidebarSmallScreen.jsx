@@ -13,6 +13,7 @@ const SidebarSmallScreen = (props) => {
   const [activeCategory, setActiveCategory] = useState(null);
   const { toggleSidebar } = useSidebar();
   const { darkMode } = useTheme();
+  const { userData} = useSelector((state)=> state.user);
 
   const allLinks = [
     {
@@ -25,7 +26,7 @@ const SidebarSmallScreen = (props) => {
       name: "Profile",
       navLinks: [
         {
-          to: "/employee/" + localStorage.getItem("_id") + "/personal-info",
+          to: "/employee/" + userData?._id + "/personal-info",
           label: "Profile",
         },
       ],

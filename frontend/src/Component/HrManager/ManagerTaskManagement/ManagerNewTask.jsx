@@ -16,6 +16,7 @@ import { IoIosArrowRoundForward, IoMdDoneAll } from "react-icons/io";
 import { getFormattedDate } from "../../../Utils/GetDayFormatted";
 import { PiInfoLight } from "react-icons/pi";
 import profile from "../../../img/profile.jpg"
+import { useSelector } from "react-redux";
 const ManagerNewTask = () => {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -28,13 +29,14 @@ const ManagerNewTask = () => {
   const [expandedTaskId, setExpandedTaskId] = useState(null);
   const [, setIsAccepted] = useState(false);
   const [, setIsRejected] = useState(false);
+  const { userData} = useSelector((state)=> state.user);
 
   const { darkMode } = useTheme();
 
   const taskId = uuidv4();
-  const name = localStorage.getItem("Name");
-  const email = localStorage.getItem("Email");
-  const id = localStorage.getItem("_id");
+  const name = `${userData?.FirstName} ${userData?.LastName}`;
+  const email = userData?.Email;
+  const id = userData?._id;
 
   const { socket } = useContext(AttendanceContext);
 

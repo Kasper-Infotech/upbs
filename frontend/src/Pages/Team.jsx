@@ -7,11 +7,12 @@ import { AttendanceContext } from '../Context/AttendanceContext/AttendanceContex
 import { rowBodyStyle, rowHeadStyle } from "../Style/TableStyle";
 import Pagination from "../Utils/Pagination";
 import TittleHeader from "./TittleHeader/TittleHeader";
+import { useSelector } from "react-redux";
 
 const Table = () => {
   const {managerMail} = useContext(AttendanceContext)
-
-  const email = localStorage.getItem("Email");
+  const { userData} = useSelector((state)=> state.user);
+  const email = userData?.Email;;
   const [employeeData, setEmployeeData] = useState([]);
   const [loading, setLoading] = useState(true);
   const { darkMode } = useTheme();

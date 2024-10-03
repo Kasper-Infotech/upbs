@@ -11,6 +11,7 @@ import BASE_URL from "../../../Pages/config/config";
 import TittleHeader from "../../../Pages/TittleHeader/TittleHeader";
 import OverLayToolTip from "../../../Utils/OverLayToolTip";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 const override = css`
   display: block;
@@ -20,11 +21,13 @@ const override = css`
 `;
 
 const EducationTable = (props) => {
+const { userData} = useSelector((state)=> state.user);
+
   let id;
   if (props.data) {
     id = props.data["_id"];
   } else {
-    id = localStorage.getItem("_id");
+    id = userData?._id;
   }
   const [educationData, setEducationData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -57,7 +60,7 @@ const EducationTable = (props) => {
   };
   useEffect(() => {
     loadEducationData();
-  }, [localStorage.getItem("_id")]);
+  }, [id]);
   // [props.data["_id"]]);
 
   const onEducationDelete = (e1, e2) => {

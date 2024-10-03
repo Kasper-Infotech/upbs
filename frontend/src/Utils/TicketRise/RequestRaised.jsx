@@ -4,9 +4,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Modal, Button, Form } from 'react-bootstrap';
 import moment from 'moment';
 import BASE_URL from '../../Pages/config/config';
+import { useSelector } from 'react-redux';
 
 const RequestRaised = () => {
-  const email = localStorage.getItem("Email");
+  const { userData} = useSelector((state)=> state.user);
+  const email = userData?.Email;
   const [data, setData] = useState([]);
   const [darkMode, setDarkMode] = useState(false); 
   const [showModal, setShowModal] = useState(false); 

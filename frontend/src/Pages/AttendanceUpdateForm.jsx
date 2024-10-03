@@ -5,9 +5,11 @@ import axios from "axios";
 import BASE_URL from "./config/config";
 import toast from "react-hot-toast";
 import TittleHeader from "./TittleHeader/TittleHeader";
+import { useSelector } from "react-redux";
 
 const AttendanceUpdateForm = () => {
-  const email = localStorage.getItem("Email");
+  const { userData} = useSelector((state)=> state.user);
+  const email = userData?.Email;
   const [attendanceData, setAttendanceData] = useState({
     updatedBy: email,
     date: "",

@@ -18,7 +18,9 @@ import TittleHeader from "../../../Pages/TittleHeader/TittleHeader";
 import { getFormattedDate } from "../../../Utils/GetDayFormatted";
 import { useTheme } from "../../../Context/TheamContext/ThemeContext";
 import profile from "../../../img/profile.jpg"
+import { useSelector } from "react-redux";
 const AdminAssignedTask = () => {
+  const { userData} = useSelector((state)=> state.user);
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -29,7 +31,7 @@ const AdminAssignedTask = () => {
   const [expandedTaskId, setExpandedTaskId] = useState(null);
   const [currentTime, setCurrentTime] = useState(new Date());
   const { darkMode } = useTheme();
-const email = localStorage.getItem("Email")
+  const email = userData?.Email;
   const [updatedTask, setUpdatedTask] = useState({
     id: "",
     Taskname: "",

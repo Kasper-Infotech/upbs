@@ -14,12 +14,13 @@ import OverLayToolTip from "../../../Utils/OverLayToolTip";
 import Pagination from "../../../Utils/Pagination";
 import LeaveDark from "../../../img/Leave/LeaveDark.svg";
 import { rowBodyStyle, rowHeadStyle } from "../../../Style/TableStyle";
+import { useSelector } from "react-redux";
 
 
 const LeaveApplicationHRTable = (props) => {
   const location = useLocation();
   const routeChecker = location.pathname.split("/")[1];
-    
+  const { userData} = useSelector((state)=> state.user);
   const [leaveApplicationHRData, setLeaveApplicationHRData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [sortColumn, setSortColumn] = useState(null);
@@ -30,7 +31,7 @@ const LeaveApplicationHRTable = (props) => {
   const { darkMode } = useTheme();
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
-  const email = localStorage.getItem("Email");
+  const email = userData?.Email;;
   const formatDate = (dateString) => {
     if (!dateString) return;
     const dateParts = dateString.split("-");

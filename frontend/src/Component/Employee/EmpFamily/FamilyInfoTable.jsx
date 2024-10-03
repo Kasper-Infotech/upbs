@@ -11,6 +11,7 @@ import { useTheme } from "../../../Context/TheamContext/ThemeContext";
 import { FaPlus, FaRegEdit } from "react-icons/fa";
 import TittleHeader from "../../../Pages/TittleHeader/TittleHeader";
 import OverLayToolTip from "../../../Utils/OverLayToolTip";
+import { useSelector } from "react-redux";
 
 const override = css`
   display: block;
@@ -20,11 +21,13 @@ const override = css`
 `;
 
 const FamilyInfoTable = (props) => {
+const { userData} = useSelector((state)=> state.user);
+
   let id;
   if (props.data) {
     id = props.data["_id"];
   } else {
-    id = localStorage.getItem("_id");
+    id = userData?._id;
   }
   const [familyInfoData, setFamilyInfoData] = useState([]);
   const [loading, setLoading] = useState(true);

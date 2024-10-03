@@ -2,14 +2,15 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import BASE_URL from "../../../Pages/config/config";
 import { useTheme } from "../../../Context/TheamContext/ThemeContext";
+import { useSelector } from "react-redux";
 
 const EmployeeCompletedTask = () => {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { darkMode } = useTheme()
-
-  const email = localStorage.getItem("Email");
+  const { userData} = useSelector((state)=> state.user);
+  const email = userData?.Email;
   const fetchData = async () => {
     try {
       const response = await axios.get(`${BASE_URL}/api/tasks`, {

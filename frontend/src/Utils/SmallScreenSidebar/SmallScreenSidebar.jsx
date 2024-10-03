@@ -29,12 +29,14 @@ import { TbBeach, TbUserCheck } from "react-icons/tb";
 import { PiUsersThree } from "react-icons/pi";
 import { AiOutlineFundProjectionScreen } from "react-icons/ai";
 import { RiUser3Line } from "react-icons/ri";
+import { useSelector } from "react-redux";
 
 const SmallScreenSidebar = () => {
   const [activeCategory, setActiveCategory] = useState(null);
   const { toggleSidebar } = useSidebar();
   const { darkMode } = useTheme();
-  const LoginUser = localStorage.getItem("Account");
+  const { userData} = useSelector((state)=> state.user);
+  const LoginUser = userData?.Account;
 
   const allLinks = [
     {
@@ -341,7 +343,7 @@ const SmallScreenSidebar = () => {
       name: "Profile",
       navLinks: [
         {
-          to: "/employee/" + localStorage.getItem("_id") + "/personal-info",
+          to: "/employee/" + userData?._id + "/personal-info",
           label: "Profile",
         },
       ],

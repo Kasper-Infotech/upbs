@@ -7,19 +7,22 @@ import BASE_URL from "../../../Pages/config/config";
 import { IoMdAttach, IoMdEye } from "react-icons/io";
 import { useTheme } from "../../../Context/TheamContext/ThemeContext";
 import TittleHeader from "../../../Pages/TittleHeader/TittleHeader";
+import { useSelector } from "react-redux";
 
 const EmployeeNewTask = () => {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [email, setEmail] = useState(null);
-  const empMail = localStorage.getItem("Email");
+  const { userData} = useSelector((state)=> state.user);
+
   const { darkMode } = useTheme();
   const { socket } = useContext(AttendanceContext);
   const [empData, setEmpData] = useState(null);
+  const empMail = userData?.Email;
+  const name = `${userData?.FirstName} ${userData?.LastName}`;
+  const id = userData?._id;
 
-  const name = localStorage.getItem("Name");
-  const id = localStorage.getItem("_id");
 
   useEffect(() => {
     const loadPersonalInfoData = async () => {

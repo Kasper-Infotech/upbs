@@ -6,15 +6,17 @@ import BASE_URL from "../../../Pages/config/config";
 import { useTheme } from "../../../Context/TheamContext/ThemeContext";
 import SetBreakLogs from "../../../Pages/Attendance/SetBreakLogs";
 import { GetDayFormatted } from "../../../Utils/GetDayFormatted";
+import { useSelector } from "react-redux";
 
 const SelfAttendance = () => {
   const [attendanceData, setAttendanceData] = useState(null);
+  const { userData} = useSelector((state)=> state.user);
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
   const [hoveredDate, setHoveredDate] = useState(null);
   const [isInfoHovering, setIsInfoHovering] = useState(false);
-  const empMail = localStorage.getItem("Email");
-  const employeeId = localStorage.getItem("_id");
+  const empMail = userData?.Email;
+  const employeeId = userData?._id;
   const { darkMode } = useTheme();
 
   const handleMouseEnter = (date) => {

@@ -7,9 +7,11 @@ import { AttendanceContext } from "../../../Context/AttendanceContext/Attendance
 import { v4 as uuid } from "uuid";
 import BASE_URL from "../../../Pages/config/config";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 
 const ManagerNewTask = () => {
+  const { userData} = useSelector((state)=> state.user);
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -17,9 +19,9 @@ const ManagerNewTask = () => {
   const [, setIsRejected] = useState(false);
   const [allImage, setAllImage] = useState(null);
   const [empData, setEmpData] = useState(null);
-  const name = localStorage.getItem("Name");
+  const name = `${userData?.FirstName} ${userData?.LastName}`;
   const { socket } = useContext(AttendanceContext);
-  const email = localStorage.getItem("Email");
+  const email = userData?.Email;;
 
 
   const calculateRemainingTime = (endDate) => {

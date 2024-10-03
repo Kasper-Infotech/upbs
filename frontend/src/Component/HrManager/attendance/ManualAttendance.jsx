@@ -5,10 +5,11 @@ import BASE_URL from "../../../Pages/config/config";
 import Moment from "moment";
 import { useTheme } from "../../../Context/TheamContext/ThemeContext";
 import TittleHeader from "../../../Pages/TittleHeader/TittleHeader";
+import { useSelector } from "react-redux";
 
 function ManualAttendance() {
   const { darkMode } = useTheme();
-
+  const { userData} = useSelector((state)=> state.user);
   const {
     employees,
     setEmployees,
@@ -20,8 +21,8 @@ function ManualAttendance() {
     setMessage,
   } = useContext(AttendanceContext);
 
-  const userType = localStorage.getItem("Accounts");
-  const reportingHr = localStorage.getItem("Email");
+  const userType = userData?.Account;
+  const reportingHr = userData?.Email;
 
   useEffect(() => {
     const fetchUsers = async () => {

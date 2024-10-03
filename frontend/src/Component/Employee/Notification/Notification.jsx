@@ -4,14 +4,17 @@ import { ImBin } from "react-icons/im";
 import { AttendanceContext } from "../../../Context/AttendanceContext/AttendanceContext";
 import "./notification.css";
 import BASE_URL from "../../../Pages/config/config.js";
+import { useSelector } from "react-redux";
 
 const Notification = () => {
   const [selectAll, setSelectAll] = useState(false);
   const [selectedNotification, setSelectedNotification] = useState([]);
   const [notification, setNotification] = useState(null);
   const { socket } = useContext(AttendanceContext);
-  const id = localStorage.getItem("_id");
-  const email = localStorage.getItem("Email");
+  const { userData} = useSelector((state)=> state.user);
+
+  const id = userData?._id;
+  const email = userData?.Email;
 
   const loadEmployeeData = () => {
     axios

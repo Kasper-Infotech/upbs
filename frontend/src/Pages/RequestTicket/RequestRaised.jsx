@@ -9,9 +9,11 @@ import RequestImage from "../../img/Request/Request.svg";
 import BASE_URL from "../config/config";
 import toast from "react-hot-toast";
 import profile from "../../img/profile.jpg";
+import { useSelector } from "react-redux";
 
 const RequestRaised = () => {
-  const email = localStorage.getItem("Email");
+  const { userData} = useSelector((state)=> state.user);
+  const email = userData?.Email;;
   const [data, setData] = useState([]);
   const { darkMode } = useTheme();
   const [showModal, setShowModal] = useState(false);
@@ -23,7 +25,7 @@ const RequestRaised = () => {
   });
   const [selectedRequest, setSelectedRequest] = useState(null);
 
-  const MyEmail = localStorage.getItem("Email");
+  const MyEmail = userData?.Email;;
 
   const fetchRequests = async () => {
     try {

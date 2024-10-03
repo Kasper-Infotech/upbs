@@ -13,13 +13,16 @@ import TittleHeader from "../../../Pages/TittleHeader/TittleHeader";
 import { MdArrowDropDown, MdArrowDropUp } from "react-icons/md";
 import profile from "../../../img/profile.jpg"
 import AvatarGroup from "../../../Pages/AvatarGroup/AvatarGroup";
+import { useSelector } from "react-redux";
 
 const EmployeeNewTask = () => {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [email, setEmail] = useState(null);
-  const empMail = localStorage.getItem("Email");
+const { userData} = useSelector((state)=> state.user);
+
+  const empMail =    userData?.Email;
   const { darkMode } = useTheme();
   const { socket } = useContext(AttendanceContext);
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -27,8 +30,8 @@ const EmployeeNewTask = () => {
   const [timeinfo, setTimeinfo] = useState(false);
   const [expandedTaskId, setExpandedTaskId] = useState(null);
 
-  const name = localStorage.getItem("Name");
-  const id = localStorage.getItem("_id");
+  const name = `${userData?.FirstName} ${userData?.LastName}`;
+  const id = userData?._id;
 
   useEffect(() => {
     const loadPersonalInfoData = async () => {

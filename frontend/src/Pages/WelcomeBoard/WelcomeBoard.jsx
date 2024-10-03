@@ -4,13 +4,14 @@ import axios from "axios";
 import { useTheme } from "../../Context/TheamContext/ThemeContext";
 import BASE_URL from "../config/config";
 import TakeBreakLogs from "../Attendance/TakeBreakLogs";
+import { useSelector } from "react-redux";
 // import HrAttendance from "../../Component/HrManager/attendance/AttendanceSample";
 
 const WelcomeBoard = ({ height = "220px" }) => {
   const [employeeData, setEmployeeData] = useState(null);
   const { darkMode } = useTheme();
-
-  const id = localStorage.getItem("_id");
+  const { userData} = useSelector((state)=> state.user);
+  const id = userData?._id;
 
   const loadEmployeeData = () => {
     axios

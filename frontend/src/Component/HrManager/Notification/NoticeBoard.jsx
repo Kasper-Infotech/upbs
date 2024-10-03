@@ -6,15 +6,18 @@ import { useTheme } from "../../../Context/TheamContext/ThemeContext";
 import BASE_URL from "../../../Pages/config/config";
 import { TiDeleteOutline } from "react-icons/ti";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import { useSelector } from "react-redux";
 
 const NoticeBoard = () => {
   const location = useLocation();
+  const { userData} = useSelector((state)=> state.user);
+
   const route = location.pathname.split("/")[1];
-  const email = localStorage.getItem("Email");
+  const email = userData?.Email;
   const [notice, setNotice] = useState([]);
   const { darkMode } = useTheme();
   const { socket } = useContext(AttendanceContext);
-  const id = localStorage.getItem("_id");
+  const id = userData?._id;
 
   const loadEmployeeData = () => {
     axios

@@ -13,14 +13,15 @@ import LeavePlaceHolder from "../../img/Leave/LeavePlaceHolder.svg";
 
 const EmployeeLeaveDash = () => {
   const [leaveBalance, setLeaveBalance] = useState([]);
-  const id = localStorage.getItem("_id");
+  const { userData} = useSelector((state)=> state.user);
+  const id = userData?._id;
   const { darkMode } = useTheme();
   const { empData } = useSelector((state) => state.personalInfo);
   console.log(empData);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const employeeId = localStorage.getItem("_id");
+    const employeeId = userData?._id;
     dispatch(fetchPersonalInfo(employeeId));
   }, [dispatch]);
 
@@ -151,7 +152,8 @@ const EmployeeLeaveDash = () => {
     return text.replace(/Leave|leave/g, "").trim();
   };
 
-  const userType = localStorage.getItem("Account");
+
+  const userType = userData?.Account;
 
   const paths = {
     1: "/admin/todaysAttendance",

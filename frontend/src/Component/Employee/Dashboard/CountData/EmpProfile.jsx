@@ -27,10 +27,11 @@ const EmpProfile = (props) => {
   const [activeSection, setActiveSection] = useState("personalInfo");
   const [showDownloadbtn, setShowDownloadbtn] = useState(false);
   const [visibleDocs, setVisibleDocs] = useState(true);
-
+  const { userData} = useSelector((state)=> state.user);
+  const employeeId = userData._id;
   const loadPersonalInfoData = () => {
     axios
-      .get(`${BASE_URL}/api/personal-info/` + localStorage.getItem("_id"), {
+      .get(`${BASE_URL}/api/personal-info/` + employeeId, {
         headers: {
           authorization: localStorage.getItem("token") || ""
         }

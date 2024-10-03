@@ -13,6 +13,7 @@ import LeaveBalance from "../../Component/HrManager/LeaveStatus/LeaveBalance";
 import TittleHeader from "../TittleHeader/TittleHeader";
 import { rowBodyStyle, rowHeadStyle } from "../../Style/TableStyle";
 import Pagination from "../../Utils/Pagination";
+import { useSelector } from "react-redux";
 
 const override = css`
   display: block;
@@ -26,13 +27,13 @@ const LeaveApplicationEmpTable = (props) => {
   const [rowData, setRowData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
-
+  const { userData} = useSelector((state)=> state.user);
   const { darkMode } = useTheme();
 
   const loadLeaveApplicationEmpData = () => {
     axios
       .get(
-        `${BASE_URL}/api/leave-application-man/` + localStorage.getItem("_id"),
+        `${BASE_URL}/api/leave-application-man/` + userData?._id,
         {
           headers: {
             authorization: localStorage.getItem("token") || "",

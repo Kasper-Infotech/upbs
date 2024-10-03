@@ -6,6 +6,7 @@ import { useTheme } from "../../../Context/TheamContext/ThemeContext";
 import TittleHeader from "../../../Pages/TittleHeader/TittleHeader";
 import { MdArrowDropDown, MdArrowDropUp } from "react-icons/md";
 import profile from "../../../img/profile.jpg"
+import { useSelector } from "react-redux";
 
 const EmployeeCompletedTask = () => {
   const [tasks, setTasks] = useState([]);
@@ -14,8 +15,9 @@ const EmployeeCompletedTask = () => {
   const { darkMode } = useTheme();
   const [timeinfo, setTimeinfo] = useState(false);
   const [expandedTaskId, setExpandedTaskId] = useState(null);
+  const { userData} = useSelector((state)=> state.user);
 
-  const email = localStorage.getItem("Email");
+  const email = userData?.Email;
   const fetchData = async () => {
     try {
       const response = await axios.get(`${BASE_URL}/api/tasks`, {

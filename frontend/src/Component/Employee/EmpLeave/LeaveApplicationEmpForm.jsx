@@ -7,9 +7,12 @@ import TittleHeader from "../../../Pages/TittleHeader/TittleHeader";
 import BASE_URL from "../../../Pages/config/config";
 import { useLocation } from "react-router-dom";
 import { useTheme } from "../../../Context/TheamContext/ThemeContext";
+import { useSelector } from "react-redux";
 
 const LeaveApplicationEmpForm = (props) => {
-  const id = localStorage.getItem("_id");
+const { userData} = useSelector((state)=> state.user);
+
+const id = userData?._id;
   const [empData, setEmpData] = useState(null);
   const [leaveBalance, setLeaveBalance] = useState([]);
   const [formData, setFormData] = useState({
@@ -23,7 +26,8 @@ const LeaveApplicationEmpForm = (props) => {
   const [halfDayType, setHalfDayType] = useState(""); // First half or second half
   const [addManager, setAddManager] = useState(""); // Additional manager
   const [additionalManagerList, setAdditionalManagerList] = useState([]); // List of additional managers
-  const email = localStorage.getItem("Email");
+  const email = userData?.Email;
+
   const location = useLocation();
   const { darkMode } = useTheme();
   const status = location.pathname.split("/")[1];

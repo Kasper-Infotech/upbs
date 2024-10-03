@@ -9,16 +9,19 @@ import BASE_URL from "../../../Pages/config/config";
 import TittleHeader from "../../../Pages/TittleHeader/TittleHeader";
 import { useTheme } from "../../../Context/TheamContext/ThemeContext";
 import { useHistory, useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import { useSelector } from "react-redux";
 
 const TaskAssign = () => {
   const [departmentData, setDepartmentData] = useState([]);
+  const { userData} = useSelector((state)=> state.user);
+
   const [endDateError, setEndDateError] = useState(false);
   const [managerData, setManagerData] = useState(null);
   const [empData, setEmpData] = useState(null);
   const { socket } = useContext(AttendanceContext);
-  const email = localStorage.getItem("Email");
-  const name = localStorage.getItem("Name");
-  const id = localStorage.getItem("_id");
+  const email = userData?.Email;
+  const name = `${userData?.FirstName} ${userData?.LastName}`;
+  const id = userData?._id;
   const route = useLocation().pathname.split("/")[1];
   const history = useHistory();
   const taskId = uuidv4();

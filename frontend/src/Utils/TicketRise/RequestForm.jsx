@@ -6,11 +6,14 @@ import TittleHeader from "../../Pages/TittleHeader/TittleHeader";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import { useTheme } from "../../Context/TheamContext/ThemeContext";
 import BASE_URL from "../../Pages/config/config";
+import { useSelector } from "react-redux";
 
 const RequestForm = (props) => {
   const location = useLocation().pathname.split("/")[1];
-  const email = localStorage.getItem("Email");
-  const id = localStorage.getItem("_id");
+  const { userData} = useSelector((state)=> state.user);
+
+  const id = userData?._id;
+  const email = userData?.Email;
   const [empData, setEmpData] = useState([]);
   const [formData, setFormData] = useState({
     requestedBy: email,

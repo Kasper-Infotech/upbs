@@ -6,12 +6,14 @@ import BASE_URL from "../../../Pages/config/config";
 import toast from "react-hot-toast";
 import { FaComputerMouse } from "react-icons/fa6";
 import { PiCoffeeFill } from "react-icons/pi";
+import { useSelector } from "react-redux";
 
 function EmpAttendance(props) {
   const [empName, setEmpName] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
   const [onBreak, setOnBreak] = useState(false);
-  const id = localStorage.getItem("_id");
+  const { userData} = useSelector((state)=> state.user);
+
 
   const {
     employees,
@@ -28,7 +30,7 @@ function EmpAttendance(props) {
     const fetchUsers = async () => {
       try {
         const response = await axios.get(
-          `${BASE_URL}/api/employee/` + localStorage.getItem("_id"),
+          `${BASE_URL}/api/employee/` + userData?._id,
           {
             headers: {
               authorization: localStorage.getItem("token") || "",
@@ -39,7 +41,7 @@ function EmpAttendance(props) {
         setEmployees(response.data);
 
         const attendanceResponse = await axios.get(
-          `${BASE_URL}/api/attendance/` + localStorage.getItem("_id"),
+          `${BASE_URL}/api/attendance/` + userData?._id,
           {
             headers: {
               authorization: localStorage.getItem("token") || "",
@@ -62,7 +64,7 @@ function EmpAttendance(props) {
     const loadPersonalInfoData = async () => {
       try {
         const response = await axios.get(
-          `${BASE_URL}/api/personal-info/` + localStorage.getItem("_id"),
+          `${BASE_URL}/api/personal-info/` + userData?._id,
           {
             headers: {
               authorization: localStorage.getItem("token") || "",

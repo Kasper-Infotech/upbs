@@ -5,6 +5,7 @@ import { toast } from "react-hot-toast";
 import Table from "react-bootstrap/Table";
 import BASE_URL from "../../../Pages/config/config";
 import { useTheme } from "../../../Context/TheamContext/ThemeContext";
+import { useSelector } from "react-redux";
 
 const EmployeeActiveTask = () => {
   const [tasks, setTasks] = useState([]);
@@ -15,7 +16,8 @@ const EmployeeActiveTask = () => {
   const [isAccepted, setIsAccepted] = useState(false);
   const [isRejected, setIsRejected] = useState(false);
   const { darkMode } = useTheme();
-  const email = localStorage.getItem("Email");
+  const { userData} = useSelector((state)=> state.user);
+  const email = userData?.Email;
   const calculateRemainingTime = (endDate) => {
     const now = new Date();
     const endDateTime = new Date(endDate);

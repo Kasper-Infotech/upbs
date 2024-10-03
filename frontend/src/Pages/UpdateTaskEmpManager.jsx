@@ -4,12 +4,14 @@ import { v4 as uuidv4 } from "uuid";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import { useTheme } from "../Context/TheamContext/ThemeContext";
 import TittleHeader from "./TittleHeader/TittleHeader";
+import { useSelector } from "react-redux";
 
 const UpdateTaskEmpManager = () => {
   const { messageData, socket, setChat, chat, profile } =
     useContext(AttendanceContext);
-  const email = localStorage.getItem("Email");
-  const name = localStorage.getItem("Name");
+    const { userData} = useSelector((state)=> state.user);
+  const email = userData?.Email;;
+  const name = `${userData?.FirstName} ${userData?.LastName}`;
   const [newMessage, setNewMessage] = useState("");
   const chatContainerRef = useRef(null);
   const location = useLocation().pathname.split("/")[2];

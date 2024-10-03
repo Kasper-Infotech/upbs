@@ -13,6 +13,8 @@ const EmployeeStatus = () => {
   const { darkMode } = useTheme();
   const dispatch = useDispatch();
   const { attendanceData, status } = useSelector((state) => state.attendance);
+  const { userData} = useSelector((state)=> state.user);
+
   const [showAllAbsent, setShowAllAbsent] = useState(false);
   const [showAllHalfDay, setShowAllHalfDay] = useState(false);
   const [showAllBreak, setShowAllBreak] = useState(false);
@@ -68,7 +70,7 @@ const EmployeeStatus = () => {
   const displayedBreakData = showAllBreak ? breakData : breakData.slice(0, 2);
   console.log(displayedBreakData);
 
-  const userType = localStorage.getItem("Account");
+  const userType = userData?.Account;
   const paths = {
     1: "/admin/todaysAttendance",
     2: "/hr/todaysAttendance",

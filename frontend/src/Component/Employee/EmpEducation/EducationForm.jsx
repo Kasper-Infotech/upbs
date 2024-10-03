@@ -1,13 +1,16 @@
 import React from "react";
 import "./EducationForm.css";
 import { Form, Button, div, Row } from "react-bootstrap";
+import { useSelector } from "react-redux";
 
 const EducationForm = (props) => {
+const { userData} = useSelector((state)=> state.user);
+
   let id;
   if (props.data) {
     id = props.data["_id"];
   } else {
-    id = localStorage.getItem("_id");
+    id = userData?._id;
   }
   return (
     <div className="container-fluid">

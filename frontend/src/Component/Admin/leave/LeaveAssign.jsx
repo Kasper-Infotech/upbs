@@ -6,9 +6,12 @@ import BASE_URL from "../../../Pages/config/config";
 import { useTheme } from "../../../Context/TheamContext/ThemeContext";
 import TittleHeader from "../../../Pages/TittleHeader/TittleHeader";
 
+
 const LeaveAssign = () => {
   const [empData, setEmpData] = useState([]);
   const { darkMode } = useTheme();
+
+
   const [formData, setFormData] = useState({
     employees: [],
     sickLeave: "",
@@ -18,7 +21,7 @@ const LeaveAssign = () => {
     maternityLeave: "",
   });
 
-  const id = localStorage.getItem("_id");
+
 
   const loadEmployeeData = () => {
     axios

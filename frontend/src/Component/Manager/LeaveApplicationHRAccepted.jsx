@@ -6,15 +6,18 @@ import { AttendanceContext } from "../../Context/AttendanceContext/AttendanceCon
 import BASE_URL from "../../Pages/config/config.js";
 import { v4 as uuid } from "uuid";
 import LeaveApplicationHRTableAccepted from "./LeaveApplicationHRTableAccepted.jsx";
+import { useSelector } from "react-redux";
 const LeaveApplicationHR = (props) => {
   const [table, setTable] = useState(true);
   const { socket } = useContext(AttendanceContext);
   const [editForm, setEditForm] = useState(false);
   const [editData, setEditData] = useState({});
   const [empData, setEmpData] = useState(null);
-  const email = localStorage.getItem("Email");
-  const name = localStorage.getItem("Name");
-  const id = localStorage.getItem("_id");
+  const { userData} = useSelector((state)=> state.user);
+
+  const id = userData?._id;
+  const email = userData?.Email;
+  const name = `${userData?.FirstName} ${userData?.LastName}`;
     
   const loadEmployeeData = () => {
     axios

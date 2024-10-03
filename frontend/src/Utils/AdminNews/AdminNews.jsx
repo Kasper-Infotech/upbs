@@ -9,13 +9,16 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import NoticeImg from "../../img/Notice/NoticeImg.svg";
 import { HiOutlineBellAlert } from "react-icons/hi2";
 import { getTimeAgo } from "../GetDayFormatted";
+import { useSelector } from "react-redux";
 
 const AdminNews = () => {
-  const id = localStorage.getItem("_id");
+  const { userData} = useSelector((state)=> state.user);
+  const id = userData?._id;
   const { darkMode } = useTheme();
   const [notice, setNotice] = useState([]);
   const { socket } = useContext(AttendanceContext);
-
+  
+  const userType = userData?.Account;
   const loadEmployeeData = () => {
     axios
       .get(`${BASE_URL}/api/notice/${id}`, {
@@ -69,7 +72,7 @@ const AdminNews = () => {
     );
   };
 
-  const userType = localStorage.getItem("Account");
+  
   const paths = {
     1: "/admin/NoticeBoard",
     2: "/hr/NoticeBoard",

@@ -6,8 +6,11 @@ import FamilyInfoFormEdit from "./FamilyInfoFormEdit.jsx";
 import BASE_URL from "../../../Pages/config/config.js";
 import toast from "react-hot-toast";
 import { useHistory, useLocation } from "react-router-dom/cjs/react-router-dom.min.js";
+import { useSelector } from "react-redux";
 
 const FamilyInfo = (props) => {
+const { userData} = useSelector((state)=> state.user);
+
   const [table, setTable] = useState(true);
   const [editForm, setEditForm] = useState(false);
   const [editData, setEditData] = useState({});
@@ -28,7 +31,7 @@ const FamilyInfo = (props) => {
 
     axios
       .post(
-        `${BASE_URL}/api/family-info/` + localStorage.getItem("_id"),
+        `${BASE_URL}/api/family-info/` +  userData?._id,
         body,
         
         {

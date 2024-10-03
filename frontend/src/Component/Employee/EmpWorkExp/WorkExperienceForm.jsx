@@ -75,9 +75,11 @@ import { Form } from "react-bootstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./WorkExperienceForm.css";
+import { useSelector } from "react-redux";
 
 const WorkExperienceForm = (props) => {
-  let id = props.data ? props.data["_id"] : localStorage.getItem("_id");
+  const { userData} = useSelector((state)=> state.user);
+  let id = props.data ? props.data["_id"] : userData?._id;
   const today = new Date().toISOString().split("T")[0];
 
   const formik = useFormik({

@@ -7,8 +7,10 @@ import { AttendanceContext } from "../../../Context/AttendanceContext/Attendance
 import axios from "axios";
 const NoticeBoard = () => {
   const [notice, setNotice] = useState([]);
+  const { userData} = useSelector((state)=> state.user);
+
   const { socket } = useContext(AttendanceContext);
-  const id = localStorage.getItem("_id");
+  const id = userData?._id;
   const loadEmployeeData = () => {
     axios
       .get(`${BASE_URL}/api/particularEmployee/${id}`, {

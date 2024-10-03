@@ -7,12 +7,15 @@ import { useTheme } from "../../../Context/TheamContext/ThemeContext";
 import TittleHeader from "../../../Pages/TittleHeader/TittleHeader";
 import profile from "../../../img/profile.jpg"
 import AvatarGroup from "../../../Pages/AvatarGroup/AvatarGroup";
+import { useSelector } from "react-redux";
 
 const EmployeeRejectTask = () => {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const email = localStorage.getItem("Email");
+  const { userData} = useSelector((state)=> state.user);
+
+  const email = userData?.Email;
   const { darkMode } = useTheme();
   const [timeinfo, setTimeinfo] = useState(false);
   const [expandedTaskId, setExpandedTaskId] = useState(null);

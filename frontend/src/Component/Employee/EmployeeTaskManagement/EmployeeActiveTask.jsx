@@ -18,7 +18,9 @@ import { IoIosChatboxes, IoMdDoneAll } from "react-icons/io";
 import { RiAttachmentLine } from "react-icons/ri";
 import profile from "../../../img/profile.jpg"
 import AvatarGroup from "../../../Pages/AvatarGroup/AvatarGroup";
+import { useSelector } from "react-redux";
 const EmployeeActiveTask = () => {
+  const { userData} = useSelector((state)=> state.user);
   const { setMessageData } = useContext(AttendanceContext);
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -31,7 +33,8 @@ const EmployeeActiveTask = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const { darkMode } = useTheme();
   const history = useHistory();
-  const email = localStorage.getItem("Email");
+
+  const email = userData?.Email;
   const [timeinfo, setTimeinfo] = useState(false);
   const [expandedTaskId, setExpandedTaskId] = useState(null);
 

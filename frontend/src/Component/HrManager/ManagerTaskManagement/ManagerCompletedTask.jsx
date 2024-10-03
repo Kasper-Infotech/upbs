@@ -7,15 +7,17 @@ import { MdArrowDropDown, MdArrowDropUp } from "react-icons/md";
 import { getFormattedDate } from "../../../Utils/GetDayFormatted";
 import TittleHeader from "../../../Pages/TittleHeader/TittleHeader";
 import profile from "../../../img/profile.jpg"
+import { useSelector } from "react-redux";
 
 const ManagerCompletedTask = () => {
   const [tasks, setTasks] = useState([]);
+  const { userData} = useSelector((state)=> state.user);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { darkMode } = useTheme();
   const [timeinfo, setTimeinfo] = useState(false);
   const [expandedTaskId, setExpandedTaskId] = useState(null);
-  const email = localStorage.getItem("Email")
+  const email = userData?.Email;
   const fetchData = async () => {
     try {
       const response = await axios.get(`${BASE_URL}/api/tasks`, {

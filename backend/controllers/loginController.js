@@ -87,9 +87,33 @@ const loginEmployee = async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 };
+const loginVerify =  (req, res) => {
+
+  const token = req.headers.authorization;
+
+  // Check if the token is provided
+  if (!token) {
+    return res.status(401).json({ message: 'Authorization header missing or token not provided', data: {Account: 0} });
+  }
+
+  // Verify the token (assuming no Bearer prefix)
+  jwt.verify(token, jwtKey, async (err, decoded) => {
+    if (err) {
+      return res.status(403).json({ message: 'Invalid or expired token' });
+    }
+
+    // If token is valid, decoded will contain the payload
+
+    const employee = await Employee.findOne({_id: decoded._id});
+   
+    if(!employee) return  res.status(404).json({ message: 'Employee Not Found', data: {Account: 0} });
+    console.log(employee.Account)
+    res.status(200).json({ message: 'Token verified', data: {Account: employee.Account} });
+  });
+};
 
 module.exports = {
-  loginEmployee
+  loginEmployee,loginVerify
 };
 
 // const Joi = require("joi");

@@ -21,7 +21,7 @@ const LeaveAssign = () => {
     maternityLeave: ""
   });
 
-  const id = localStorage.getItem("_id");
+ 
 
   const loadEmployeeData = () => {
     axios

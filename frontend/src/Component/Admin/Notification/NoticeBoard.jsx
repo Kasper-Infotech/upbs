@@ -4,10 +4,12 @@ import { AttendanceContext } from "../../../Context/AttendanceContext/Attendance
 import axios from "axios";
 import NoticeBadge from "../../../img/NoticeBadge.svg";
 import BASE_URL from "../../../Pages/config/config";
+import { useSelector } from "react-redux";
 const NoticeBoard = () => {
   const [notice, setNotice] = useState([]);
+  const { userData} = useSelector((state)=> state.user);
   const { socket } = useContext(AttendanceContext);
-  const id = localStorage.getItem("_id");
+  const id = userData?._id;
   const loadEmployeeData = () => {
     axios
       .get(`${BASE_URL}/api/particularEmployee/${id}`, {

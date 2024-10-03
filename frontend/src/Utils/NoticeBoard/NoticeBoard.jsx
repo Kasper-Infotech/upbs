@@ -241,15 +241,17 @@ import { MdRemoveCircleOutline } from "react-icons/md";
 import profileimage from "../../img/profile.jpg";
 import toast from "react-hot-toast";
 import { getTimeAgo } from "../GetDayFormatted";
+import { useSelector } from "react-redux";
 const NoticeBoard = () => {
+  const { userData} = useSelector((state)=> state.user);
   const location = useLocation();
   const history = useHistory(); // Initialize history
   const route = location.pathname.split("/")[1];
-  const name = localStorage.getItem("Name");
+  const name = `${userData?.FirstName} ${userData?.LastName}`;
   const [notice, setNotice] = useState([]);
   const { darkMode } = useTheme();
   const { socket } = useContext(AttendanceContext);
-  const id = localStorage.getItem("_id");
+  const id = userData?._id;
 
   const loadEmployeeData = () => {
     axios

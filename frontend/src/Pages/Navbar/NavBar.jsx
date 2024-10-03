@@ -19,9 +19,11 @@ import { useTheme } from "../../Context/TheamContext/ThemeContext";
 import SearchComponent from "../../Utils/SearchComponent/SearchComponent";
 import { TbBell } from "react-icons/tb";
 import GoBack from "../../Utils/GoBack/GoBack";
-
+import { useSelector, useDispatch} from "react-redux";
+import {userInfo}   from "../../redux/slices/userSlice";
 const NavBar = (props, data) => {
   const [activeProfile, setActiveProfile] = useState(null);
+const dispatch = useDispatch();
   const history = useHistory();
   const { darkMode } = useTheme();
   const location = useLocation().pathname.split("/")[1];
@@ -32,12 +34,14 @@ const NavBar = (props, data) => {
   const { toggleSidebar } = useSidebar();
   const [loginNoti, setLoginNoti] = useState(true);
   let userProfile;
+useEffect(()=>{
+  dispatch(userInfo)
+},[])
+  const { userData} = useSelector((state)=> state.user);
 
-  const UserNumber = localStorage.getItem("Account");
-
-  const id = localStorage.getItem("_id");
+  const id = userData?._id;
   console.log(id);
-  const email = localStorage.getItem("Email");
+  const email = userData?.Email;
   const pushNotification = (taskName) => {
     addNotification({
       title: "Kasper",

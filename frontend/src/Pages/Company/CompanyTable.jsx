@@ -9,14 +9,16 @@ import { FiEdit2 } from "react-icons/fi";
 import Pagination from "../../Utils/Pagination";
 import { rowBodyStyle, rowHeadStyle } from "../../Style/TableStyle";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useSelector } from "react-redux";
 
 const AdminCompanyTable = (props) => {
   const [companyData, setCompanyData] = useState([]);
+  const { userData} = useSelector((state)=> state.user);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
   const { darkMode } = useTheme();
-  const userno = localStorage.getItem("Account");
+  const userno = userData?.Account;
   const history = useHistory(); // Initialize history
 
   useEffect(() => {

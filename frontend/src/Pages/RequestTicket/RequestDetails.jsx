@@ -8,9 +8,11 @@ import { getTimeAgo } from "../../Utils/GetDayFormatted";
 import RequestImage from "../../img/Request/Request.svg";
 import toast from "react-hot-toast";
 import profile from "../../img/profile.jpg";
+import { useSelector } from "react-redux";
 
 const RequestDetails = () => {
-  const email = localStorage.getItem("Email");
+  const { userData} = useSelector((state)=> state.user);
+  const email = userData?.Email;
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -24,7 +26,7 @@ const RequestDetails = () => {
   });
   const [selectedRequest, setSelectedRequest] = useState(null);
 
-  const MyEmail = localStorage.getItem("Email");
+  const MyEmail = userData?.Email;;
 
   const fetchRequestList = async () => {
     setLoading(true);

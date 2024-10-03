@@ -19,6 +19,7 @@ import BASE_URL from "../../../Pages/config/config.js";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min.js";
 import { useTheme } from "../../../Context/TheamContext/ThemeContext.js";
 import TittleHeader from "../../../Pages/TittleHeader/TittleHeader.jsx";
+import { useSelector } from "react-redux";
 const override = css`
   display: block;
   margin: 0 auto;
@@ -28,7 +29,7 @@ const override = css`
 
 const PersonalInfoTable = (props) => {
   const location = useLocation().pathname.split("/")[2];
-
+  const { userData} = useSelector((state)=> state.user);
   const [personalInfoData, setPersonalInfoData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [rowData, setRowData] = useState([]);
@@ -36,7 +37,7 @@ const PersonalInfoTable = (props) => {
   const { darkMode } = useTheme();
 
   const id =
-    location === "employee" ? props.data["_id"] : localStorage.getItem("_id");
+    location === "employee" ? props.data["_id"] : userData?._id;
   const loadPersonalInfoData = () => {
     axios
       .get(`${BASE_URL}/api/personal-info/${id}`, {

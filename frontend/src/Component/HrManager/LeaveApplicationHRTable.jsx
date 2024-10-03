@@ -15,6 +15,7 @@ import BASE_URL from "../../Pages/config/config";
 import { useLocation } from "react-router-dom/cjs/react-router-dom";
 import { rowBodyStyle, rowHeadStyle } from "../../Style/TableStyle";
 import Pagination from "../../Utils/Pagination";
+import { useSelector } from "react-redux";
 
 const override = css`
   display: block;
@@ -24,6 +25,7 @@ const override = css`
 `;
 
 const LeaveApplicationHRTable = (props) => {
+  const { userData} = useSelector((state)=> state.user);
   const [leaveApplicationHRData, setLeaveApplicationHRData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [rowData, setRowData] = useState([]);
@@ -36,7 +38,7 @@ const LeaveApplicationHRTable = (props) => {
   const [itemsPerPage] = useState(10);
   const location = useLocation();
 
-  const email = localStorage.getItem("Email");
+  const email = userData?.Email;
   const formatDate = (dateString) => {
     if (!dateString) return;
     const dateParts = dateString.split("-");

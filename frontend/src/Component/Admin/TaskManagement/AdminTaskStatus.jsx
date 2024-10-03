@@ -9,14 +9,17 @@ import { toast } from "react-hot-toast";
 import BASE_URL from "../../../Pages/config/config";
 import TittleHeader from "../../../Pages/TittleHeader/TittleHeader";
 import { useTheme } from "../../../Context/TheamContext/ThemeContext";
+import { useSelector } from "react-redux";
 
 const AdminTaskStatus = () => {
   const [departmentData, setDepartmentData] = useState([]);
   const [endDateError, setEndDateError] = useState(false);
+  const { userData} = useSelector((state)=> state.user);
+  const email = userData?.Email;
   const [managerData, setManagerData] = useState(null);
   const { socket } = useContext(AttendanceContext);
   const { darkMode } = useTheme();
-  const email = localStorage.getItem("Email");
+
   const taskId = uuidv4();
   const [newTask, setNewTask] = useState({
     Taskname: "",
@@ -114,7 +117,7 @@ const AdminTaskStatus = () => {
     formData.append("comment", newTask.comment);
     formData.append("adminMail", email);
 
-    const id = localStorage.getItem("_id");
+   
     axios
       .post(`${BASE_URL}/api/tasks`, formData)
       .then((res) => {

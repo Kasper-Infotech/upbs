@@ -9,12 +9,15 @@ import BASE_URL from "../../Pages/config/config";
 import { getFormattedDateWTY } from "../GetDayFormatted";
 import { CgArrowLongRightC } from "react-icons/cg";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { useSelector } from "react-redux";
 
 const LeaveComponentHrDash = () => {
   const { darkMode } = useTheme();
   const [data, SetLeaveData] = useState([]);
   const [empLeave, setEmpLeave] = useState(null);
-  const email = localStorage.getItem("Email");
+  const { userData} = useSelector((state)=> state.user);
+
+  const email = userData?.Email;
 
   const loadLeaveApplicationHRData = () => {
     axios
@@ -101,7 +104,7 @@ const LeaveComponentHrDash = () => {
     }
   };
 
-  const userType = localStorage.getItem("Account");
+  const userType = userData?.Account;
   const paths = {
     1: "/admin/leaveApplication",
     2: "/hr/leaveApplication",

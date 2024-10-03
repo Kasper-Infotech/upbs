@@ -5,14 +5,17 @@ import { AttendanceContext } from "../../../Context/AttendanceContext/Attendance
 import "./notification.css";
 import BASE_URL from "../../../Pages/config/config";
 import { useTheme } from "../../../Context/TheamContext/ThemeContext";
+import { useSelector } from "react-redux";
 
 const Notification = () => {
   const [selectAll, setSelectAll] = useState(false);
   const [selectedNotification, setSelectedNotification] = useState([]);
   const [notification, setNotification] = useState(null);
+  const { userData} = useSelector((state)=> state.user);
+
   const { socket } = useContext(AttendanceContext);
-  const id = localStorage.getItem("_id");
-  const email = localStorage.getItem("Email");
+  const id = userData?._id;
+  const email = userData?.Email;
   const { darkMode } = useTheme();
 
   const loadEmployeeData = () => {

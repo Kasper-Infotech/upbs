@@ -4,10 +4,13 @@ import "./chart.css";
 import axios from "axios";
 import BASE_URL from "../../../../Pages/config/config";
 import { useTheme } from "../../../../Context/TheamContext/ThemeContext";
+import { useSelector } from "react-redux";
 
 const DepartmentChart = (props) => {
   const [departmentData, setDepartmentData] = useState([]);
-  const id = localStorage.getItem("_id");
+  const { userData} = useSelector((state)=> state.user);
+
+  const id = userData?._id;
   const { darkMode } = useTheme()
   const [chartOption, setChartOption] = useState({
     options: {
@@ -30,7 +33,7 @@ const DepartmentChart = (props) => {
 
   const loadEmployeeData = () => {
     axios
-      .get(`${BASE_URL}/api/employee/` + localStorage.getItem("_id"), {
+      .get(`${BASE_URL}/api/employee/` + id, {
         headers: {
           authorization: localStorage.getItem("token") || ""
         }

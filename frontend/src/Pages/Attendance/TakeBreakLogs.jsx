@@ -6,10 +6,12 @@ import toast from "react-hot-toast";
 import { FaComputerMouse } from "react-icons/fa6";
 import { PiCoffeeFill } from "react-icons/pi";
 import { AttendanceContext } from "../../Context/AttendanceContext/AttendanceContext";
+import { useSelector } from "react-redux";
 
 function TakeBreakLogs(props) {
   const [todayData, setTodayData] = useState(null);
-  const id = localStorage.getItem("_id");
+  const { userData} = useSelector((state)=> state.user);
+  const id = userData?._id;
   const { setMessage } = useContext(AttendanceContext);
 
   const loadPersonalInfoData = async () => {

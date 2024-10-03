@@ -11,10 +11,12 @@ import { useTheme } from "../../../Context/TheamContext/ThemeContext";
 import toast from "react-hot-toast";
 import "./NoticeManagement.css";
 import { useHistory, useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import { useSelector } from "react-redux";
 
 const NoticeManagement = () => {
-  const name = localStorage.getItem("Name");
-  const email = localStorage.getItem("Email");
+  const { userData} = useSelector((state)=> state.user);
+  const email = userData?.Email;
+  const name = `${userData?.FirstName} ${userData?.LastName}`;
   const route = useLocation().pathname.split("/")[1];
   const history = useHistory();
   const [newTask, setNewTask] = useState({

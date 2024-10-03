@@ -12,6 +12,7 @@ import { TbStatusChange } from "react-icons/tb";
 import { GoHash } from "react-icons/go";
 import { IoIosTimer, IoMdTimer } from "react-icons/io";
 import { rowBodyStyle, rowHeadStyle } from "../../../Style/TableStyle";
+import { useSelector } from "react-redux";
 
 const AttendanceDetails = () => {
   const [employeeId, setEmployeeId] = useState("");
@@ -22,8 +23,8 @@ const AttendanceDetails = () => {
   const { darkMode } = useTheme();
   const [hoveredDate, setHoveredDate] = useState(null);
   const [isInfoHovering, setIsInfoHovering] = useState(false);
-
-  const UserType = localStorage.getItem('Account')
+  const { userData} = useSelector((state)=> state.user);
+  const UserType = userData?.Account;
   const ReportingManager = localStorage.getItem('Email')
 
   const handleMouseEnter = (date) => {

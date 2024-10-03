@@ -1,11 +1,14 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 const FamilyInfoForm = (props) => {
+const { userData} = useSelector((state)=> state.user);
+
   let id;
   if (props.data) {
     id = props.data["_id"];
   } else {
-    id = localStorage.getItem("_id");
+    id = userData?._id;
   }
   return (
     <div className="container-fluid">

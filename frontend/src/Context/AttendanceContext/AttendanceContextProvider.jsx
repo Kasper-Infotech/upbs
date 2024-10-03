@@ -19,12 +19,15 @@ const AttendanceContextProvider = ({ children }) => {
     taskId: "",
     to: "",
   });
+  const [personalData, setPersonalData] = useState(null);
   const [chat, setChat] = useState([]);
 
   return (
     <AttendanceContext.Provider
       value={{
         socket,
+        personalData,
+        setPersonalData,
         setIsLogin,
         isLogin,
         emailInput,

@@ -36,11 +36,13 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import OverLayToolTip from "../../../Utils/OverLayToolTip";
 import { AiFillFilePpt, AiFillFileWord } from "react-icons/ai";
 import profile from "../../../img/profile.jpg"
+import { useSelector } from "react-redux";
 
 const ManagerActiveTask = () => {
+  const { userData} = useSelector((state)=> state.user);
   const history = useHistory();
   const [modalShow, setModalShow] = React.useState(false);
-  const name = localStorage.getItem("Name");
+  const name = `${userData?.FirstName} ${userData?.LastName}`;
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -52,7 +54,7 @@ const ManagerActiveTask = () => {
   const [selectedTaskId, setSelectedTaskId] = useState(null);
   const [selectAll, setSelectAll] = useState(false);
   const [isForwardButtonDisabled, setIsForwardButtonDisabled] = useState(true);
-  const email = localStorage.getItem("Email");
+  const email = userData?.Email;;
   const [employeeData, setEmployeeData] = useState([]);
   const [rowData, setRowData] = useState([]);
   const [taskDepartment, setTaskDepartment] = useState("");

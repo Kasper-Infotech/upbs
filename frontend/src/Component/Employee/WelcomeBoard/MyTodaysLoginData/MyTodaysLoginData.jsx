@@ -5,14 +5,17 @@ import BASE_URL from "../../../../Pages/config/config";
 import { useTheme } from "../../../../Context/TheamContext/ThemeContext";
 import { FiCoffee } from "react-icons/fi";
 import { IoLogInOutline, IoLogOutOutline } from "react-icons/io5";
+import { useSelector } from "react-redux";
 
 
 const MyTodaysLoginData = (props) => {
   const [attendanceData, setAttendanceData] = useState(null);
   const [empName, setEmpName] = useState(null);
+  const { userData} = useSelector((state)=> state.user);
+
   const { darkMode } = useTheme();
 
-  const employeeId = localStorage.getItem("_id");
+  const employeeId = userData?._id;
  
   useEffect(() => {
     const loadPersonalInfoData = async () => {
@@ -177,7 +180,7 @@ const Labels = ({
 //   const [countdown, setCountdown] = useState(null);
 //   const { darkMode } = useTheme();
 
-//   const employeeId = localStorage.getItem("_id");
+//   const employeeId = userData?._id;
 
 //   useEffect(() => {
 //     const loadPersonalInfoData = async () => {
@@ -375,7 +378,7 @@ const Labels = ({
 //   const [empName, setEmpName] = useState(null);
 //   const { darkMode } = useTheme();
 
-//   const employeeId = localStorage.getItem("_id");
+//   const employeeId = userData?._id;
 //   console.log(empName);
 
 //   useEffect(() => {

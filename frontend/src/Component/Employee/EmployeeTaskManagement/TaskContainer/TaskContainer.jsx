@@ -9,9 +9,9 @@ import { fetchTasks } from "../../../../redux/slices/tasksSlice";
 
 const TaskContainer = () => {
   const dispatch = useDispatch();
-  const id = localStorage.getItem("_id");
   const { tasks, loading, error } = useSelector((state) => state.tasks);
-  const email = localStorage.getItem("Email");
+  
+
 
   useEffect(() => {
     dispatch(fetchTasks());

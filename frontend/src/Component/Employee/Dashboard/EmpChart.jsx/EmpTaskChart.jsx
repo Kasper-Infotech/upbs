@@ -5,12 +5,14 @@ import BASE_URL from "../../../../Pages/config/config";
 import { useTheme } from "../../../../Context/TheamContext/ThemeContext";
 import { AttendanceContext } from "../../../../Context/AttendanceContext/AttendanceContext";
 import "./chart.css";
+import { useSelector } from "react-redux";
 
 const EmpTaskChart = () => {
+  const { userData} = useSelector((state)=> state.user);
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const email = localStorage.getItem("Email");
+  const email = userData?.Email;
   const { darkMode } = useTheme();
   const { socket } = useContext(AttendanceContext);
 

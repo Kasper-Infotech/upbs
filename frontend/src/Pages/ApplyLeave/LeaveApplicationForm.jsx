@@ -6,13 +6,17 @@ import { useTheme } from "../../Context/TheamContext/ThemeContext";
 import { MdCancel } from "react-icons/md";
 import { IoCheckmarkDoneCircle } from "react-icons/io5";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 const LeaveApplicationEmpForm = (props) => {
-  const id = localStorage.getItem("_id");
+  const { userData} = useSelector((state)=> state.user);
+
+  const id = userData?._id;
   const [empData, setEmpData] = useState([]);
   const [leaveBalance, setLeaveBalance] = useState(null);
+ 
   const { darkMode } = useTheme();
-  const email = localStorage.getItem("Email");
+  const email = userData?.Email;;
   const [formData, setFormData] = useState({
     startDate: "",
     endDate: "",

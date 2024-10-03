@@ -5,8 +5,10 @@ import "./EmployeeFormEdit.css";
 import BASE_URL from "../config/config";
 import { useTheme } from "../../Context/TheamContext/ThemeContext";
 import { MdOutlineCancel, MdOutlineDoneAll } from "react-icons/md";
+import { useSelector } from "react-redux";
 
 const EmployeeFormEdit = (props) => {
+  const { userData} = useSelector((state)=> state.user);
   const [roleData, setRoleData] = useState([]);
   const [positionData, setPositionData] = useState([]);
   const [departmentData, setDepartmentData] = useState([]);
@@ -20,7 +22,7 @@ const EmployeeFormEdit = (props) => {
     },
   ]);
   const [rowData, setRowData] = useState([]);
-  const userNumber = localStorage.getItem("Account");
+  const userNumber =userData?.Account;
 
   const [genderData, setGenderData] = useState(props.editData["Gender"]);
   const [status, setStatus] = useState(props.editData["status"]);

@@ -4,11 +4,13 @@ import axios from "axios";
 import { useTheme } from "../../../Context/TheamContext/ThemeContext";
 import BASE_URL from "../../../Pages/config/config";
 import TakeBreakLogs from "../../../Pages/Attendance/TakeBreakLogs";
+import { useSelector } from "react-redux";
 const WelcomeBoard = () => {
   const [employeeData, setEmployeeData] = useState(null);
   const { darkMode } = useTheme();
+  const { userData} = useSelector((state)=> state.user);
 
-  const id = localStorage.getItem("_id");
+  const id = userData?._id;
 
   const loadEmployeeData = () => {
     axios

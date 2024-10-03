@@ -7,6 +7,7 @@ import LeaveApplicationEmpFormEdit from "./LeaveApplicationFormEdit.jsx";
 import { AttendanceContext } from "../../Context/AttendanceContext/AttendanceContext.js";
 import { v4 as uuid } from "uuid";
 import BASE_URL from "../config/config.js";
+import { useSelector } from "react-redux";
 
 const LeaveApplicationEmp = (props) => {
   const [table, setTable] = useState(true);
@@ -14,8 +15,10 @@ const LeaveApplicationEmp = (props) => {
   const [empData, setEmpData] = useState(null);
   const [editData, setEditData] = useState({});
   const [leaveRequestDone, setLeaveRequestDone] = useState(false);
-  const name = localStorage.getItem("Name");
-  const id = localStorage.getItem("_id");
+  const { userData} = useSelector((state)=> state.user);
+
+  const id = userData?._id;
+  const name = `${userData?.FirstName} ${userData?.LastName}`;
   const { socket } = useContext(AttendanceContext);
   const loadEmployeeData = () => {
     axios
@@ -69,7 +72,7 @@ const LeaveApplicationEmp = (props) => {
     console.log(body);
     axios
       .post(
-        `${BASE_URL}/api/leave-application-man/` + localStorage.getItem("_id"),
+        `${BASE_URL}/api/leave-application-man/` + userData?._id,
         body,
         {
           headers: {
@@ -147,7 +150,7 @@ const LeaveApplicationEmp = (props) => {
 
     axios
       .put(
-        `${BASE_URL}/api/leave-application-emp/` + localStorage.getItem("_id"),
+        `${BASE_URL}/api/leave-application-emp/` + userData?._id,
         body,
         {
           headers: {

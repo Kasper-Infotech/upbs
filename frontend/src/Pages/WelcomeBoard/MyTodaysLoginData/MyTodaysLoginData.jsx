@@ -4,12 +4,13 @@ import { RiLoginCircleFill, RiLogoutCircleFill } from "react-icons/ri";
 import { BsFillBriefcaseFill } from "react-icons/bs";
 import BASE_URL from "../../config/config";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const MyTodaysLoginData = (props) => {
   const [attendanceData, setAttendanceData] = useState(null);
   const [empName, setEmpName] = useState(null);
-
-  const employeeId = localStorage.getItem("_id");
+  const { userData} = useSelector((state)=> state.user);
+  const employeeId = userData?._id;
 
   useEffect(() => {
     const loadPersonalInfoData = async () => {

@@ -7,14 +7,16 @@ import axios from "axios";
 import { RiSearch2Line } from "react-icons/ri";
 import "./SearchComponent.css";
 import { useTheme } from "../../Context/TheamContext/ThemeContext";
+import { useSelector } from "react-redux";
 
 const SearchComponent = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const { userData} = useSelector((state)=> state.user);
   const [expanded, setExpanded] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const inputRef = useRef(null);
   const [employeeData, setEmployeeData] = useState({});
-  const id = localStorage.getItem("_id");
+  const id = userData?._id;
   const history = useHistory();
   const { darkMode } = useTheme();
 
