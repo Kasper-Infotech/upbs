@@ -222,7 +222,6 @@ if(dateObject.ResumeTime.length < dateObject.breakTime.length){
     dateObject.BreakReasion = [...dateObject.BreakReasion, ...BreakReasion];
   }
 
-  dateObject.LogStatus = LogStatus;
 
   if (totalLogAfterBreak) {
     dateObject.totalLogAfterBreak = dateObject.TotalLogin >= dateObject.totalBrake
