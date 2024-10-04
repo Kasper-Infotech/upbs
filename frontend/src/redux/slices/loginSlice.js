@@ -22,7 +22,7 @@ loginUser = createAsyncThunk(
             const data = jwt.decode(response.data);
            
             thunkAPI.dispatch(attendanceInfo({employeeId: data._id,attendanceId:data.attendanceObjID, status:"login"}))
-            thunkAPI.dispatch(userInfo(data._id))
+            thunkAPI.dispatch(userInfo(data))
             return data;
         } catch (error) {
             return thunkAPI.rejectWithValue(error.response?.data || "Login failed");
@@ -63,6 +63,7 @@ const loginSlice = createSlice({
             .addCase(loginUser.fulfilled, (state, action) => {
                 const decodedData = action.payload;
                 state.loginInfo = decodedData;
+                state.loginError = "";
             })
             .addCase(loginUser.rejected, (state, action) => {
                 state.loginError = action.payload;

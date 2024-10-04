@@ -47,10 +47,10 @@ const userSlice = createSlice({
 
 export const userInfo = createAsyncThunk(
     "user/userInfo",
-    async (id, thunkAPI) => {
+    async ({_id}, thunkAPI) => {
         try {
   
-            const response = await axios.get(`${BASE_URL}/api/particularEmployee/${id}`,{
+            const response = await axios.get(`${BASE_URL}/api/particularEmployee/${_id}`,{
                 headers: {
                   authorization: localStorage.getItem("token") || ""
                 }});   

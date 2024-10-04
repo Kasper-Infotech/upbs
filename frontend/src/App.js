@@ -18,36 +18,12 @@ import {loginUser,attendanceInfo} from "./redux/slices/loginSlice.js";
 import { useSelector, useDispatch } from "react-redux";
 import { persistStore } from 'redux-persist';
 import {store} from "./redux/store.js"
-import {userInfo} from "./redux/slices/userSlice.js";
+
 
 const App = () => {
   const history = useHistory();
-  const getUserIdFromToken = () => {
-   
-    const token = localStorage.getItem('token');
-  
-    if (!token) {
-      console.error("No token found");
-      return null;
-    }
-  
-   
-    const tokenParts = token.split('.');
-  
-    if (tokenParts.length !== 3) {
-      console.error("Invalid token");
-      return null;
-    }
-    const decodedPayload = atob(tokenParts[1]);
-    const payload = JSON.parse(decodedPayload);
-    return payload._id;
-  };
-  useEffect(()=>{
-   const id=  getUserIdFromToken()
-    if(id){
-      dispatch(userInfo(id))
-    }
-  },[])
+ 
+
   const persistor = persistStore(store);
   const dispatch = useDispatch();
   const { loginInfo,
@@ -57,47 +33,10 @@ const App = () => {
     const { userData} = useSelector((state)=> state.user);
 
   const { socket, isLogin,setIsLogin} = useContext(AttendanceContext);
-  let error = null;
 
 
-  useEffect(() => {
-   
-    if (loginInfo && loginError === "") {
-      if (loginInfo.status === "Inactive") {
-        throw new Error("User Inactive");
-        return;
-      }
-  
-      let accountType;
-      let redirectPath;
-  
-      if (userData?.Account === 1) {
-        accountType = 1;
-        redirectPath = "#/admin/dashboard";
-      } else if (userData?.Account === 2) {
-        accountType = 2;
-        redirectPath = "#/hr/dashboard";
-      } else if (userData?.Account === 4) {
-        accountType = 4;
-        redirectPath = "#/manager/dashboard";
-      } else if (userData?.Account === 3) {
-        accountType = 3;
-        redirectPath = `#/employee/${loginInfo._id}/dashboard`;
-      }
-  console.log(accountType)
-      if (accountType) {
-        setIsLogin(true);
 
 
-  
-       
-  
-     
-      }
-    } else if (loginError !== "") {
-      error = loginError;
-    }
-  }, [loginInfo, loginError, userData]);
   useEffect(() => {
     if (attednaceInfo && attednaceError === "") {
      toast.success(attednaceInfo)   
@@ -155,7 +94,6 @@ const App = () => {
 
 
 
- console.log(loginInfo)
 
   return (
 
@@ -169,7 +107,7 @@ const App = () => {
         if (userData?.Account === 2) return <Redirect to="/hr/dashboard" />;
         if (userData?.Account === 3) return <Redirect to="/employee/dashboard" />;
         if (userData?.Account === 4) return <Redirect to="/manager/dashboard" />;
-        return <Login onSubmit={handleSubmit}  error={error} />;
+        return <Login onSubmit={handleSubmit}  />;
        }
         }
       />

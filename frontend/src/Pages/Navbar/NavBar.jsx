@@ -19,14 +19,56 @@ import { useTheme } from "../../Context/TheamContext/ThemeContext";
 import SearchComponent from "../../Utils/SearchComponent/SearchComponent";
 import { TbBell } from "react-icons/tb";
 import GoBack from "../../Utils/GoBack/GoBack";
+<<<<<<< HEAD
 import { useSelector, useDispatch } from "react-redux";
 import { userInfo } from "../../redux/slices/userSlice";
+=======
+import { useSelector, useDispatch} from "react-redux";
+import {userInfo}   from "../../redux/slices/userSlice";
+import { persistStore } from 'redux-persist';
+import {store} from "../../redux/store"
+
+>>>>>>> 82f385843627a826050b24104fa60606d0912cb1
 const NavBar = (props, data) => {
+  const persistor = persistStore(store);
+
   const [activeProfile, setActiveProfile] = useState(null);
   const dispatch = useDispatch();
   const history = useHistory();
   const { darkMode } = useTheme();
   const location = useLocation().pathname.split("/")[1];
+  const pathname = useLocation().pathname;
+  const { userData} = useSelector((state)=> state.user);
+  useEffect(() => {
+    const body = {
+      _id: userData?._id,
+      Account: userData?.Account,
+    };
+  
+    axios
+      .post(`${BASE_URL}/api/verifyAccount`, body, {
+        headers: {
+          authorization: localStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+    
+      })
+      .catch(async (error) => {
+      
+        if (error.response.data.error==="Unauthorized Access") {
+       
+         localStorage.clear();
+        
+         await persistor.purge();
+         history.push("#/login");
+         window.location.reload(); 
+        }
+      });
+  }, [pathname]);
+  
+
+ 
   const [notification, setNotification] = useState([]);
   const [employeeData, setEmployeeData] = useState("");
   const [notiToggle, setNotiToggle] = useState(false);
@@ -34,13 +76,17 @@ const NavBar = (props, data) => {
   const { toggleSidebar } = useSidebar();
   const [loginNoti, setLoginNoti] = useState(true);
   let userProfile;
+<<<<<<< HEAD
   useEffect(() => {
     dispatch(userInfo);
   }, []);
   const { userData } = useSelector((state) => state.user);
+=======
+>>>>>>> 82f385843627a826050b24104fa60606d0912cb1
 
+  
   const id = userData?._id;
-  console.log(id);
+ 
   const email = userData?.Email;
   const pushNotification = (taskName) => {
     addNotification({

@@ -123,6 +123,31 @@ app.use((err, req, res, next) => {
   console.error(err.stack); // Log the error stack to the console
   res.status(err.status || 500).send(err.message || "Something went wrong!"); // Send error message
 });
+app.post("/api/verifyAccount", async (req, res) => {
+  try {
+    const { _id, Account } = req.body;
+
+    // Find employee by ID
+    const emp = await Employee.findOne({ _id });
+    
+    // If employee is not found
+    if (!emp) {
+      return res.status(404).json({ error: "Employee not found" });
+    }
+
+    // If account does not match
+    if (emp.Account !== Account) {
+      return res.status(401).json({ error: "Unauthorized Access" });
+    }
+
+    // If everything is correct (authorized access)
+    return res.status(200).json({ message: "Authorized Access" });
+
+  } catch (error) {
+    // Catch any server errors
+    return res.status(500).json({ error: "Server error" });
+  }
+});
 
 const multer = require("multer");
 
@@ -145,6 +170,7 @@ app.get("/api/getTask", async (req, res) => {
     });
   } catch (error) {}
 });
+
 
 app.post("/api/tasks/:taskId/employees", async (req, res) => {
   const taskId = req.params.taskId;

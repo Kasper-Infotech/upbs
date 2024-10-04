@@ -5,21 +5,18 @@ import { GoEyeClosed } from "react-icons/go";
 import { Link } from "react-router-dom";
 import LoginImage from "../../img/AuthPage/LoginPage.jpeg";
 import KASPLOGO from "../../img/logo.png";
+import { useSelector } from "react-redux";
 
 const Login = (props) => {
-  
+  const { 
+    loginError,
+    } = useSelector((state)=> state.login);
   let error = null;
   const [alertMsg, setalertMsg] = useState("");
   const [seePass, setSeepass] = useState(false);
   const [password, setPassword] = useState("");
 
-  if (props.error) {
-    if (props.error.response) {
-      error = props.error.response.data;
-    } else {
-      error = props.error.message;
-    }
-  }
+
 
   return (
     <div
@@ -94,9 +91,9 @@ const Login = (props) => {
                   {seePass ? <GoEyeClosed /> : <RxEyeOpen />}
                 </span>
               </div>
-              {error && (
+              {loginError!=="" && (
                 <p className="alert m-0 fw-normal text-center p-0 text-danger">
-                  {error}
+                  {loginError}
                 </p>
               )}
             </div>
