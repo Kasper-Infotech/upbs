@@ -184,250 +184,266 @@ const TodaysAttendance = () => {
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = sortedAndFilteredData.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = sortedAndFilteredData.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
 
   const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(sortedAndFilteredData.length / itemsPerPage); i++) {
+  for (
+    let i = 1;
+    i <= Math.ceil(sortedAndFilteredData.length / itemsPerPage);
+    i++
+  ) {
     pageNumbers.push(i);
   }
 
   return (
     <div className="container-fluid pb-5">
-    <div className="d-flex justify-content-between py-3">
-      <div>
-        <h5
-          style={{
-            color: darkMode
-              ? "var(--secondaryDashColorDark)"
-              : "var(--primaryDashMenuColor)",
-          }}
-          className=" my-auto"
-        >
-          Today's Attendance
-        </h5>
-        <span className="p-0 fs-6 d-flex ">
-          <span
+      <div className="d-flex justify-content-between py-3">
+        <div>
+          <h5
             style={{
               color: darkMode
                 ? "var(--secondaryDashColorDark)"
                 : "var(--primaryDashMenuColor)",
             }}
-            className="m-0 p-0 fs-6 text-center"
+            className=" my-auto"
           >
-            {status(dayCurrent)} , <span>{dd}</span> - <span>{mm}</span> -
-            <span>{yyyy}</span>
+            Today's Attendance
+          </h5>
+          <span className="p-0 fs-6 d-flex ">
+            <span
+              style={{
+                color: darkMode
+                  ? "var(--secondaryDashColorDark)"
+                  : "var(--primaryDashMenuColor)",
+              }}
+              className="m-0 p-0 fs-6 text-center"
+            >
+              {status(dayCurrent)} , <span>{dd}</span> - <span>{mm}</span> -
+              <span>{yyyy}</span>
+            </span>
           </span>
-        </span>
-      </div>
-      <div>
-        <div className="d-flex gap-2">
-          <input
-            value={searchQuery}
-            onChange={handleInputChange}
-            type="search"
-            className="form-control d-none d-sm-flex rounded-5"
-            placeholder="Search by employee name"
-          />
-          <button
-            style={{
-              whiteSpace: "pre",
-              color: darkMode
-                ? "var(--primaryDashColorDark)"
-                : "var(--secondaryDashMenuColor)",
-            }}
-            className="btn d-flex gap-2 align-items-center justify-content-center m-auto shadow-sm rounded-5"
-            onClick={exportToExcel}
-          >
-            {" "}
-            <SiMicrosoftexcel className="text-success fs-5" />
-            <span className="d-none d-md-flex text-success">Export XLSX</span>
-          </button>
+        </div>
+        <div>
+          <div className="d-flex gap-2">
+            <input
+              value={searchQuery}
+              onChange={handleInputChange}
+              type="search"
+              className="form-control d-none d-sm-flex rounded-5"
+              placeholder="Search by employee name"
+            />
+            <button
+              style={{
+                whiteSpace: "pre",
+                color: darkMode
+                  ? "var(--primaryDashColorDark)"
+                  : "var(--secondaryDashMenuColor)",
+              }}
+              className="btn d-flex gap-2 align-items-center justify-content-center m-auto shadow-sm rounded-5"
+              onClick={exportToExcel}
+            >
+              {" "}
+              <SiMicrosoftexcel className="text-success fs-5" />
+              <span className="d-none d-md-flex text-success">Export XLSX</span>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-    <div className="d-flex d-sm-none">
-      <input
-        value={searchQuery}
-        onChange={handleInputChange}
-        type="search"
-        className="form-control mb-3 rounded-0"
-        placeholder="Search by employee name"
-      />
-    </div>
-    <div
-    >
-      {currentItems.length > 0 ? (
-        <div>
-           <div style={{
-          // maxHeight: "68vh",
-          overflow: "auto",
-          position: "relative",
-        }}
-        className="table-responsive p-2 mb-3">  
-                    <table className="table" style={{ fontSize: ".9rem" }}>
-          <thead>
-            <tr style={{ position: "sticky", top: "0", zIndex: "1" }}>
-              <th
-                onClick={() => handleSort("FirstName")}
-                style={rowHeadStyle(darkMode)}
-              >
-                <RxCaretSort /> Employee {renderSortIcon("FirstName")}
-              </th>
-              <th style={rowHeadStyle(darkMode)}>
-                {" "}
-                <HiOutlineLogin /> Login Time{" "}
-              </th>
-              <th style={rowHeadStyle(darkMode)}>
-                {" "}
-                Logout Time <HiOutlineLogout />{" "}
-              </th>
-
-              <th style={rowHeadStyle(darkMode)}>
-                {" "}
-                <RxCounterClockwiseClock /> Log Count{" "}
-              </th>
-              <th style={rowHeadStyle(darkMode)}>
-                {" "}
-                Gross Login <HiOutlineLogout />{" "}
-              </th>
-              <th style={rowHeadStyle(darkMode)}> Total Break </th>
-              <th style={rowHeadStyle(darkMode)}>
-                {" "}
-                <FaUserClock /> Net Login{" "}
-              </th>
-              <th style={rowHeadStyle(darkMode)}>
-                {" "}
-                Status <HiStatusOnline />
-              </th>
-              <th style={rowHeadStyle(darkMode)}>
-                {" "}
-                <IoCheckmarkDoneOutline /> Mark{" "}
-              </th>
-              <th style={rowHeadStyle(darkMode)} className="text-center">
-                {" "}
-                Break Count
-              </th>
-              <th style={rowHeadStyle(darkMode)}></th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentItems.map((user) => {
-              const mark = getAttendanceMark(user);
-              return (
-                <tr
-                  style={{ position: "sticky", top: "0" }}
-                  key={user.userId}
-                >
-                  <td style={rowBodyStyle(darkMode)}>
-                    <div className="d-flex w-100 align-items-center gap-2">
-                      <div
-                        style={{
-                          height: "35px",
-                          width: "35px",
-                          overflow: "hidden",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          backgroundColor: "#ccc", // background color for the initials
-                          borderRadius: "50%",
-                          fontSize: "14px",
-                          fontWeight: "bold",
-                          color: "#fff",
-                        }}
-                      >
-                        {user?.profile?.image_url ? (
-                          <img
-                            style={{
-                              height: "100%",
-                              width: "100%",
-                              objectFit: "cover",
-                              overflow: "hidden",
-                              borderRadius: "50%",
-                            }}
-                            src={user.profile.image_url}
-                            alt={`${user?.FirstName} ${user?.LastName}`}
-                          />
-                        ) : (
-                          `${user?.FirstName?.[0]}${user?.LastName?.[0]}`
-                        )}
-                      </div>
-                      <div>
-                        <p
-                          style={{ fontSize: ".75rem" }}
-                          className="p-0 m-0 w-100"
-                        >
-                          {user.empID}
-                        </p>
-                        <p
-                          style={{ fontSize: ".80rem" }}
-                          className="p-0 m-0 w-100 text-uppercase"
-                        >
-                          {user.FirstName} {user.LastName}
-                        </p>
-                      </div>
-                    </div>
-                  </td>
-                  <td style={rowBodyStyle(darkMode)}>
-                    {user.attendance ? user.attendance.loginTime[0] : "--"}
-                  </td>
-                  <td style={rowBodyStyle(darkMode)}>
-                    {user.attendance
-                      ? user.attendance.logoutTime[
-                          user.attendance.logoutTime.length - 1
-                        ]
-                      : "--"}
-                  </td>
-                  <td className="text-center" style={rowBodyStyle(darkMode)}>
-                    {user.attendance
-                      ? user.attendance.loginTime.length
-                      : "--"}
-                  </td>
-                  <td style={rowBodyStyle(darkMode)}>
-                    {user.attendance
-                      ? convertMinutesToHoursAndMinutes(
-                          user.attendance.TotalLogin
-                        )
-                      : null}
-                  </td>
-                  <td style={rowBodyStyle(darkMode)}>
-                    {user.attendance
-                      ? convertMinutesToHoursAndMinutes(
-                          user.attendance.totalBrake
-                        )
-                      : null}
-                  </td>
-                  <td style={rowBodyStyle(darkMode)}>
-                    {user.attendance
-                      ? convertMinutesToHoursAndMinutes(
-                          user.attendance.totalLogAfterBreak
-                        )
-                      : null}
-                  </td>
-                  <td style={rowBodyStyle(darkMode)}>
-                    {user.attendance ? user.attendance.status : "--"}
-                  </td>
-                  <td style={rowBodyStyle(darkMode)}>
-                    <span
-                      style={{ fontSize: ".8rem" }}
-                      className={`py-0 px-3 rounded-5 ${
-                        mark === "Present"
-                          ? "border border-success"
-                          : mark === "Late"
-                          ? "border border-info"
-                          : mark === "Half Day"
-                          ? "border border-warning"
-                          : "border border-danger"
-                      }`}
+      <div className="d-flex d-sm-none">
+        <input
+          value={searchQuery}
+          onChange={handleInputChange}
+          type="search"
+          className="form-control mb-3 rounded-0"
+          placeholder="Search by employee name"
+        />
+      </div>
+      <div>
+        {currentItems.length > 0 ? (
+          <div>
+            <div
+              style={{
+                // maxHeight: "68vh",
+                overflow: "auto",
+                position: "relative",
+              }}
+              className="table-responsive p-2 mb-3"
+            >
+              <table className="table" style={{ fontSize: ".9rem" }}>
+                <thead>
+                  <tr style={{ position: "sticky", top: "0", zIndex: "1" }}>
+                    <th
+                      onClick={() => handleSort("FirstName")}
+                      style={rowHeadStyle(darkMode)}
                     >
-                      {mark}
-                    </span>
-                  </td>
-                  <td className="text-center" style={rowBodyStyle(darkMode)}>
-                    {user.attendance
-                      ? user.attendance.breakTime.length
-                      : "--"}
-                  </td>
-                  <td style={rowBodyStyle(darkMode)}>
+                      <RxCaretSort /> Employee {renderSortIcon("FirstName")}
+                    </th>
+                    <th style={rowHeadStyle(darkMode)}>
+                      {" "}
+                      <HiOutlineLogin /> Login Time{" "}
+                    </th>
+                    <th style={rowHeadStyle(darkMode)}>
+                      {" "}
+                      Logout Time <HiOutlineLogout />{" "}
+                    </th>
+
+                    <th style={rowHeadStyle(darkMode)}>
+                      {" "}
+                      <RxCounterClockwiseClock /> Log Count{" "}
+                    </th>
+                    <th style={rowHeadStyle(darkMode)}>
+                      {" "}
+                      Gross Login <HiOutlineLogout />{" "}
+                    </th>
+                    <th style={rowHeadStyle(darkMode)}> Total Break </th>
+                    <th style={rowHeadStyle(darkMode)}>
+                      {" "}
+                      <FaUserClock /> Net Login{" "}
+                    </th>
+                    <th style={rowHeadStyle(darkMode)}>
+                      {" "}
+                      Status <HiStatusOnline />
+                    </th>
+                    <th style={rowHeadStyle(darkMode)}>
+                      {" "}
+                      <IoCheckmarkDoneOutline /> Mark{" "}
+                    </th>
+                    <th style={rowHeadStyle(darkMode)} className="text-center">
+                      {" "}
+                      Break Count
+                    </th>
+                    {/* <th style={rowHeadStyle(darkMode)}></th> */}
+                  </tr>
+                </thead>
+                <tbody>
+                  {currentItems.map((user) => {
+                    const mark = getAttendanceMark(user);
+                    return (
+                      <tr
+                        style={{ position: "sticky", top: "0" }}
+                        key={user.userId}
+                      >
+                        <td style={rowBodyStyle(darkMode)}>
+                          <div className="d-flex w-100 align-items-center gap-2">
+                            <div
+                              style={{
+                                height: "35px",
+                                width: "35px",
+                                overflow: "hidden",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                backgroundColor: "#ccc", // background color for the initials
+                                borderRadius: "50%",
+                                fontSize: "14px",
+                                fontWeight: "bold",
+                                color: "#fff",
+                              }}
+                            >
+                              {user?.profile?.image_url ? (
+                                <img
+                                  style={{
+                                    height: "100%",
+                                    width: "100%",
+                                    objectFit: "cover",
+                                    overflow: "hidden",
+                                    borderRadius: "50%",
+                                  }}
+                                  src={user.profile.image_url}
+                                  alt={`${user?.FirstName} ${user?.LastName}`}
+                                />
+                              ) : (
+                                `${user?.FirstName?.[0]}${user?.LastName?.[0]}`
+                              )}
+                            </div>
+                            <div>
+                              <p
+                                style={{ fontSize: ".75rem" }}
+                                className="p-0 m-0 w-100"
+                              >
+                                {user.empID}
+                              </p>
+                              <p
+                                style={{ fontSize: ".80rem" }}
+                                className="p-0 m-0 w-100 text-uppercase"
+                              >
+                                {user.FirstName} {user.LastName}
+                              </p>
+                            </div>
+                          </div>
+                        </td>
+                        <td style={rowBodyStyle(darkMode)}>
+                          {user.attendance
+                            ? user.attendance.loginTime[0]
+                            : "--"}
+                        </td>
+                        <td style={rowBodyStyle(darkMode)}>
+                          {user.attendance
+                            ? user.attendance.logoutTime[
+                                user.attendance.logoutTime.length - 1
+                              ]
+                            : "--"}
+                        </td>
+                        <td
+                          className="text-center"
+                          style={rowBodyStyle(darkMode)}
+                        >
+                          {user.attendance
+                            ? user.attendance.loginTime.length
+                            : "--"}
+                        </td>
+                        <td style={rowBodyStyle(darkMode)}>
+                          {user.attendance
+                            ? convertMinutesToHoursAndMinutes(
+                                user.attendance.TotalLogin
+                              )
+                            : null}
+                        </td>
+                        <td style={rowBodyStyle(darkMode)}>
+                          {user.attendance
+                            ? convertMinutesToHoursAndMinutes(
+                                user.attendance.totalBrake
+                              )
+                            : null}
+                        </td>
+                        <td style={rowBodyStyle(darkMode)}>
+                          {user.attendance
+                            ? convertMinutesToHoursAndMinutes(
+                                user.attendance.totalLogAfterBreak
+                              )
+                            : null}
+                        </td>
+                        <td style={rowBodyStyle(darkMode)}>
+                          {user.attendance ? user.attendance.status : "--"}
+                        </td>
+                        <td style={rowBodyStyle(darkMode)}>
+                          <span
+                            style={{ fontSize: ".8rem" }}
+                            className={`py-0 px-3 rounded-5 ${
+                              mark === "Present"
+                                ? "border border-success"
+                                : mark === "Late"
+                                ? "border border-info"
+                                : mark === "Half Day"
+                                ? "border border-warning"
+                                : "border border-danger"
+                            }`}
+                          >
+                            {mark}
+                          </span>
+                        </td>
+                        <td
+                          className="text-center"
+                          style={rowBodyStyle(darkMode)}
+                        >
+                          {user.attendance
+                            ? user.attendance.breakTime.length
+                            : "--"}
+                        </td>
+                        {/* <td style={rowBodyStyle(darkMode)}>
                     <button
                       onMouseEnter={() => setActiveCategory(user)}
                       onMouseLeave={() => setActiveCategory(null)}
@@ -454,59 +470,59 @@ const TodaysAttendance = () => {
                         </Link>
                       </span>
                     </button>{" "}
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table> 
-        </div>
-        <Pagination
-          currentPage={currentPage}
-          pageNumbers={pageNumbers}
-          handlePaginationPrev={handlePaginationPrev}
-          handlePaginationNext={handlePaginationNext}
-          setCurrentPage={setCurrentPage}
-          filteredDataLength={sortedAndFilteredData.length}
-          itemsPerPage={itemsPerPage}
-        />
-        </div>
-      ) : (
-        <div
-          style={{
-            minHeight: "70vh",
-            maxHeight: "70vh",
-            width: "100%",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            wordSpacing: "5px",
-            flexDirection: "column",
-            gap: "2rem",
-          }}
-        >
-          <img
+                  </td> */}
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+            <Pagination
+              currentPage={currentPage}
+              pageNumbers={pageNumbers}
+              handlePaginationPrev={handlePaginationPrev}
+              handlePaginationNext={handlePaginationNext}
+              setCurrentPage={setCurrentPage}
+              filteredDataLength={sortedAndFilteredData.length}
+              itemsPerPage={itemsPerPage}
+            />
+          </div>
+        ) : (
+          <div
             style={{
-              height: "auto",
-              width: "20%",
-            }}
-            src={SearchLight}
-            alt="img"
-          />
-          <p
-            className="text-center w-75 mx-auto"
-            style={{
-              color: darkMode
-                ? "var(--secondaryDashColorDark)"
-                : "var( --primaryDashMenuColor)",
+              minHeight: "70vh",
+              maxHeight: "70vh",
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              wordSpacing: "5px",
+              flexDirection: "column",
+              gap: "2rem",
             }}
           >
-            Sorry records not found or attendance not marked yet.
-          </p>
-        </div>
-      )}
+            <img
+              style={{
+                height: "auto",
+                width: "20%",
+              }}
+              src={SearchLight}
+              alt="img"
+            />
+            <p
+              className="text-center w-75 mx-auto"
+              style={{
+                color: darkMode
+                  ? "var(--secondaryDashColorDark)"
+                  : "var( --primaryDashMenuColor)",
+              }}
+            >
+              Sorry records not found or attendance not marked yet.
+            </p>
+          </div>
+        )}
+      </div>
     </div>
-  </div>
   );
 };
 

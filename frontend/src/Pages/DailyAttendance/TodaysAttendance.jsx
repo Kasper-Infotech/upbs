@@ -20,7 +20,7 @@ import { rowBodyStyle, rowHeadStyle } from "../../Style/TableStyle";
 import Modal from "react-modal";
 
 const TodaysAttendance = () => {
-  const [activeCategory, setActiveCategory] = useState(null);
+  // const [activeCategory, setActiveCategory] = useState(null);
   const [attendanceData, setAttendanceData] = useState([]);
   const [companyData, setCompanyData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -642,7 +642,7 @@ const TodaysAttendance = () => {
                             ? user.attendance.breakTime.length
                             : "--"}
                         </td>
-                        <td style={rowBodyStyle(darkMode)}>
+                        {/* <td style={rowBodyStyle(darkMode)}>
                           <button
                             onMouseEnter={() => setActiveCategory(user)}
                             onMouseLeave={() => setActiveCategory(null)}
@@ -670,7 +670,7 @@ const TodaysAttendance = () => {
                               </Link>
                             </span>
                           </button>{" "}
-                        </td>
+                        </td> */}
                       </tr>
                     );
                   })}
