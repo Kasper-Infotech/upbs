@@ -12,13 +12,14 @@ import { getTimeAgo } from "../GetDayFormatted";
 import { useSelector } from "react-redux";
 
 const AdminNews = () => {
-  const { userData} = useSelector((state)=> state.user);
+  const { userData } = useSelector((state) => state.user);
   const id = userData?._id;
   const { darkMode } = useTheme();
   const [notice, setNotice] = useState([]);
   const { socket } = useContext(AttendanceContext);
-  
+
   const userType = userData?.Account;
+
   const loadEmployeeData = () => {
     axios
       .get(`${BASE_URL}/api/notice/${id}`, {
@@ -72,7 +73,6 @@ const AdminNews = () => {
     );
   };
 
-  
   const paths = {
     1: "/admin/NoticeBoard",
     2: "/hr/NoticeBoard",
@@ -80,7 +80,16 @@ const AdminNews = () => {
     4: "/manager/NoticeBoard",
   };
 
-  console.log(notice);
+  const isNoticeWithin24Hours = (createdAt) => {
+    const currentTime = new Date().getTime();
+    const noticeTime = new Date(createdAt).getTime();
+    const timeDifference = currentTime - noticeTime;
+    return timeDifference <= 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+  };
+
+  const filteredNotices = notice.filter((n) =>
+    isNoticeWithin24Hours(n.createdAt)
+  );
 
   return (
     <div
@@ -105,12 +114,12 @@ const AdminNews = () => {
           }}
           className="d-flex align-items-center justify-content-center"
         >
-          {notice.length}
+          {filteredNotices.length}
         </span>
       </div>
-      {notice.length > 0 ? (
+      {filteredNotices.length > 0 ? (
         <div>
-          {notice.slice(-1).map((n, i) => (
+          {filteredNotices.slice(-1).map((n, i) => (
             <div key={i} className="d-flex flex-column gap-3">
               <div className="d-flex align-items-center justify-content-between gap-2">
                 <div className="d-flex align-items-center gap-2">

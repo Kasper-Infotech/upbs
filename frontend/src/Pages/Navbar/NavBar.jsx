@@ -19,11 +19,11 @@ import { useTheme } from "../../Context/TheamContext/ThemeContext";
 import SearchComponent from "../../Utils/SearchComponent/SearchComponent";
 import { TbBell } from "react-icons/tb";
 import GoBack from "../../Utils/GoBack/GoBack";
-import { useSelector, useDispatch} from "react-redux";
-import {userInfo}   from "../../redux/slices/userSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { userInfo } from "../../redux/slices/userSlice";
 const NavBar = (props, data) => {
   const [activeProfile, setActiveProfile] = useState(null);
-const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const history = useHistory();
   const { darkMode } = useTheme();
   const location = useLocation().pathname.split("/")[1];
@@ -34,10 +34,10 @@ const dispatch = useDispatch();
   const { toggleSidebar } = useSidebar();
   const [loginNoti, setLoginNoti] = useState(true);
   let userProfile;
-useEffect(()=>{
-  dispatch(userInfo)
-},[])
-  const { userData} = useSelector((state)=> state.user);
+  useEffect(() => {
+    dispatch(userInfo);
+  }, []);
+  const { userData } = useSelector((state) => state.user);
 
   const id = userData?._id;
   console.log(id);
@@ -427,10 +427,9 @@ useEffect(()=>{
                     top: "100%",
                     minWidth: "230px",
                     maxWidth: "250px",
-                    borderRadius: "20px 0 20px 20px",
                     display: notiToggle == "name" ? "flex" : "none",
                   }}
-                  className="border border-muted border-1 flex-column gap-1 w-100 bg-white align-items-center gap-2 justify-content-between  p-2  shadow"
+                  className="border border-muted border-1 flex-column gap-1 w-100 bg-white align-items-center gap-2 justify-content-between  p-1 rounded-2  shadow"
                 >
                   {notiToggle &&
                     notification.length > 0 &&
@@ -444,10 +443,11 @@ useEffect(()=>{
                       .map((val, i) => {
                         return (
                           <div
+                            style={{ cursor: "pointer" }}
                             className={
                               val.status === "unseen"
-                                ? "d-flex align-items-center justify-content-between w-100 back"
-                                : "d-flex align-items-center justify-content-between w-100"
+                                ? "d-flex align-items-center justify-content-between py-1 px-2 w-100 back"
+                                : "d-flex align-items-center justify-content-between py-1 px-2 w-100"
                             }
                           >
                             <div
@@ -497,12 +497,12 @@ useEffect(()=>{
                             <div className="d-flex align-items-center gap-1">
                               <span
                                 style={{
-                                  fontSize: ".80rem",
+                                  fontSize: ".90rem",
                                   height: "1.2rem",
                                   width: "1.2rem",
                                   borderRadius: "50%",
                                 }}
-                                className="d-flex align-items-center text-white  bg-danger justify-content-center"
+                                className="d-flex align-items-center text-danger fw-bold justify-content-center"
                                 onClick={(e) => (
                                   notificationDeleteHandler(val.taskId),
                                   e.stopPropagation()
