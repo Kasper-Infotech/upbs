@@ -454,10 +454,9 @@ const NavBar = (props, data) => {
                     top: "100%",
                     minWidth: "230px",
                     maxWidth: "250px",
-                    borderRadius: "20px 0 20px 20px",
                     display: notiToggle == "name" ? "flex" : "none",
                   }}
-                  className="border border-muted border-1 flex-column gap-1 w-100 bg-white align-items-center gap-2 justify-content-between  p-2  shadow"
+                  className="border border-muted border-1 flex-column w-100 bg-white align-items-center gap-1 justify-content-between  p-1 rounded-2  shadow"
                 >
                   {notiToggle &&
                     notification.length > 0 &&
@@ -471,10 +470,11 @@ const NavBar = (props, data) => {
                       .map((val, i) => {
                         return (
                           <div
+                            style={{ cursor: "pointer" }}
                             className={
                               val.status === "unseen"
-                                ? "d-flex align-items-center justify-content-between w-100 back"
-                                : "d-flex align-items-center justify-content-between w-100"
+                                ? "d-flex align-items-center justify-content-between p-1 w-100 back"
+                                : "d-flex align-items-center justify-content-between p-1 w-100"
                             }
                           >
                             <div
@@ -524,12 +524,12 @@ const NavBar = (props, data) => {
                             <div className="d-flex align-items-center gap-1">
                               <span
                                 style={{
-                                  fontSize: ".80rem",
+                                  fontSize: "1rem",
                                   height: "1.2rem",
                                   width: "1.2rem",
                                   borderRadius: "50%",
                                 }}
-                                className="d-flex align-items-center text-white  bg-danger justify-content-center"
+                                className="d-flex align-items-center text-danger  fw-bold justify-content-center"
                                 onClick={(e) => (
                                   notificationDeleteHandler(val.taskId),
                                   e.stopPropagation()
