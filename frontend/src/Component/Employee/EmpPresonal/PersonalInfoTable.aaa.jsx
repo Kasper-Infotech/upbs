@@ -16,7 +16,7 @@ import Document from "../Document/Document.jsx";
 import FamilyInfo from "../EmpFamily/FamilyInfo";
 import BASE_URL from "../../../Pages/config/config.js";
 
-import { useLocation } from "react-router-dom/cjs/react-router-dom.min.js";
+import { useLocation } from "react-router-dom";
 import { useTheme } from "../../../Context/TheamContext/ThemeContext.js";
 import TittleHeader from "../../../Pages/TittleHeader/TittleHeader.jsx";
 import { useSelector } from "react-redux";

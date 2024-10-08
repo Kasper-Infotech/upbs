@@ -5,7 +5,7 @@ import "./Employee.css";
 import EmployeeTable from "./EmployeeTable.jsx";
 import EmployeeForm from "./EmployeeForm.jsx";
 import EmployeeFormEdit from "./EmployeeFormEdit.jsx";
-import { HashRouter as Router, Route } from "react-router-dom";
+import { HashRouter as Router, Route, Routes,useNavigate  } from "react-router-dom";
 import PersonalInfo from "../../Component/Employee/EmpPresonal/PersonalInfo.jsx";
 import Education from "../../Component/Employee/EmpEducation/Education.jsx";
 import FamilyInfo from "../../Component/Employee/EmpFamily/FamilyInfo.jsx";
@@ -21,10 +21,10 @@ const Employee = () => {
   const [editStatus, setEditStatus] = useState("");
   const [empInfo, setEmpInfo] = useState({});
   const [empInfoBool, setEmpInfoBool] = useState(false);
-
+  const navigate = useNavigate();
   const handleEmpInfo = (e) => {
     setEmpInfo(e);
-    setEmpInfoBool(true);
+    navigate("/hr/employee/info/personal-info");
   };
 
   const handleBack = () => {
@@ -173,66 +173,36 @@ const Employee = () => {
   };
 
   return (
-    <Router>
-      <Route
-        exact
-        path="/hr/employee"
-        render={(props) => (
-          <>
-            {table ? (
-              editForm ? (
-                <EmployeeFormEdit
-                  onEmployeeEditUpdate={handleEmployeeEditUpdate}
-                  onFormEditClose={handleEditFormClose}
-                  editData={editData}
-                  onGenderChange={handleEditFormGenderChange}
-                  onStatusChange={handleEditFormStatusChange}
-                />
-              ) : (
-                <>
-                  {!empInfoBool ? (
-                    <EmployeeTable
-                      onAddEmployee={handleAddEmployee}
-                      onEditEmployee={handleEditEmployee}
-                      onEmpInfo={handleEmpInfo}
-                    />
-                  ) : (
-                    <PersonalInfo data={empInfo} onBack={handleBack} />
-                  )}
-                </>
-              )
-            ) : (
-              <EmployeeForm
-                onEmployeeSubmit={handleEmployeeSubmit}
-                onFormClose={handleFormClose}
-                onGenderChange={handleAddFormGenderChange}
-              />
-            )}
-          </>
-        )}
+    <Routes>
+    <Route path="/" element={table ? (
+      editForm ? (
+        <EmployeeFormEdit
+          onEmployeeEditUpdate={handleEmployeeEditUpdate}
+          onFormEditClose={handleEditFormClose}
+          editData={editData}
+          onGenderChange={handleEditFormGenderChange}
+          onStatusChange={handleEditFormStatusChange}
+        />
+      ) : (
+        <EmployeeTable
+          onAddEmployee={handleAddEmployee}
+          onEditEmployee={handleEditEmployee}
+          onEmpInfo={handleEmpInfo}
+        />
+      )
+    ) : (
+      <EmployeeForm
+        onEmployeeSubmit={handleEmployeeSubmit}
+        onFormClose={handleFormClose}
+        onGenderChange={handleAddFormGenderChange}
       />
-
-      <Route
-        exact
-        path="/hr/employee/info/personal-info"
-        render={(props) => <PersonalInfo data={empInfo} back={true} />}
-      />
-      <Route
-        exact
-        path="/hr/employee/info/education"
-        render={(props) => <Education data={empInfo} back={true} />}
-      />
-      <Route
-        exact
-        path="/hr/employee/info/family-info"
-        render={(props) => <FamilyInfo data={empInfo} back={true} />}
-      />
-      <Route
-        exact
-        path="/hr/employee/info/work-experience"
-        render={(props) => <WorkExperience data={empInfo} back={true} />}
-      />
-    </Router>
+    )} />
+    
+    <Route path="info/personal-info" element={<PersonalInfo data={empInfo} back={true} />} />
+    <Route path="info/education" element={<Education data={empInfo} back={true} />} />
+    <Route path="info/family-info" element={<FamilyInfo data={empInfo} back={true} />} />
+    <Route path="info/work-experience" element={<WorkExperience data={empInfo} back={true} />} />
+  </Routes>
   );
 };
 

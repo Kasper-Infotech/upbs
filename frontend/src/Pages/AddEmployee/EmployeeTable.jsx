@@ -19,7 +19,7 @@ import { useTheme } from "../../Context/TheamContext/ThemeContext";
 import Pagination from "../../Utils/Pagination";
 import OverLayToolTip from "../../Utils/OverLayToolTip";
 import { RiUserAddLine } from "react-icons/ri";
-import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import { useLocation } from "react-router-dom";
 import { rowBodyStyle, rowHeadStyle } from "../../Style/TableStyle";
 import { CgProfile } from "react-icons/cg";
 import { FaFileExcel, FaUserPlus } from "react-icons/fa6";

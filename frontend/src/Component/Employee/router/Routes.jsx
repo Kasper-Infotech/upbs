@@ -31,11 +31,7 @@ import { AttendanceContext } from "../../../Context/AttendanceContext/Attendance
 
 
 const RouterContent = ({ data }) => {
-  const {isLogin} = useContext(AttendanceContext);
 
-  useEffect(()=>{
-
-  }, [isLogin])
   return (
     <InnerDashContainer>    
       <div

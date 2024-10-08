@@ -25,7 +25,7 @@ const AttendanceDetails = () => {
   const [isInfoHovering, setIsInfoHovering] = useState(false);
   const { userData} = useSelector((state)=> state.user);
   const UserType = userData?.Account;
-  const ReportingManager = localStorage.getItem('Email')
+  const Email = userData?.Email
 
   const handleMouseEnter = (date) => {
     setHoveredDate(date);
@@ -54,16 +54,16 @@ const AttendanceDetails = () => {
           authorization: localStorage.getItem("token") || "",
         },
       });
-
-      if (UserType === "1") {
+      console.log(response.data)
+      if (UserType === 1) {
         setEmployees(response.data);
-      } else if (UserType === "2") {
+      } else if (UserType === 2) {
         setEmployees(response.data.filter((data) => data.Account !== 1));
-      } else if (UserType === "3") {
+      } else if (UserType === 3) {
         setEmployees([]);
-      } else if (UserType === "4") {
+      } else if (UserType === 4) {
         setEmployees(
-          response.data.filter((data) => data.reportManager === ReportingManager)
+          response.data.filter((data) => data.reportManager === Email)
         );
       }
     } catch (error) {

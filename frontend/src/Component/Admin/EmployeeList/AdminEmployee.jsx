@@ -5,7 +5,7 @@ import "../../../Pages/AddEmployee/Employee.css";
 import EmployeeTable from "../../../Pages/AddEmployee/EmployeeTable.jsx";
 import EmployeeFormEdit from "../../../Pages/AddEmployee/EmployeeFormEdit.jsx";
 import EmployeeForm from "../../../Pages/AddEmployee/EmployeeForm.jsx";
-import { HashRouter as Router, Route } from "react-router-dom";
+import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import Education from "../../Employee/EmpEducation/Education.jsx";
 import FamilyInfo from "../../Employee/EmpFamily/FamilyInfo.jsx";
 import WorkExperience from "../../Employee/EmpWorkExp/WorkExperience.jsx";
@@ -157,13 +157,9 @@ const AdminEmployee = () => {
   };
 
   return (
-    <Router>
-      <Route
-        exact
-        path="/admin/employee"
-        render={(props) => (
-          <>
-            {table ? (
+    <Routes>
+      <Route path="/" element={table ? (
+          
               editForm ? (
                 <EmployeeFormEdit
                   onEmployeeEditUpdate={handleEmployeeEditUpdate}
@@ -192,31 +188,15 @@ const AdminEmployee = () => {
                 onGenderChange={handleAddFormGenderChange}
               />
             )}
-          </>
-        )}
+        
+       
       />
 
-      <Route
-        exact
-        path="/hr/employee/info/personal-info"
-        render={(props) => <PersonalInfo data={empInfo} back={true} />}
-      />
-      <Route
-        exact
-        path="/hr/employee/info/education"
-        render={(props) => <Education data={empInfo} back={true} />}
-      />
-      <Route
-        exact
-        path="/hr/employee/info/family-info"
-        render={(props) => <FamilyInfo data={empInfo} back={true} />}
-      />
-      <Route
-        exact
-        path="/hr/employee/info/work-experience"
-        render={(props) => <WorkExperience data={empInfo} back={true} />}
-      />
-    </Router>
+<Route path="info/personal-info" element={<PersonalInfo data={empInfo} back={true} />} />
+    <Route path="info/education" element={<Education data={empInfo} back={true} />} />
+    <Route path="info/family-info" element={<FamilyInfo data={empInfo} back={true} />} />
+    <Route path="info/work-experience" element={<WorkExperience data={empInfo} back={true} />} />
+    </Routes>
   );
 };
 

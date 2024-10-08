@@ -18,7 +18,7 @@ import { Link } from "react-router-dom";
 // *************csv & pdf **************//
 import jsPDF from "jspdf";
 import "jspdf-autotable";
-// import { Link } from "react-router-dom/cjs/react-router-dom.min";
+// import { Link } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
 // *************csv & pdf **************//
 

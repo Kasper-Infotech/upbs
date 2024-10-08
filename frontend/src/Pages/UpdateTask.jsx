@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import { AttendanceContext } from "../Context/AttendanceContext/AttendanceContext";
 import { v4 as uuidv4 } from "uuid";
-import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import { useLocation } from "react-router-dom";
 import { useTheme } from "../Context/TheamContext/ThemeContext";
 import TittleHeader from "./TittleHeader/TittleHeader";
 import { useSelector } from "react-redux";

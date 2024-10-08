@@ -2,7 +2,7 @@
 // import { AttendanceContext } from "../../Context/AttendanceContext/AttendanceContext";
 // import axios from "axios";
 // import NoticeImg from "../../img/Notice/NoticeImg.svg"
-// import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+// import { useLocation } from "react-router-dom";
 // import { useTheme } from "../../Context/TheamContext/ThemeContext";
 // import BASE_URL from "../../Pages/config/config";
 // import TittleHeader from "../../Pages/TittleHeader/TittleHeader";
@@ -232,7 +232,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { AttendanceContext } from "../../Context/AttendanceContext/AttendanceContext";
 import axios from "axios";
 import NoticeImg from "../../img/Notice/NoticeImg.svg";
-import { useLocation, useHistory } from "react-router-dom"; // Import useHistory
+import { useLocation, useNavigate } from "react-router-dom"; // Import useNavigate
 import { useTheme } from "../../Context/TheamContext/ThemeContext";
 import BASE_URL from "../../Pages/config/config";
 import TittleHeader from "../../Pages/TittleHeader/TittleHeader";
@@ -245,7 +245,7 @@ import { useSelector } from "react-redux";
 const NoticeBoard = () => {
   const { userData} = useSelector((state)=> state.user);
   const location = useLocation();
-  const history = useHistory(); // Initialize history
+  const history = useNavigate(); // Initialize history
   const route = location.pathname.split("/")[1];
   const name = `${userData?.FirstName} ${userData?.LastName}`;
   const [notice, setNotice] = useState([]);

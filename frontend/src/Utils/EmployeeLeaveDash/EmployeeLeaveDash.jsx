@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTheme } from "../../Context/TheamContext/ThemeContext";
 import axios from "axios";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link } from "react-router-dom";
 import { IoAirplaneOutline, IoTimerOutline } from "react-icons/io5";
 import { LiaCapsulesSolid } from "react-icons/lia";
 import { BsCurrencyRupee } from "react-icons/bs";

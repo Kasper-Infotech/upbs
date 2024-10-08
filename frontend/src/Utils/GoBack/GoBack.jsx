@@ -1,14 +1,14 @@
 import React from "react";
 import {
-  useHistory,
+  useNavigate,
   useLocation,
-} from "react-router-dom/cjs/react-router-dom.min";
+} from "react-router-dom";
 import { useTheme } from "../../Context/TheamContext/ThemeContext";
 import { IoChevronBackOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
 
 const GoBack = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
   const { darkMode } = useTheme();
 
@@ -28,7 +28,7 @@ const GoBack = () => {
         <span
           style={{ cursor: "pointer", color: darkMode ? "black" : "white" }}
           className="py-1 px-2 d-flex align-items-center gap-2"
-          onClick={() => history.goBack()}
+          onClick={() => navigate(-1)}
         >
           <IoChevronBackOutline /> Back
         </span>

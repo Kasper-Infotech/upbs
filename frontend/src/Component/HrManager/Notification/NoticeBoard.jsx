@@ -5,7 +5,7 @@ import axios from "axios";
 import { useTheme } from "../../../Context/TheamContext/ThemeContext";
 import BASE_URL from "../../../Pages/config/config";
 import { TiDeleteOutline } from "react-icons/ti";
-import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const NoticeBoard = () => {

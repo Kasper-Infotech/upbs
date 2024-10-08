@@ -5,15 +5,15 @@ import "./NavBar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { AttendanceContext } from "../../Context/AttendanceContext/AttendanceContext";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import addNotification from "react-push-notification";
-import { useLocation } from "react-router-dom/cjs/react-router-dom";
+import { useLocation } from "react-router-dom";
 import DarkModeToggle from "../TheamChanger/DarkModeToggle";
 import { LuMenu } from "react-icons/lu";
 import { useSidebar } from "../../Context/AttendanceContext/smallSidebarcontext";
 import profile from "../../img/profile.jpg";
 import { toast } from "react-hot-toast";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link } from "react-router-dom";
 import BASE_URL from "../config/config";
 import { useTheme } from "../../Context/TheamContext/ThemeContext";
 import SearchComponent from "../../Utils/SearchComponent/SearchComponent";
@@ -23,48 +23,130 @@ import { useSelector, useDispatch } from "react-redux";
 import { userInfo } from "../../redux/slices/userSlice";
 import { persistStore } from "redux-persist";
 import { store } from "../../redux/store";
-
+import {jwtDecode} from "jwt-decode";
+import { attendanceInfo } from "../../redux/slices/loginSlice";
 const NavBar = (props, data) => {
   const persistor = persistStore(store);
 
   const [activeProfile, setActiveProfile] = useState(null);
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const { darkMode } = useTheme();
   const location = useLocation().pathname.split("/")[1];
   const pathname = useLocation().pathname;
   const { userData } = useSelector((state) => state.user);
+  const decodeToken = (token) => {
+    // Check if token structure is valid
+    const parts = token.split('.');
+    if (parts.length !== 3) {
+      localStorage.clear(); 
+      navigate("/");
+      return;
+    }
+  
+    try {
+      const decoded = jwtDecode(token);
+      return decoded;
+    } catch (error) {
+      localStorage.clear(); 
+      navigate("/");
+      return null;
+    }
+  };
   useEffect(() => {
-    const body = {
-      _id: userData?._id,
-      Account: userData?.Account,
-    };
-
-    axios
-      .post(`${BASE_URL}/api/verifyAccount`, body, {
-        headers: {
-          authorization: localStorage.getItem("token") || "",
-        },
-      })
-      .then((res) => {})
-      .catch(async (error) => {
-        if (error.response.data.error === "Unauthorized Access") {
-          localStorage.clear();
-
-          await persistor.purge();
-          history.push("#/login");
-          window.location.reload();
+    const verifyAccount = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        
+        if (!token) {
+          navigate("/");
+          return;
         }
-      });
-  }, [pathname]);
-
+  
+        const decodedToken = decodeToken(token);
+        
+        console.log(decodedToken)// Handle token decoding safely
+        if (!decodedToken || !decodedToken.Account) {
+          navigate("/");
+          return;
+        }
+  
+        // Compare token account with Redux userData
+        if (userData?.Account !== decodedToken.Account) {
+          localStorage.clear(); 
+          await persistor.purge();
+          navigate("/"); // Redirect to login if accounts mismatch
+          return;
+        }
+  
+        // Prepare request body
+        const body = {
+          _id: userData?._id,
+          Account: userData?.Account,
+        };
+  
+        // API request to verify account
+        await axios.post(`${BASE_URL}/api/verifyAccount`, body, {
+          headers: {
+            authorization: token,
+          },
+        });
+  
+      } catch (error) {
+        console.error("Error during verification:", error);
+        // Handle Unauthorized Access or other errors
+        if (error.response?.data?.error === "Unauthorized Access") {
+          await persistor.purge(); // Clear persisted Redux store
+          navigate("/"); // Redirect to login
+        } else {
+          // Other error handling, if necessary
+          console.error("Account verification failed:", error);
+        }
+      }
+    };
+  
+    verifyAccount(); // Call the async function
+  
+    // No need for cleanup function here, so just return undefined
+  }, [pathname, userData]);
+  
+    const handleLogout = async () => {
+    try {
+      dispatch(attendanceInfo({ employeeId: userData._id, status: "logout" }));
+      
+      localStorage.clear();
+      await persistor.purge();
+      
+    
+      window.location.href = "/";
+      
+      if (userData) {
+        socket.emit("logoutUser", {
+          manager: userData.reportHr || userData.reportManager,
+          user: userData.Email
+        });
+  
+        if (!userData.Email) {
+          alert("Please select an employee");
+          return;
+        }
+  
+        alert("Logout time recorded successfully");
+  
+      
+   
+      }
+    } catch (error) {
+      console.error("Error during logout:", error);
+    }
+  };
   const [notification, setNotification] = useState([]);
   const [employeeData, setEmployeeData] = useState("");
   const [notiToggle, setNotiToggle] = useState(false);
   const { socket } = useContext(AttendanceContext);
   const { toggleSidebar } = useSidebar();
   const [loginNoti, setLoginNoti] = useState(true);
-  let userProfile;
+
 
   const id = userData?._id;
 
@@ -130,7 +212,7 @@ const NavBar = (props, data) => {
         setEmployeeData(response.data.result);
         setNotification(response.data.result.Notification);
 
-        history.push(`/${location}/${path}`);
+       navigate(`/${location}/${path}`);
       })
       .catch((error) => {
         console.log(error);
@@ -484,7 +566,7 @@ const NavBar = (props, data) => {
                                   ? () =>
                                       notificationHandler(val.taskId, val.path)
                                   : () =>
-                                      history.push(`/${location}/${val.path}`)
+                                      navigate(`/${location}/${val.path}`)
                               }
                             >
                               <div
@@ -589,23 +671,23 @@ const NavBar = (props, data) => {
                 }}
               >
                 <span>
-                  {/* <p
+                  <p
                   style={{ width: "fit-content", fontSize: ".8rem" }}
                   className="m-0"
                 >
-                  {UserType(UserNumber)}
-                </p> */}
+                  {UserType(userData?.Account)}
+                </p>
                   {/* <hr className="m-0 my-1" /> */}
                   <p className="m-0 p-0">
                     <span className="text-capitalize m-0 p-0">
-                      {props.loginInfo["Name"]}
+                      {`${userData?.FirstName} ${userData?.LastName}`}
                     </span>{" "}
                   </p>
                   <p
-                    title={props.loginInfo["Email"]}
+                    title={userData?.Email}
                     className="m-0 text-muted p-0"
                   >
-                    {ShortedText(props.loginInfo["Email"])}
+                    {ShortedText(userData?.Email)}
                   </p>
                 </span>
 
@@ -625,7 +707,7 @@ const NavBar = (props, data) => {
                 )}
 
                 <button
-                  onClick={props.onLogout}
+                  onClick={handleLogout}
                   style={{ cursor: "pointer" }}
                   className="btn btn-danger d-flex align-items-center justify-content-between"
                 >

@@ -55,6 +55,9 @@ const loginEmployee = async (req, res) => {
     if (!employee) {
       return res.status(404).send("Employee not found.");
     }
+   if(employee.status==="Inactive"){
+    return res.status(401).send("Employee not Active");
+   }
 
     // Compare passwords
     const passwordMatch = await bcrypt.compare(password, employee.Password);
@@ -66,15 +69,6 @@ const loginEmployee = async (req, res) => {
     const data = {
       _id: employee._id,
       Account: employee.Account,
-      FirstName: employee.FirstName,
-      LastName: employee.LastName,
-      reportHr: employee.reportHr || "",
-      reportManager: employee.reportManager || "",
-      empID: employee.empID,
-      profile: employee.profile ? employee.profile.image_url : null,
-      status: employee.status,
-      loginStatus: employee.loginStatus,
-      role: "employee" // Assuming role for regular employees
     };
 
     // Generate JWT token

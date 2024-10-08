@@ -12,7 +12,7 @@ import { useTheme } from "../../Context/TheamContext/ThemeContext";
 import LeaveLight from "../../img/Leave/LeaveLight.svg";
 import LeaveDark from "../../img/Leave/LeaveDark.svg";
 import BASE_URL from "../../Pages/config/config";
-import { useLocation } from "react-router-dom/cjs/react-router-dom";
+import { useLocation } from "react-router-dom";
 import { rowBodyStyle, rowHeadStyle } from "../../Style/TableStyle";
 import Pagination from "../../Utils/Pagination";
 import { useSelector } from "react-redux";
@@ -457,7 +457,7 @@ export default LeaveApplicationHRTable;
 // import LeaveLight from "../../img/Leave/LeaveLight.svg";
 // import LeaveDark from "../../img/Leave/LeaveDark.svg";
 // import BASE_URL from "../../Pages/config/config";
-// import { useLocation } from "react-router-dom/cjs/react-router-dom";
+// import { useLocation } from "react-router-dom";
 // import { rowBodyStyle, rowHeadStyle } from "../../Style/TableStyle";
 // import Pagination from "../../Utils/Pagination";
 

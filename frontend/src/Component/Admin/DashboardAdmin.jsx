@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { HashRouter as Router } from "react-router-dom";
+import { Outlet, HashRouter as Router } from "react-router-dom";
 import AdminRoutes from "./Routes.jsx";
 import NavBar from "../../Pages/Navbar/NavBar.jsx";
 import "../../Style/Dashboard.css";
@@ -40,7 +40,7 @@ const DashboardAdmin = (props) => {
         top: "0",
       }}
     >
-      <Router>
+   
         <div className="dashboard-grid">
         <div
             style={{
@@ -63,7 +63,10 @@ const DashboardAdmin = (props) => {
             <MainSidebar />
           </div>
           <div className="mainbar-grid">
-            <AdminRoutes />
+          <div style={{ maxHeight: "84vh", overflow: "auto" }} className="pb-4">
+          
+            <Outlet />
+            </div>
             <div
               style={{ zIndex: "50", position: "absolute", bottom: "0" }}
               className="HrPannelFooter bg-dark w-100 text-white"
@@ -72,7 +75,7 @@ const DashboardAdmin = (props) => {
             </div>
           </div>
         </div>
-      </Router>
+  
     </div>
   );
 };

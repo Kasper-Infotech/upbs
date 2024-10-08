@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Form, ListGroup } from "react-bootstrap";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { SearchRouteData } from "./SearchRouteData";
 import BASE_URL from "../../Pages/config/config";
 import axios from "axios";
@@ -17,7 +17,7 @@ const SearchComponent = () => {
   const inputRef = useRef(null);
   const [employeeData, setEmployeeData] = useState({});
   const id = userData?._id;
-  const history = useHistory();
+  const history = useNavigate();
   const { darkMode } = useTheme();
 
   const loadEmployeeData = () => {

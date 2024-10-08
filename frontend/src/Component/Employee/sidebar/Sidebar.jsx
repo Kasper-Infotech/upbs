@@ -3,7 +3,7 @@ import { MdFamilyRestroom, MdMenuOpen, MdWorkOutline } from "react-icons/md";
 import { FaRegUser } from "react-icons/fa";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { BsFolderCheck } from "react-icons/bs";
-import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
+import { NavLink } from "react-router-dom";
 import { useTheme } from "../../../Context/TheamContext/ThemeContext";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";

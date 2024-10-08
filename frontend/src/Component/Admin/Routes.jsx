@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 
-import { Switch, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import AdminDasd from "../Admin/Dashboard/AdminDash.jsx";
 import Role from "../../Pages/Department/Role.jsx";
 import Position from "../../Pages/Department/Position.jsx";
@@ -49,12 +49,10 @@ import MonthlyLeaveRegister from "../../Pages/ApplyLeave/MonthlyLeaveRegister/Mo
 import LeaveRegister from "../../Utils/LeaveComponentHrDash/LeaveRegister.jsx";
 
 const AdminRoutes = () => {
-  const { isLogin } = useContext(AttendanceContext);
 
-  useEffect(() => {}, [isLogin]);
   return (
-    <div style={{ maxHeight: "84vh", overflow: "auto" }} className="pb-4">
-      <Switch>
+   
+      <Routes>
         <Route path="/admin/dashboard" exact component={AdminDasd} />
         <Route path="/admin/role" exact component={Role} />
         <Route path="/admin/position" exact component={Position} />
@@ -161,8 +159,8 @@ const AdminRoutes = () => {
         {/*END LEAVE ROUTES */}
         <Route component={NotFound404} />
         {/* ********task******* */}
-      </Switch>
-    </div>
+      </Routes>
+
   );
 };
 

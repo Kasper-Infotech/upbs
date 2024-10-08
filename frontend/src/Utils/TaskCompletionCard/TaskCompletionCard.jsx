@@ -4,7 +4,7 @@ import { TbSubtask } from "react-icons/tb";
 import CircularProgressBar from "./CircularProgressBar";
 import axios from "axios";
 import BASE_URL from "../../Pages/config/config";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link } from "react-router-dom";
 import {
   BsEmojiAngryFill,
   BsEmojiExpressionlessFill,

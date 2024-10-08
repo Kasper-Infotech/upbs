@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { IoSunnyOutline, IoMoonOutline } from "react-icons/io5"; // Import moon icon
 import "./AttendanceCard.css";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link } from "react-router-dom";
 import { useTheme } from "../../Context/TheamContext/ThemeContext";
 import { useSelector } from "react-redux";
 

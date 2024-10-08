@@ -5,7 +5,7 @@ import profileimage from "../../img/profile.jpg";
 import { AttendanceContext } from "../../Context/AttendanceContext/AttendanceContext";
 import BASE_URL from "../../Pages/config/config";
 import { useTheme } from "../../Context/TheamContext/ThemeContext";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link } from "react-router-dom";
 import NoticeImg from "../../img/Notice/NoticeImg.svg";
 import { HiOutlineBellAlert } from "react-icons/hi2";
 import { getTimeAgo } from "../GetDayFormatted";

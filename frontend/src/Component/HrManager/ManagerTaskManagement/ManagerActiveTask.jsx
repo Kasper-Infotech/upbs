@@ -23,13 +23,13 @@ import "./TaskManagement.css";
 import { IoIosSend, IoMdDoneAll } from "react-icons/io";
 import { PiInfoLight } from "react-icons/pi";
 import { getFormattedDate } from "../../../Utils/GetDayFormatted";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useNavigate } from "react-router-dom";
 import OverLayToolTip from "../../../Utils/OverLayToolTip";
 import { AiFillFilePpt } from "react-icons/ai";
 import { useSelector } from "react-redux";
 
 const ManagerActiveTask = () => {
-  const history = useHistory();
+  const history = useNavigate();
   const { userData} = useSelector((state)=> state.user);
   const [modalShow, setModalShow] = React.useState(false);
   const name = `${userData?.FirstName} ${userData?.LastName}`;

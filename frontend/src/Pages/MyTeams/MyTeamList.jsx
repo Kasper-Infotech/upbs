@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { Button } from "react-bootstrap";
 import axios from "axios";
 import profile from "../../img/profile.jpg";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useTheme } from "../../Context/TheamContext/ThemeContext";
 import { AttendanceContext } from "../../Context/AttendanceContext/AttendanceContext";
 import BASE_URL from "../config/config";
@@ -10,7 +10,7 @@ import { MdClose, MdKeyboardArrowRight } from "react-icons/md";
 import "./MyTeam.css";
 
 const MyTeamList = () => {
-  const history = useHistory();
+  const history = useNavigate();
   const { setManagerMail } = useContext(AttendanceContext);
   const [showModal, setShowModal] = useState(false);
   const [selectedDepartment, setSelectedDepartment] = useState(null);

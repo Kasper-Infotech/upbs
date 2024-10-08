@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../../Style/Dashboard.css";
-import { HashRouter as Router } from "react-router-dom";
-import MainContent from "./Router.jsx";
+import { Outlet, HashRouter as Router } from "react-router-dom";
+
 import NavBar from "../../Pages/Navbar/NavBar.jsx";
 import { useSidebar } from "../../Context/AttendanceContext/smallSidebarcontext.jsx";
 import Footer from "../../Pages/Footer/Footer.jsx";
@@ -40,7 +40,7 @@ const DashboardHR = (props) => {
         top: "0",
       }}
     >
-      <Router>
+     
         <div className="dashboard-grid">
         <div
             style={{
@@ -63,7 +63,9 @@ const DashboardHR = (props) => {
             <MainSidebar />
           </div>
           <div className="mainbar-grid">
-            <MainContent />
+          <div style={{ maxHeight: "84vh", overflow: "auto" }} className="pb-4">
+            <Outlet />
+            </div>
             <div
               style={{ zIndex: "50", position: "absolute", bottom: "0" }}
               className="HrPannelFooter bg-dark w-100 text-white"
@@ -72,7 +74,7 @@ const DashboardHR = (props) => {
             </div>
           </div>
         </div>
-      </Router>
+  
     </div>
   );
 };

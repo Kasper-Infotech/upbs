@@ -3,7 +3,7 @@ import axios from "axios";
 import Select from "react-select";
 import "bootstrap/dist/css/bootstrap.min.css";
 import TittleHeader from "../../Pages/TittleHeader/TittleHeader";
-import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import { useLocation } from "react-router-dom";
 import { useTheme } from "../../Context/TheamContext/ThemeContext";
 import BASE_URL from "../../Pages/config/config";
 import { useSelector } from "react-redux";

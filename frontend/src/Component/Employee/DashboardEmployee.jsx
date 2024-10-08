@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import NavBar from "../../Pages/Navbar/NavBar.jsx";
 import EmpRoutes from "./router/Routes.jsx";
-import { HashRouter as Router } from "react-router-dom";
+import { Outlet, HashRouter as Router } from "react-router-dom";
 import "./DashboardEmployee.css";
 import { useSidebar } from "../../Context/AttendanceContext/smallSidebarcontext.jsx";
 import { useTheme } from "../../Context/TheamContext/ThemeContext.js";
 import Footer from "../../Pages/Footer/Footer.jsx";
 import MainSidebar from "../../Utils/Sidebar/MainSidebar.jsx";
 import SmallScreenSidebar from "../../Utils/SmallScreenSidebar/SmallScreenSidebar.jsx";
+import InnerDashContainer from "../InnerDashContainer.jsx";
 
 const DashboardEmployee = (props) => {
   const [checked, setChecked] = useState(true);
@@ -39,7 +40,7 @@ const DashboardEmployee = (props) => {
         top: "0",
       }}
     >
-      <Router>
+ 
         <div className="dashboard-grid-employee">
         <div
             style={{
@@ -52,7 +53,7 @@ const DashboardEmployee = (props) => {
           </div>
           <div className="employeenavbar-grid">
             <NavBar
-              loginInfo={props.data}
+              // loginInfo={props.data}
               checked={checked}
               handleChange={handleChange}
               onLogout={props.onLogout}
@@ -62,7 +63,14 @@ const DashboardEmployee = (props) => {
             <MainSidebar/>
           </div>
           <div className="employeemainbar-grid">
-            <EmpRoutes data={props.data} />
+          <InnerDashContainer>
+      <div
+        style={{ height: "82vh", width: "100%", overflow: "auto" }}
+        className="empSidebar d-flex flex-column pb-3"
+      >
+            <Outlet />
+            </div>
+            </InnerDashContainer>
             <div
               style={{ zIndex: "50", position: "absolute", bottom: "0" }}
               className="HrPannelFooter bg-dark w-100 text-white"
@@ -71,7 +79,7 @@ const DashboardEmployee = (props) => {
             </div>
           </div>
         </div>
-      </Router>
+ 
     </div>
   );
 };

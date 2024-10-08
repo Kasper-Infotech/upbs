@@ -8,7 +8,7 @@ import axios from "axios";
 import BASE_URL from "../../Pages/config/config";
 import { getFormattedDateWTY } from "../GetDayFormatted";
 import { CgArrowLongRightC } from "react-icons/cg";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const LeaveComponentHrDash = () => {

@@ -8,7 +8,7 @@ import {
 } from "react-icons/md";
 import { AiOutlineFundProjectionScreen } from "react-icons/ai";
 import "./Sidebar.css";
-import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
+import { NavLink } from "react-router-dom";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useTheme } from "../../../Context/TheamContext/ThemeContext";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";

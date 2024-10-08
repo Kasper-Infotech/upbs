@@ -32,7 +32,7 @@ import { RiArrowDropDownLine, RiAttachmentLine } from "react-icons/ri";
 import { PiInfoLight } from "react-icons/pi";
 import { getFormattedDate } from "../../../Utils/GetDayFormatted";
 import AvatarGroup from "../../../Pages/AvatarGroup/AvatarGroup";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useNavigate } from "react-router-dom";
 import OverLayToolTip from "../../../Utils/OverLayToolTip";
 import { AiFillFilePpt, AiFillFileWord } from "react-icons/ai";
 import profile from "../../../img/profile.jpg"
@@ -40,7 +40,7 @@ import { useSelector } from "react-redux";
 
 const ManagerActiveTask = () => {
   const { userData} = useSelector((state)=> state.user);
-  const history = useHistory();
+  const history = useNavigate();
   const [modalShow, setModalShow] = React.useState(false);
   const name = `${userData?.FirstName} ${userData?.LastName}`;
   const [tasks, setTasks] = useState([]);

@@ -4,7 +4,7 @@ import { Form } from "react-bootstrap";
 import BASE_URL from "../config/config";
 import { useTheme } from "../../Context/TheamContext/ThemeContext";
 import { MdOutlineCancel, MdOutlineDoneAll } from "react-icons/md";
-import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import { useLocation } from "react-router-dom";
 import NumericInput from "../../Utils/InputBox/NumericInput";
 import { GoEyeClosed } from "react-icons/go";
 import { RxEyeOpen } from "react-icons/rx";

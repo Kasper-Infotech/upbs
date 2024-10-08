@@ -6,7 +6,7 @@ import {
   MdOutlineDashboardCustomize,
   MdOutlineLocationOn,
 } from "react-icons/md";
-import { NavLink } from "react-router-dom/cjs/react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useTheme } from "../../Context/TheamContext/ThemeContext";
 import { Tooltip, OverlayTrigger } from "react-bootstrap";
 import { IoCalendarOutline } from "react-icons/io5";

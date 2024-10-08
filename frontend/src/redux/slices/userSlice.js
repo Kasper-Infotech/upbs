@@ -50,11 +50,11 @@ export const userInfo = createAsyncThunk(
     async ({_id}, thunkAPI) => {
         try {
   
-            const response = await axios.get(`${BASE_URL}/api/particularEmployee/${_id}`,{
+            const response = await axios.get(`${BASE_URL}/api/userData/${_id}`,{
                 headers: {
                   authorization: localStorage.getItem("token") || ""
                 }});   
-     
+                    console.log(response.data)
             return response.data;
         } catch (error) {
            

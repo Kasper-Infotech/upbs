@@ -10,7 +10,7 @@ import TittleHeader from "../../../Pages/TittleHeader/TittleHeader";
 import { useTheme } from "../../../Context/TheamContext/ThemeContext";
 import toast from "react-hot-toast";
 import "./NoticeManagement.css";
-import { useHistory, useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const NoticeManagement = () => {
@@ -18,7 +18,7 @@ const NoticeManagement = () => {
   const email = userData?.Email;
   const name = `${userData?.FirstName} ${userData?.LastName}`;
   const route = useLocation().pathname.split("/")[1];
-  const history = useHistory();
+  const history = useNavigate();
   const [newTask, setNewTask] = useState({
     notice: "",
     attachments: null,

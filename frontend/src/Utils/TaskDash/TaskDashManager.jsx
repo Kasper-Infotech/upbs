@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import BASE_URL from "../../Pages/config/config";
 import "./TaskDash.css";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link } from "react-router-dom";
 import { HiArrowLongRight, HiOutlineCalendarDays } from "react-icons/hi2";
 import { MdOutlineAddTask } from "react-icons/md";
 import { useTheme } from "../../Context/TheamContext/ThemeContext";

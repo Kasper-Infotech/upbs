@@ -9,7 +9,7 @@ import {
 import { HiOutlineBuildingOffice2 } from "react-icons/hi2";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { TbBeach, TbUserCheck } from "react-icons/tb";
-import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
+import { NavLink } from "react-router-dom";
 import { Tooltip, OverlayTrigger } from "react-bootstrap";
 import { useTheme } from "../../Context/TheamContext/ThemeContext";
 import { ImCalendar } from "react-icons/im";

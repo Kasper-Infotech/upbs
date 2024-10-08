@@ -7,7 +7,7 @@ import { BsFillFileEarmarkPdfFill } from "react-icons/bs";
 import { LuSearch } from "react-icons/lu";
 import { useTheme } from "../../../Context/TheamContext/ThemeContext";
 import BASE_URL from "../../../Pages/config/config";
-import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import { useLocation } from "react-router-dom";
 import TittleHeader from "../../../Pages/TittleHeader/TittleHeader";
 import LeaveLight from "../../../img/Leave/LeaveLight.svg";
 import OverLayToolTip from "../../../Utils/OverLayToolTip";

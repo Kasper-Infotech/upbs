@@ -8,7 +8,7 @@ import { toast } from "react-hot-toast";
 import BASE_URL from "../../../Pages/config/config";
 import TittleHeader from "../../../Pages/TittleHeader/TittleHeader";
 import { useTheme } from "../../../Context/TheamContext/ThemeContext";
-import { useHistory, useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const TaskAssign = () => {
@@ -23,7 +23,7 @@ const TaskAssign = () => {
   const name = `${userData?.FirstName} ${userData?.LastName}`;
   const id = userData?._id;
   const route = useLocation().pathname.split("/")[1];
-  const history = useHistory();
+  const history = useNavigate();
   const taskId = uuidv4();
   const { darkMode } = useTheme();
   const [newTask, setNewTask] = useState({

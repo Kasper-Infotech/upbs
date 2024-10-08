@@ -21,7 +21,7 @@ import { getFormattedDate } from "../../../Utils/GetDayFormatted";
 import { useTheme } from "../../../Context/TheamContext/ThemeContext";
 import AvatarGroup from "../../../Pages/AvatarGroup/AvatarGroup";
 import { AttendanceContext } from "../../../Context/AttendanceContext/AttendanceContext";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useNavigate } from "react-router-dom";
 import profile from "../../../img/profile.jpg"
 import { useSelector } from "react-redux";
 
@@ -41,7 +41,7 @@ const AdminActive = () => {
   const { darkMode } = useTheme();
   const [flash, setFlash] = useState(false);
   const { setMessageData } = useContext(AttendanceContext);
-  const history = useHistory();
+  const history = useNavigate();
   const [updatedTask, setUpdatedTask] = useState({
     id: "",
     Taskname: "",

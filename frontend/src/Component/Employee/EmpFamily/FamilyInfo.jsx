@@ -5,7 +5,7 @@ import FamilyInfoForm from "./FamilyInfoForm.jsx";
 import FamilyInfoFormEdit from "./FamilyInfoFormEdit.jsx";
 import BASE_URL from "../../../Pages/config/config.js";
 import toast from "react-hot-toast";
-import { useHistory, useLocation } from "react-router-dom/cjs/react-router-dom.min.js";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const FamilyInfo = (props) => {
@@ -15,7 +15,7 @@ const { userData} = useSelector((state)=> state.user);
   const [editForm, setEditForm] = useState(false);
   const [editData, setEditData] = useState({});
   const route = useLocation().pathname.split("/")[1];
-  const history = useHistory();
+  const history = useNavigate();
   const handleFamilyInfoSubmit = (event, id) => {
     event.preventDefault();
       

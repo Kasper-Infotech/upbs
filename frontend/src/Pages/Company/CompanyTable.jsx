@@ -8,7 +8,7 @@ import OverLayToolTip from "../../Utils/OverLayToolTip";
 import { FiEdit2 } from "react-icons/fi";
 import Pagination from "../../Utils/Pagination";
 import { rowBodyStyle, rowHeadStyle } from "../../Style/TableStyle";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const AdminCompanyTable = (props) => {
@@ -19,7 +19,7 @@ const AdminCompanyTable = (props) => {
   const [itemsPerPage] = useState(10);
   const { darkMode } = useTheme();
   const userno = userData?.Account;
-  const history = useHistory(); // Initialize history
+  const history = useNavigate(); // Initialize history
 
   useEffect(() => {
     axios

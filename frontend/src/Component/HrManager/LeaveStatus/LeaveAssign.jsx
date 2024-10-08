@@ -5,10 +5,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useTheme } from "../../../Context/TheamContext/ThemeContext";
 import BASE_URL from "../../../Pages/config/config";
 import toast from "react-hot-toast";
-import { useHistory, useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import { useNavigate, useLocation } from "react-router-dom";
 const LeaveAssign = () => {
   const {darkMode} = useTheme()
-  const history = useHistory();
+  const history = useNavigate();
   const route = useLocation().pathname.split("/")[1];
 
   const [empData, setEmpData] = useState([]);

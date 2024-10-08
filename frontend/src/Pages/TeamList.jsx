@@ -4,11 +4,11 @@ import BASE_URL from './config/config';
 import axios from 'axios';
 import profile from "../img/profile.jpg"
 import { AttendanceContext } from '../Context/AttendanceContext/AttendanceContext';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 const TeamList = () => {
-  const history = useHistory();
+  const history = useNavigate();
   const {setManagerMail} = useContext(AttendanceContext)
   const [showModal, setShowModal] = useState(false);
   const [selectedDepartment, setSelectedDepartment] = useState(null);

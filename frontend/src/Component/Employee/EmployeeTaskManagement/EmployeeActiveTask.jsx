@@ -10,7 +10,7 @@ import {
   MdOutlineAssignmentInd,
   MdOutlineCancel,
 } from "react-icons/md";
-import { useHistory } from "react-router-dom/cjs/react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AttendanceContext } from "../../../Context/AttendanceContext/AttendanceContext";
 import TittleHeader from "../../../Pages/TittleHeader/TittleHeader";
 import { getFormattedDate } from "../../../Utils/GetDayFormatted";
@@ -32,7 +32,7 @@ const EmployeeActiveTask = () => {
   const [allImage, setAllImage] = useState(null);
   const [currentTime, setCurrentTime] = useState(new Date());
   const { darkMode } = useTheme();
-  const history = useHistory();
+  const history = useNavigate();
 
   const email = userData?.Email;
   const [timeinfo, setTimeinfo] = useState(false);

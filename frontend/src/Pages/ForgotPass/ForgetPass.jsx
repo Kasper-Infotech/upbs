@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./forgot.css";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import KASPLOGO from "../../img/logo.png";
 import { Link } from "react-router-dom";
 import BASE_URL from "../config/config";
@@ -13,7 +13,7 @@ import { GoEyeClosed } from "react-icons/go";
 import { RxEyeOpen } from "react-icons/rx";
 
 const ForgetPass = () => {
-  const history = useHistory();
+  const history = useNavigate();
   const [seePass, setSeePass] = useState(false);
   const [seeConfirmPass, setSeeConfirmPass] = useState(false); // New state
   const [password, setPassword] = useState("");

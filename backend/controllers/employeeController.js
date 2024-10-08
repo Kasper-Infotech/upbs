@@ -946,6 +946,21 @@ const findParticularEmployee = async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 };
+const userData = async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const findEmployee = await Employee.findById({ _id: id }, "Email Account FirstName LastName Notification");
+    console.log(findEmployee)
+    if (findEmployee) {
+      return res.status(200).send(findEmployee);
+    } else {
+      return res.status(400).send("Employee not found");
+    }
+  } catch (error) {
+    res.status(500).send("Internal Server Error");
+  }
+};
 const notificationStatusUpdate = async (req, res) => {
   const id = req.params.id;
   const { email } = req.body;
@@ -1212,9 +1227,36 @@ const EmployeeTeam =  async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
+
+const verifyAccount = async (req, res) => {
+  try {
+    const { _id, Account } = req.body;
+
+    // Find employee by ID
+    const emp = await Employee.findOne({ _id });
+    
+    // If employee is not found
+    if (!emp) {
+      return res.status(404).json({ error: "Employee not found" });
+    }
+
+    // If account does not match
+    if (emp.Account !== Account) {
+      return res.status(401).json({ error: "Unauthorized Access" });
+    }
+
+    // If everything is correct (authorized access)
+    return res.status(200).json({ message: "Authorized Access" });
+
+  } catch (error) {
+    // Catch any server errors
+    return res.status(500).json({ error: "Server error" });
+  }
+}
 module.exports = {
   employeeByDepartment,
   getEmployeeByStatus,
+  verifyAccount,
   EmployeeTeam,
   getAllEmployeeByStatus,
   getAllEmployee,
@@ -1225,6 +1267,7 @@ module.exports = {
   findParticularEmployee,
   selectedDeleteNotification,
   deleteNotification,
+  userData,
   notificationStatusUpdate,
   multiSelectedDeleteNotification,
   employeeLogoutStatusUpdate,

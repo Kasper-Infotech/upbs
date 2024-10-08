@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAttendanceData } from "../../redux/slices/attendanceSlice";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { GoClock } from "react-icons/go";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link } from "react-router-dom";
 
 const EmployeeStatus = () => {
   const { darkMode } = useTheme();
@@ -423,7 +423,7 @@ export default EmployeeStatus;
 // import { fetchAttendanceData } from "../../redux/slices/attendanceSlice";
 // import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 // import { GoClock } from "react-icons/go";
-// import { Link } from "react-router-dom/cjs/react-router-dom.min";
+// import { Link } from "react-router-dom";
 
 // const EmployeeStatus = () => {
 //   const { darkMode } = useTheme();

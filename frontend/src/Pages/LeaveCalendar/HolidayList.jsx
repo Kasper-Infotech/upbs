@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import holidayImage from "../../img/holidayImage.svg";
-import { Link } from "react-router-dom/cjs/react-router-dom";
+import { Link } from "react-router-dom";
 import BASE_URL from "../config/config";
 import { TwoDigitDates } from "../../Utils/GetDayFormatted";
 import { useTheme } from "../../Context/TheamContext/ThemeContext";

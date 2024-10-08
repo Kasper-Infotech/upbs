@@ -12,15 +12,17 @@ const {
   employeeLoginStatusUpdate,
   getAllEmployeeByStatus,
   employeeLogoutStatusUpdate,EmployeeTeam,employeeByDepartment,
-  deleteEmployee,
-  getEmployeeByStatus
+  deleteEmployee,verifyAccount,userData,
+  getEmployeeByStatus,
 } = require("../controllers/employeeController");
 const { fileUploadMiddleware, checkFileSize } = require("../middleware/multer");
 const {verifyAdminHRManager,verifyAdminHR ,verifyAll} = require('../middleware/rbacMiddleware');
 // GET: Retrieve all countries
 employeeRoute.get("/employee/",getAllEmployee);
+employeeRoute.post("/verifyAccount",verifyAccount);
 employeeRoute.get("/employee/:id?",getAllEmployee);
 employeeRoute.get("/particularEmployee/:id",findParticularEmployee);
+employeeRoute.get("/userData/:id",userData);
 employeeRoute.post("/notificationStatusUpdate/:id", notificationStatusUpdate);
 employeeRoute.post("/managersList",getEmployeeByStatus);
 employeeRoute.post("/managersMailsList", getAllEmployeeByStatus);

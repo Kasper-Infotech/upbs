@@ -7,14 +7,14 @@ import EducationFormEdit from "./EducationFormEdit.jsx";
 import BASE_URL from "../../../Pages/config/config.js";
 import { useTheme } from "../../../Context/TheamContext/ThemeContext.js";
 import toast from "react-hot-toast";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min.js";
+import { useNavigate } from "react-router-dom";
 
 const Education = (props) => {
   const [table, setTable] = useState(true);
   const [editForm, setEditForm] = useState(false);
   const [editData, setEditData] = useState({});
   const { darkMode } = useTheme();
-  const history = useHistory(); 
+  const history = useNavigate(); 
   const handleEducationSubmit = (event, id) => {
     event.preventDefault();
     setTable(true);
