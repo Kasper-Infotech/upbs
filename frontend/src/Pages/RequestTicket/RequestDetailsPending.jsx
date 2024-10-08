@@ -40,7 +40,7 @@ const RequestDetailsPending = () => {
         }
       );
       const requests = response.data;
-      console.log(requests);
+     
       setData(requests);
 
       // Filter requests with status "Pending"

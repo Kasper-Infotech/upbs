@@ -372,7 +372,7 @@ const UpdateTaskAdminEmployee = async (req, res) => {
   const { emptaskStatus, empTaskComment } = req.body;
   const { empEmail, taskId } = req.params; // Ensure empEmail and taskId are strings
 
-  console.log(emptaskStatus, empTaskComment, empEmail, taskId);
+  
 
   try {
     // Find the task by ID and populate only the 'Email' field from the employee reference

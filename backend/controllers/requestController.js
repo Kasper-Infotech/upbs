@@ -12,7 +12,7 @@ const createRequest = async (req, res) => {
     const currentISTTime = moment
       .tz("Asia/Kolkata")
       .format("YYYY-MM-DDTHH:mm:ss.SSSZ");
-    console.log(currentISTTime);
+
     const newRequest = new Request({
       to,
       requestedBy,

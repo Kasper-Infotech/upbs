@@ -54,7 +54,7 @@ const id = userData?._id;
       .post(`${BASE_URL}/api/particularLeave`, { id })
       .then((response) => {
         setLeaveBalance(response.data);
-        console.log(response.data)
+        
       })
       .catch((error) => {
         console.error("Error loading leave balance", error);

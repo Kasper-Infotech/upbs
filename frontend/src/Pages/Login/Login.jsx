@@ -110,7 +110,7 @@ useEffect(()=>{
     dispatch(loginUser(bodyLogin))
       .unwrap()
       .then((data) => {
-        console.log(data)
+         
         if (data.Account === 3) {
           navigate("/employee/dashboard");
         } else if (data.Account === 2) {

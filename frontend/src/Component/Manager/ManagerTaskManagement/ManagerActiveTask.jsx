@@ -136,7 +136,7 @@ const ManagerActiveTask = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get(`${BASE_URL}/api/tasks`);
-       console.log(response.data)
+      
       setTasks(response.data);
       setError(null);
     } catch (error) {
@@ -364,7 +364,7 @@ const ManagerActiveTask = () => {
     const completedTasks = task.employees.filter(
       (emp) => emp.empTaskStatus === "Completed"
     ).length;
-    console.log(totalEmployees,completedTasks)
+   
     return (completedTasks / totalEmployees) * 100;
   };
 

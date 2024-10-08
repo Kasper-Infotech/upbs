@@ -14,7 +14,7 @@ cloudinary.config({
 
 // Upload image file to Cloudinary
 const cloudinaryFileUploder = async (localFilePath) => {
-    console.log("localFilePath ============ ", localFilePath);
+  
     try {
         if (!localFilePath) {
             return null;
@@ -31,7 +31,7 @@ const cloudinaryFileUploder = async (localFilePath) => {
 
 // Upload images to Cloudinary
 const uplodeImagesCloudinary = async (filePath) => {
-    console.log("filePath ============ >>>>>>>>>>>>>>", filePath);
+   
     if (filePath) {
         const image = await cloudinary.uploader.upload(filePath);
         if (image) {

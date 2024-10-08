@@ -215,7 +215,7 @@ const { userData} = useSelector((state)=> state.user);
   };
 
   const completeTask = async (taskId, empEmail, task) => {
-    console.log(taskId, empEmail, task)
+    
     try {
       const empRemarks = prompt("Enter remarks for completing the task:");
 

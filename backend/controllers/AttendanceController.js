@@ -191,7 +191,7 @@ const createAttendance = async (req, res) => {
 
     // Handling break and resume time updates
     if (breakTime) {
-      console.log(dateObject.ResumeTime.length === dateObject.breakTime.length);
+    
       BreakTime = [currentTime];
       BreakTimeMs = [currentTimeMs];
       if (dateObject.ResumeTime.length === dateObject.breakTime.length) {

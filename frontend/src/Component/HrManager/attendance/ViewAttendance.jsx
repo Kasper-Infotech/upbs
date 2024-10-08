@@ -54,7 +54,7 @@ const AttendanceDetails = () => {
           authorization: localStorage.getItem("token") || "",
         },
       });
-      console.log(response.data)
+     
       if (UserType === 1) {
         setEmployees(response.data);
       } else if (UserType === 2) {

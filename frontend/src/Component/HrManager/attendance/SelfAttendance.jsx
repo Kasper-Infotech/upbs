@@ -29,7 +29,7 @@ const SelfAttendance = () => {
   const { darkMode } = useTheme();
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
-console.log(employeeId)
+
   const handleMouseEnter = (date) => {
     setHoveredDate(date);
   };

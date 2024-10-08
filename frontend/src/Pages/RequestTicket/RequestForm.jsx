@@ -115,7 +115,7 @@ const RequestForm = (props) => {
           remark: "",
           priority: "Medium", // Reset priority to default
         }));
-        console.log("Request submitted successfully");
+      
       })
       .catch((error) => {
         console.error("Error submitting request", error);

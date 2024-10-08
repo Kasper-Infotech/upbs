@@ -91,7 +91,7 @@ const AttendanceUpdateForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(attendanceData);
+  
     axios
       .post(`${BASE_URL}/api/updateAttendance`, attendanceData, {
         headers: {

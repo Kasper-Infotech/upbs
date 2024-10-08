@@ -89,7 +89,7 @@ const RequestForm = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission logic here
-    console.log("Form Data Submitted:", formData);
+   
     axios
     .post(
       `${BASE_URL}/api/request`,
@@ -107,7 +107,7 @@ const RequestForm = (props) => {
         subject: "",
         remark: "",
       }))
-      console.log("request done")
+      
     })
     .catch((error) => {
       console.error("Error loading employee data", error);

@@ -17,7 +17,7 @@ const EmployeeLeaveDash = () => {
   const id = userData?._id;
   const { darkMode } = useTheme();
   const { empData } = useSelector((state) => state.personalInfo);
-  console.log(empData);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -58,7 +58,7 @@ const EmployeeLeaveDash = () => {
             }
             return true;
           });
-        console.log(formattedData);
+      
 
         setLeaveBalance(formattedData);
       })

@@ -75,7 +75,7 @@ const RequestRaised = () => {
         },
       })
       .then(() => {
-        console.log("done");
+         ;
         data.forEach((val) => {
           if (val._id === updateData.id) {
             val.status = updateData.status;
@@ -105,7 +105,7 @@ const RequestRaised = () => {
   };
 
   const isCompleteButtonDisabled = (val) => {
-    console.log(val);
+     ;
     if (val) {
       const updatedAtTime = moment(val.updatedAt);
       const currentTime = moment();

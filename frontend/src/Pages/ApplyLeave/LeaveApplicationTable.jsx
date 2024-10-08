@@ -43,7 +43,7 @@ const LeaveApplicationEmpTable = (props) => {
       .then((response) => {
         const leaveApplicationEmpObj = response.data;
         setLoading(false);
-        console.log(leaveApplicationEmpObj);
+        
         const newRowsData = leaveApplicationEmpObj.leaveApplication.map(
           (data) => {
             return {
@@ -61,7 +61,7 @@ const LeaveApplicationEmpTable = (props) => {
             };
           }
         );
-        console.log(newRowsData);
+    
         setRowData(newRowsData);
       })
       .catch((error) => {
@@ -88,7 +88,7 @@ const LeaveApplicationEmpTable = (props) => {
   // };
 
   const status = (s) => {
-    console.log(s === 3);
+  
     if (s === "1") {
       return "Pending";
     }

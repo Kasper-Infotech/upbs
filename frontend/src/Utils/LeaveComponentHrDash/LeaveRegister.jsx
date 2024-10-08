@@ -57,7 +57,7 @@ const LeaveRegister = () => {
     });
   };
 
-  console.log(leaveData);
+  
 
   const groupedData = filterByMonthYear(leaveData).reduce((acc, leave) => {
     const { FirstName, LastName, Leavetype, FromDate, ToDate, empID } = leave;

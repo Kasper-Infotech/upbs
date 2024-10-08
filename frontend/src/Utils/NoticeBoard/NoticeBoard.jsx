@@ -262,7 +262,7 @@ const NoticeBoard = () => {
       })
       .then((response) => {
         setNotice(response.data.reverse());
-        console.log(response.data);
+        
       })
       .catch((error) => {
         console.log(error);

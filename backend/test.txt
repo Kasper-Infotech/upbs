@@ -87,12 +87,12 @@ const createEmployee = async (req, res) => {
         const findEmail = await Employee.findOne({ Email: Email });
 
         if (findEmail) {
-          console.log("hi");
+      
           res.status(400).send("email is alredy exits");
         } else {
           const findContact = await Employee.findOne({ ContactNo: ContactNo });
           if (findContact) {
-            console.log("hello");
+           
             res.status(400).send("Contact Number is alredy exits");
           } else {
             if (file) {
@@ -101,7 +101,7 @@ const createEmployee = async (req, res) => {
                 newEmployee.profile = response;
               }
             }
-            console.log("by");
+            
             // hasing Employ password
             await bcript.hash(
               req.body.Password,

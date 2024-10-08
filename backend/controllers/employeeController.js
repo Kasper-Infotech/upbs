@@ -951,7 +951,7 @@ const userData = async (req, res) => {
 
   try {
     const findEmployee = await Employee.findById({ _id: id }, "Email Account FirstName LastName Notification");
-    console.log(findEmployee)
+
     if (findEmployee) {
       return res.status(200).send(findEmployee);
     } else {

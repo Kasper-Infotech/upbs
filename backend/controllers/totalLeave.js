@@ -396,7 +396,7 @@ const getAllAvailableLeave = async (req, res) => {
     });
 
     // Transform the data to move populated fields to the top level
-    console.log(allLeaveData);
+  
     const transformedData = allLeaveData.map((record) => {
       const { empID, ...leaveData } = record.toObject();
 

@@ -56,7 +56,7 @@ const TodaysAttendance = () => {
       .catch((error) => console.log(error));
   }, []);
 
-  console.log(companyData);
+  
 
   const companyRecords = {
     CompanyName: companyData.CompanyName,

@@ -32,7 +32,7 @@ function AttendanceRegister() {
   };
 
   const daysInMonth = new Date(filterYear, filterMonth, 0).getDate();
-  console.log(attendance);
+
 
   // const markAttendance = (loginTime) => {
   //   if (!loginTime || loginTime.length === 0) {

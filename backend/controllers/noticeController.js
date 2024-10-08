@@ -55,7 +55,7 @@ const NoticeBoard = async (req, res) => {
         const noticesWithCreatorDetails = await Promise.all(
             notices.map(async (notice) => {
                 const creator = await Employee.findOne({ Email: notice.creatorMail }).populate({path: "position", select: "PositionName -_id"}).select("profile");
-                console.log(creator)
+               
                 return {
                     ...notice.toObject(),
                     creatorProfile: creator ? creator.profile : null,

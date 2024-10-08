@@ -41,7 +41,7 @@ const AdminSalaryTable = (props) => {
       })
       .then((response) => {
         const salaryObj = response.data;
-        console.log("response", response.data);
+   
         setSalaryData(response.data);
         setLoading(false);
 

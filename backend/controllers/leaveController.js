@@ -353,12 +353,12 @@ const deleteLeaveApplicationHr = async (req, res) => {
  const getLeaveApplicationNo = async (req, res) => {
   try {
     const { email } = req.body;
-    console.log('Email:', email);
+
     const listOfEmployees = await Employee.find({
       $or: [{ reportHr: email }, { reportManager: email }]
     }).select("_id");
     const today = moments().tz('Asia/Kolkata').format('YYYY-MM-DD');
-    console.log('Today (IST):', today);
+  
     const leaveRequestPromises = listOfEmployees.map((val) => {
     
       const query = {

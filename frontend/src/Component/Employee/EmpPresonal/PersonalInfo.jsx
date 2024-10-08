@@ -10,7 +10,7 @@ const PersonalInfo = ({ data, back }) => {
   const [editForm, setEditForm] = useState(false);
   const [editData, setEditData] = useState({});
   const [editFormGender, setEditFormGender] = useState("");
-console.log(data)
+ 
 
   const handleEditPersonalInfo = (e) => {
  

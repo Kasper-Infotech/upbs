@@ -528,7 +528,7 @@ io.on("connection", (socket) => {
           messageBy,
           profile,
         } = data;
-        // console.log(users);
+  
 
         employee.Notification.unshift({
           senderMail,
@@ -553,7 +553,7 @@ io.on("connection", (socket) => {
   //abhay:-when employee apply leave
   socket.on("leaveNotification", async (data) => {
     try {
-      //  console.log(data)
+      //   
       const { managerEmail, hrEmail, aditionalManager } = data;
 
       const manager = await Employee.findOne({ Email: managerEmail });
@@ -587,7 +587,7 @@ io.on("connection", (socket) => {
         io.to(targetManager.socketId).emit("leaveNotificationReceived", data);
       } else if (manager) {
         const { message, status, path, taskId, messageBy, profile } = data;
-        // console.log(users);
+       
 
         manager.Notification.unshift({
           message,
@@ -622,7 +622,7 @@ io.on("connection", (socket) => {
         );
       } else if (aditionManager) {
         const { message, status, path, taskId, messageBy, profile } = data;
-        // console.log(users);
+ 
 
         aditionManager.Notification.unshift({
           message,
@@ -655,7 +655,7 @@ io.on("connection", (socket) => {
         io.to(targetHr.socketId).emit("leaveNotificationReceived", data);
       } else if (hr) {
         const { message, status, path, taskId, messageBy, profile } = data;
-        // console.log(users);
+    
 
         hr.Notification.unshift({
           message,
@@ -676,7 +676,7 @@ io.on("connection", (socket) => {
   });
   socket.on("leaveManagerStatusNotification", async (data) => {
     try {
-      //  console.log(data)
+      //   
       const { employeeEmail, hrEmail, reportManager } = data;
 
       const employee = await Employee.findOne({ Email: employeeEmail });
@@ -712,7 +712,7 @@ io.on("connection", (socket) => {
         );
       } else if (employee) {
         const { message, status, path, taskId, messageBy, profile } = data;
-        // console.log(users);
+       
 
         employee.Notification.unshift({
           message,
@@ -748,8 +748,7 @@ io.on("connection", (socket) => {
         );
       } else if (hr) {
         const { message, status, path, taskId, messageBy, profile } = data;
-        // console.log(users);
-
+  
         hr.Notification.unshift({
           message,
           status,
@@ -784,7 +783,7 @@ io.on("connection", (socket) => {
         );
       } else if (manager) {
         const { message, status, path, taskId, messageBy, profile } = data;
-        // console.log(users);
+       
 
         manager.Notification.unshift({
           message,
@@ -805,7 +804,7 @@ io.on("connection", (socket) => {
   });
   socket.on("leaveHrStatusNotification", async (data) => {
     try {
-      //  console.log(data)
+      //   
       const { employeeEmail, managerEmail, aditionalManager } = data;
 
       const employee = await Employee.findOne({ Email: employeeEmail });
@@ -843,7 +842,7 @@ io.on("connection", (socket) => {
         );
       } else if (employee) {
         const { message, status, path, taskId, profile, messageBy } = data;
-        // console.log(users);
+   
 
         employee.Notification.unshift({
           message,
@@ -879,7 +878,7 @@ io.on("connection", (socket) => {
         );
       } else if (manager) {
         const { message, status, path, taskId, messageBy, profile } = data;
-        // console.log(users);
+ 
 
         manager.Notification.unshift({
           message,
@@ -915,7 +914,7 @@ io.on("connection", (socket) => {
         );
       } else if (aditionManager) {
         const { message, status, path, taskId, messageBy, profile } = data;
-        // console.log(users);
+        
         aditionManager.Notification.unshift({
           message,
           status,
@@ -1184,7 +1183,7 @@ io.on("connection", (socket) => {
             });
 
             await employee.save();
-            //       console.log(socket.id)
+          
           }
         }
       } else if (bwt === "emp-manager") {

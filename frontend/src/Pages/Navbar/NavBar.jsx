@@ -65,7 +65,7 @@ const NavBar = (props, data) => {
   
         const decodedToken = decodeToken(token);
         
-        console.log(decodedToken)// Handle token decoding safely
+      
         if (!decodedToken || !decodedToken.Account) {
           navigate("/");
           return;
@@ -96,6 +96,7 @@ const NavBar = (props, data) => {
         console.error("Error during verification:", error);
         // Handle Unauthorized Access or other errors
         if (error.response?.data?.error === "Unauthorized Access") {
+          localStorage.clear();
           await persistor.purge(); // Clear persisted Redux store
           navigate("/"); // Redirect to login
         } else {
@@ -224,7 +225,7 @@ const NavBar = (props, data) => {
       Notification.requestPermission().then((permission) => {
         if (permission === "granted") {
           // Permission granted, you can now trigger notifications
-          console.log("Notification permission granted");
+          
         }
       });
     }
@@ -235,14 +236,14 @@ const NavBar = (props, data) => {
     handleNotificationRequest();
     if (socket) {
       socket.on("taskNotificationReceived", (data) => {
-        console.log(data.Account);
+         ;
         if (data.Account === 4) {
           if (data.managerEmail === email) {
             setNotification((prev) => [data, ...prev]);
             pushNotification(data.message);
           }
         } else if (data.Account === 2 || data.Account === 3) {
-          console.log(data);
+           ;
           let emp = data.employeesEmail.filter((val) => {
             return val === email && val !== data.senderMail;
           });
@@ -251,7 +252,7 @@ const NavBar = (props, data) => {
             pushNotification(data.message);
           }
         } else if (data.Account === 1) {
-          console.log(data);
+           ;
           if (data.adminMail === email) {
             setNotification((prev) => [data, ...prev]);
             pushNotification(data.message);

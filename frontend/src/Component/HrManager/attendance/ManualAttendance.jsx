@@ -49,7 +49,7 @@ function ManualAttendance() {
     fetchUsers();
   }, []);
 
-  console.log(employees);
+
 
   const handleUserChange = (employeeID) => {
     const selectedEmployee = employees.find(

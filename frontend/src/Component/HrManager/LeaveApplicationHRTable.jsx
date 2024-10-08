@@ -78,7 +78,7 @@ const LeaveApplicationHRTable = (props) => {
             empObjID: data?.empObjID,
           };
         });
-        console.log(rowDataT);
+       
 
         setRowData(
           rowDataT.filter(

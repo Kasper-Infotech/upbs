@@ -69,7 +69,7 @@ const LeaveApplicationEmp = (props) => {
           : event.target[9].value,
       totalLeaveRequired,
     };
-    console.log(body);
+
     axios
       .post(
         `${BASE_URL}/api/leave-application-man/` + userData?._id,

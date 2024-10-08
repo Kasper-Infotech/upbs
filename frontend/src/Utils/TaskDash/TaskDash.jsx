@@ -21,7 +21,7 @@ const TaskDash = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get(`${BASE_URL}/api/tasks`);
-      console.log(response.data);
+    
       setTasks(response.data);
     } catch (error) {
       console.error("Error fetching tasks:", error.message);
